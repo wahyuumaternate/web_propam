@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArtisanRunnerController;
 use App\Http\Controllers\DaftarKasusController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,11 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::prefix('dashboard')->middleware('auth')->group(function () {
+    // artisan call
+    Route::get('/migrate', [ArtisanRunnerController::class, 'migrateFresh']);
+    Route::get('/link', [ArtisanRunnerController::class, 'link']);
+    Route::get('/cache', [ArtisanRunnerController::class, 'cache']);
+    // 
     Route::get('/daftar-kasus', [DaftarKasusController::class, 'index'])->name('daftarKasus');
     Route::get('/tambah-kasus', [DaftarKasusController::class, 'create'])->name('daftarKasus.create');
     Route::post('/daftarKasus', [DaftarKasusController::class, 'store'])->name('daftarKasus.store');
