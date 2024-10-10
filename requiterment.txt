@@ -1,0 +1,23 @@
+=== ENTITAS KASUS ===
+1.Kategori
+2.Tanggal lapor
+3. NRP
+5. Pangkat
+4. Nama
+6. Jabatan
+7. Satker/Satwil
+8. Pangkat
+9. Jabatan
+10. Wilayah kasus
+11. Referensi
+13. Bentuk Pelanggaran
+14. Pasal
+15. Hukuman
+16. Tanggal putusan
+17. Nomor putusan
+18. Tanggal putusan keberatan/banding
+19. Nomor putusan keberatan/banding
+20. Tanggal dimulai hukuman
+21. Tanggal RPS
+22. No RPS
+23. Status
