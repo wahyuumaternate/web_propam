@@ -13,7 +13,9 @@ use Illuminate\Http\Request;
 class DaftarKasusController extends Controller
 {
     function index() {
-        return view('page.daftar_kasus_index');
+        return view('page.daftar_kasus_index',[
+            'daftarKasus'=>DaftarKasus::latest()->get()
+        ]);
     }
     function create() {
         return view('page.tambah_kasus',[
