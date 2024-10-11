@@ -30,6 +30,9 @@ return new class extends Migration
             $table->date('tanggal_dimulai_hukuman')->nullable();
             $table->date('tanggal_rps')->nullable();
             $table->string('no_rps')->nullable();
+            $table->string('file_putusan_sidang')->nullable();
+            $table->string('file_banding')->nullable();
+            $table->string('file_rps')->nullable();
             $table->timestamps();
         });
     }

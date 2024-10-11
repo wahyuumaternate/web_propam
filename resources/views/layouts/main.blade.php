@@ -30,6 +30,12 @@
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+    @notifyCss
+    <style>
+        .notify {
+            z-index: 999999;
+        }
+    </style>
 </head>
 
 <body>
@@ -54,6 +60,9 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
+
+    <x-notify::notify />
+    @notifyJs
 
 </body>
 
