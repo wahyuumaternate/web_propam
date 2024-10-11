@@ -23,11 +23,14 @@ class ArtisanRunnerController extends Controller
             'message' => 'storage link completed.'
         ]);
     }
-    public function cache()
+    public function clear()
     {
+        Artisan::call('dump-autoload ');
         Artisan::call('config:cache');
         Artisan::call('config:clear');
         Artisan::call('cache:clear');
+        Artisan::call('route:clear');
+        Artisan::call('view:clear');
         // php artisan config:cache
         // php artisan config:clear
         // php artisan cache:clear

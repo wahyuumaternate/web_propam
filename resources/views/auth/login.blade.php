@@ -70,7 +70,8 @@
                                             <div class="input-group has-validation">
                                                 <input type="email" name="email"
                                                     class="form-control @error('email') is-invalid @enderror"
-                                                    id="yourEmail" required autocomplete="off">
+                                                    id="yourEmail" required autocomplete="off"
+                                                    value="{{ old('email') }}">
                                                 <span class="input-group-text" id="inputGroupPrepend">@</span>
                                                 <div class="invalid-feedback">
                                                     @error('email')
