@@ -28,14 +28,16 @@
         </li><!-- End Profile Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="">
+            <a class="nav-link {{ request()->is('dashboard/pangkat') ? '' : 'collapsed' }}"
+                href="{{ route('pangkat') }}">
                 <i class="bi bi-star"></i>
                 <span>Pangkat</span>
             </a>
         </li><!-- End F.A.Q Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="">
+            <a class="nav-link {{ request()->is('dashboard/satker-satwil') ? '' : 'collapsed' }}"
+                href="{{ route('satker') }}">
                 <i class="bi bi-pin-map"></i>
                 <span>Satker</span>
             </a>
@@ -43,12 +45,19 @@
 
 
 
-        {{-- <li class="nav-item">
-            <a class="nav-link collapsed" href="">
-                <i class="bi bi-box-arrow-in-right"></i>
-                <span>Jabatan</span>
+        <li class="nav-item">
+            <a class="nav-link {{ request()->is('dashboard/status') ? '' : 'collapsed' }}"
+                href="{{ route('status') }}">
+                <i class="bi bi-collection"></i>
+                <span>Status</span>
             </a>
-        </li><!-- End Login Page Nav --> --}}
+        </li><!-- End Login Page Nav -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="">
+                <i class="bi bi-people"></i>
+                <span>Pengguna</span>
+            </a>
+        </li><!-- End Login Page Nav -->
 
         {{-- <li class="nav-item">
             <a class="nav-link collapsed" href="">

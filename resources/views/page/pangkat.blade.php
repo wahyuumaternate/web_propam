@@ -3,11 +3,11 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Kategori Kasus</h1>
+            <h1>Pangkat</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Kategori Kasus</li>
+                    <li class="breadcrumb-item active">Pangkat</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -19,7 +19,7 @@
                     <div class="card">
                         <div class="card-body table-responsive">
                             <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="card-title">List Kategori Kasus</h5>
+                                <h5 class="card-title">List Pangkat</h5>
                                 <div>
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
@@ -32,17 +32,17 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title">Tambah Kategori</h5>
+                                                    <h5 class="modal-title">Tambah pangkat</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
-                                                <form action="{{ route('kategori.store') }}" method="POST">
+                                                <form action="{{ route('pangkat.store') }}" method="POST">
                                                     @csrf
                                                     <div class="modal-body">
                                                         <div class="form-group">
-                                                            <label for="nama_kategori">Nama Kategori</label>
-                                                            <input type="text" class="form-control" id="nama_kategori"
-                                                                name="nama_kategori" required>
+                                                            <label for="nama_pangkat">Nama pangkat</label>
+                                                            <input type="text" class="form-control" id="nama_pangkat"
+                                                                name="nama_pangkat" required>
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
@@ -69,22 +69,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($kategori as $kat)
+                                    @foreach ($pangkat as $pnkt)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $kat->nama_kategori }}</td>
+                                            <td>{{ $pnkt->nama_pangkat }}</td>
                                             <td>
                                                 <button type="button" class="btn btn-outline-warning"
                                                     data-bs-toggle="modal" data-bs-target="#updateModal"
-                                                    onclick="showUpdateModal({{ $kat->id }}, '{{ $kat->nama_kategori }}')">
+                                                    onclick="showUpdateModal({{ $pnkt->id }}, '{{ $pnkt->nama_pangkat }}')">
                                                     <i class="bi bi-pencil"></i>
                                                 </button>
                                                 <button type="button" class="btn btn-outline-danger"
-                                                    onclick="confirmDelete({{ $kat->id }})">
+                                                    onclick="confirmDelete({{ $pnkt->id }})">
                                                     <i class="bi bi-trash"></i>
                                                 </button>
-                                                <form id="delete-form-{{ $kat->id }}"
-                                                    action="{{ route('kategori.destroy', $kat->id) }}" method="POST"
+                                                <form id="delete-form-{{ $pnkt->id }}"
+                                                    action="{{ route('pangkat.destroy', $pnkt->id) }}" method="POST"
                                                     style="display: none;">
                                                     @csrf
                                                     @method('DELETE')
@@ -98,19 +98,19 @@
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title">Ubah Kategori</h5>
+                                                        <h5 class="modal-title">Ubah pangkat</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
                                                     <form id="updateForm" method="POST"
-                                                        action="{{ route('kategori.update', $kat->id) }}">
+                                                        action="{{ route('pangkat.update', $pnkt->id) }}">
                                                         @csrf
                                                         @method('PUT')
                                                         <div class="modal-body">
                                                             <div class="form-group">
-                                                                <label for="update_nama_kategori">Nama Kategori</label>
+                                                                <label for="update_nama_pangkat">Nama pangkat</label>
                                                                 <input type="text" class="form-control"
-                                                                    id="update_nama_kategori" name="nama_kategori" required>
+                                                                    id="update_nama_pangkat" name="nama_pangkat" required>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
@@ -139,10 +139,10 @@
 
 @section('js')
     <script>
-        function showUpdateModal(id, namaKategori) {
-            const formAction = "kategori/" + id;
+        function showUpdateModal(id, namapangkat) {
+            const formAction = "pangkat/" + id;
             document.getElementById('updateForm').action = formAction;
-            document.getElementById('update_nama_kategori').value = namaKategori;
+            document.getElementById('update_nama_pangkat').value = namapangkat;
             var updateModal = new bootstrap.Modal(document.getElementById('updateModal'), {});
             updateModal.show();
         }
