@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArtisanRunnerController;
 use App\Http\Controllers\DaftarKasusController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,9 +38,16 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/cache', [ArtisanRunnerController::class, 'cache']);
     // 
     Route::get('/daftar-kasus', [DaftarKasusController::class, 'index'])->name('daftarKasus');
-    Route::get('/tambah-kasus', [DaftarKasusController::class, 'create'])->name('daftarKasus.create');
+    Route::get('/daftar-kasus/tambah-kasus', [DaftarKasusController::class, 'create'])->name('daftarKasus.create');
     Route::post('/daftarKasus', [DaftarKasusController::class, 'store'])->name('daftarKasus.store');
     Route::put('/daftarKasus/{id}', [DaftarKasusController::class, 'update'])->name('daftarKasus.update');
+    // kategori
+    Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori');
+    Route::post('/kategori', [KategoriController::class, 'store'])->name('kategori.store');
+    Route::put('/kategori/{id}', [KategoriController::class, 'update'])->name('kategori.update');
+    Route::delete('/kategori/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
+
+
 });
 
 require __DIR__.'/auth.php';

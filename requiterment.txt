@@ -21,3 +21,9 @@
 21. Tanggal RPS
 22. No RPS
 23. Status
+
+fitur :
+	kategori kasus
+	pangkat
+	satker
+	jabatan
