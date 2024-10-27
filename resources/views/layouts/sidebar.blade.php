@@ -52,12 +52,24 @@
                 <span>Status</span>
             </a>
         </li><!-- End Login Page Nav -->
+
         <li class="nav-item">
-            <a class="nav-link collapsed" href="">
-                <i class="bi bi-people"></i>
-                <span>Pengguna</span>
+            <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-gear"></i><span>Pengaturan</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-        </li><!-- End Login Page Nav -->
+            <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="">
+                        <i class="bi bi-circle"></i><span>Pengguna</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('activityLogs.index') }}">
+                        <i class="bi bi-circle"></i><span>Aktivitas Pengguna</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End Forms Nav -->
 
         {{-- <li class="nav-item">
             <a class="nav-link collapsed" href="">

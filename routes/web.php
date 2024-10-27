@@ -4,6 +4,7 @@ use App\Http\Controllers\ArtisanRunnerController;
 use App\Http\Controllers\DaftarKasusController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PangkatController;
+use App\Http\Controllers\PengaturanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SatkerController;
 use App\Http\Controllers\StatusController;
@@ -69,7 +70,9 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::post('/status', [StatusController::class, 'store'])->name('status.store');
     Route::put('/status/{id}', [StatusController::class, 'update'])->name('status.update');
     Route::delete('/status/{id}', [StatusController::class, 'destroy'])->name('status.destroy');
-
+    // pengaturan
+    Route::get('/activity-logs', [PengaturanController::class, 'activityLogs'])->name('activityLogs.index');
+    Route::get('/activity-logs/export', [PengaturanController::class, 'exportActivityLogs'])->name('activityLogs.export');
 });
 
 require __DIR__.'/auth.php';
