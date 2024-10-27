@@ -7,6 +7,7 @@ use App\Http\Controllers\PangkatController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SatkerController;
 use App\Http\Controllers\StatusController;
+use App\Models\DaftarKasus;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,7 +44,11 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/daftar-kasus', [DaftarKasusController::class, 'index'])->name('daftarKasus');
     Route::get('/daftar-kasus/tambah-kasus', [DaftarKasusController::class, 'create'])->name('daftarKasus.create');
     Route::post('/daftarKasus', [DaftarKasusController::class, 'store'])->name('daftarKasus.store');
+    Route::get('/kasus/{id}/edit', [DaftarKasusController::class, 'edit'])->name('daftarKasus.edit');
     Route::put('/daftarKasus/{id}', [DaftarKasusController::class, 'update'])->name('daftarKasus.update');
+    Route::post('/kasus/update-status/{id}', [DaftarKasusController::class, 'updateStatus']);
+    Route::delete('/kasus/{id}', [DaftarKasusController::class, 'destroy'])->name('kasus.destroy');
+    Route::get('/export-kasus', [DaftarKasusController::class, 'export'])->name('kasus.export');
     // kategori
     Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori');
     Route::post('/kategori', [KategoriController::class, 'store'])->name('kategori.store');
@@ -64,7 +69,6 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::post('/status', [StatusController::class, 'store'])->name('status.store');
     Route::put('/status/{id}', [StatusController::class, 'update'])->name('status.update');
     Route::delete('/status/{id}', [StatusController::class, 'destroy'])->name('status.destroy');
-
 
 });
 

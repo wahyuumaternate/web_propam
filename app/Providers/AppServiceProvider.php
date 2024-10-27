@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\DaftarKasus;
+use App\Observers\KasusObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +21,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        DaftarKasus::observe(KasusObserver::class);
     }
 }

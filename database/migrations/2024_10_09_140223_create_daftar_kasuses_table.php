@@ -33,6 +33,7 @@ return new class extends Migration
             $table->string('file_putusan_sidang')->nullable();
             $table->string('file_banding')->nullable();
             $table->string('file_rps')->nullable();
+            $table->text('uraian')->nullable();
             $table->timestamps();
         });
     }

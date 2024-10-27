@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\DaftarKasus;
 use App\Models\Kategori;
 use App\Models\Pangkat;
 use App\Models\Satker;
@@ -43,10 +44,17 @@ class DatabaseSeeder extends Seeder
             'nama_status' => 'Pengawasan',
             
         ]);
+       Status::create([
+            'nama_status' => 'Selesai',
+            
+        ]);
        WilayahKasus::create([
             'nama_wilayah' => 'POLRES GRESIK',
             
         ]);
+
+        DaftarKasus::factory()->count(10)->create();
+
         
     }
 }

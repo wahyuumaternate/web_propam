@@ -157,7 +157,7 @@
             }
         });
     </script>
-    <script>
+    {{-- <script>
         function confirmDelete(id) {
             Swal.fire({
                 title: 'Apakah kamu yakin?',
@@ -175,5 +175,5 @@
                 }
             })
         }
-    </script>
+    </script> --}}
 @endsection

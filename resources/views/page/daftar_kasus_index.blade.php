@@ -21,7 +21,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 class="card-title">List Anggota Yang Melakukan Pelanggaran</h5>
                                 <div>
-                                    <a href="{{ route('daftarKasus.create') }}" class="btn btn-success">
+                                    <a href="{{ route('kasus.export') }}" class="btn btn-success">
                                         <i class="bi bi-file-earmark-excel"></i>
                                     </a>
                                     <a href="{{ route('daftarKasus.create') }}" class="btn btn-primary">
@@ -30,13 +30,10 @@
                                 </div>
                             </div>
 
-
                             <table class="table datatable">
                                 <thead>
                                     <tr>
-                                        <th>
-                                            Nama
-                                        </th>
+                                        <th>Nama</th>
                                         <th>NRP</th>
                                         <th>Kategori</th>
                                         <th data-type="date" data-format="YYYY/DD/MM">Tanggal Lapor</th>
@@ -51,17 +48,34 @@
                                             <td>{{ $kasus->nrp }}</td>
                                             <td>{{ $kasus->kategori->nama_kategori }}</td>
                                             <td>{{ $kasus->tanggal_lapor }}</td>
-                                            <td>{{ $kasus->status->nama_status }}</td>
                                             <td>
-                                                <a href="" class="btn btn-warning"><i class="bi bi-pencil"></i></a>
-                                                <a href="" class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                                                <select class="form-select" id="statusDropdown-{{ $kasus->id }}"
+                                                    onchange="updateStatus({{ $kasus->id }})">
+                                                    @foreach ($statuses as $status)
+                                                        <option value="{{ $status->id }}"
+                                                            {{ $kasus->status_id == $status->id ? 'selected' : '' }}>
+                                                            {{ $status->nama_status }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('daftarKasus.edit', $kasus->id) }}"
+                                                    class="btn btn-warning"><i class="bi bi-pencil"></i></a>
+                                                <form id="delete-form-{{ $kasus->id }}"
+                                                    action="{{ route('kasus.destroy', $kasus->id) }}" method="POST"
+                                                    style="display: none;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
+
+                                                <button onclick="confirmDelete({{ $kasus->id }})"
+                                                    class="btn btn-danger"><i class="bi bi-trash"></i></button>
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                            <!-- End Table with stripped rows -->
-
                         </div>
                     </div>
 
@@ -70,4 +84,58 @@
         </section>
 
     </main><!-- End #main -->
+@endsection
+
+@section('js')
+    <script>
+        function updateStatus(kasusId) {
+            // Get the selected status from the specific dropdown
+            const statusId = document.getElementById(`statusDropdown-${kasusId}`).value;
+
+            // Send an AJAX request to update the status
+            fetch(`/dashboard/kasus/update-status/${kasusId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}' // CSRF token for security
+                    },
+                    body: JSON.stringify({
+                        status_id: statusId
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Show a success message using SweetAlert
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: 'Status updated successfully!',
+                            timer: 1000,
+                            showConfirmButton: false
+                        });
+                    } else {
+                        // Show an error message using SweetAlert
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Failed to update status.',
+                            timer: 1000,
+                            showConfirmButton: false
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    // Show an error message using SweetAlert
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'An unexpected error occurred.',
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+                });
+        }
+    </script>
 @endsection

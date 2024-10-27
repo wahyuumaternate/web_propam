@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pangkat extends Model
 {
+    use HasFactory;
     protected $table ='pangkat';
     protected $guarded = ['id'];
 }

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class DaftarKasus extends Model
 {
+    use HasFactory;
     protected $table ='kasus';
     protected $guarded =['id'];
 
@@ -18,6 +19,24 @@ class DaftarKasus extends Model
     {
         return $this->belongsTo(Kategori::class);
     }
+
+   
+    public function pangkat()
+    {
+        return $this->belongsTo(Pangkat::class);
+    }
+
+    public function satkerSatwil()
+    {
+        return $this->belongsTo(Satker::class);
+    }
+
+    public function wilayahKasus()
+    {
+        return $this->belongsTo(WilayahKasus::class);
+    }
+
+    
 
 
 }
