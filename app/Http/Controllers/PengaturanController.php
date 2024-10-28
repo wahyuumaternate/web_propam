@@ -11,7 +11,7 @@ class PengaturanController extends Controller
 {
     public function activityLogs()
     {
-        $activityLogs = ActivityLog::with('user')->get();
+        $activityLogs = ActivityLog::with('user')->latest()->get();
         return view('page.aktivitas_user', compact('activityLogs'));
     }
 

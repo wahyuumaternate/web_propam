@@ -13,16 +13,38 @@ class KasusObserver
         ActivityLog::create([
             'user_id' => Auth::id(),
             'action' => 'create',
-            'description' => 'Buat Kasus dengan nama pelanggar ' . $kasus->nama
+            'description' => 'Buat Kasus dengan nama pelanggar ' . $kasus->nama,
+            'created_at' => now()->timezone('Asia/Jayapura'), // Set to Indonesia Eastern Time
+            'updated_at' => now()->timezone('Asia/Jayapura')  // Set to Indonesia Eastern Time
         ]);
     }
 
+    // public function updated(DaftarKasus $kasus)
+    // {
+    //     ActivityLog::create([
+    //         'user_id' => Auth::id(),
+    //         'action' => 'update',
+    //         'description' => 'Ubah data Kasus dengan nama pelanggar ' . $kasus->nama
+    //     ]);
+    // }
+
     public function updated(DaftarKasus $kasus)
     {
+        $originalData = $kasus->getOriginal();
+        $changes = $kasus->getChanges();
+
+        $description = 'Ubah data Kasus dengan nama pelanggar ' . $kasus->nama . '. Perubahan: ';
+        foreach ($changes as $field => $newValue) {
+            $oldValue = $originalData[$field];
+            $description .= "$field dari '$oldValue' menjadi '$newValue'; ";
+        }
+
         ActivityLog::create([
             'user_id' => Auth::id(),
             'action' => 'update',
-            'description' => 'Ubah data Kasus dengan nama pelanggar ' . $kasus->nama
+            'description' => $description,
+            'created_at' => now()->timezone('Asia/Jayapura'), // Set to Indonesia Eastern Time
+            'updated_at' => now()->timezone('Asia/Jayapura')  // Set to Indonesia Eastern Time
         ]);
     }
 
@@ -31,7 +53,9 @@ class KasusObserver
         ActivityLog::create([
             'user_id' => Auth::id(),
             'action' => 'delete',
-            'description' => 'Hapus Kasus dengan nama pelanggar ' . $kasus->nama
+            'description' => 'Hapus Kasus dengan nama pelanggar ' . $kasus->nama,
+            'created_at' => now()->timezone('Asia/Jayapura'), // Set to Indonesia Eastern Time
+            'updated_at' => now()->timezone('Asia/Jayapura')  // Set to Indonesia Eastern Time
         ]);
     }
 }

@@ -42,9 +42,21 @@
                                         <tr>
                                             {{-- <td>{{ $loop }}</td> --}}
                                             <td>{{ $log->user->name ?? 'System' }}</td>
-                                            <td>{{ $log->action }}</td>
+                                            <td>
+                                                <span
+                                                    class="
+                                                        @if ($log->action === 'update') badge bg-warning
+                                                        @elseif($log->action === 'delete') badge bg-danger
+                                                        @elseif($log->action === 'create') badge bg-success @endif
+                                                    ">
+                                                    {{ ucfirst($log->action) }}
+                                                </span>
+
+                                            </td>
                                             <td>{{ $log->description }}</td>
-                                            <td>{{ $log->created_at->format('Y-m-d H:i:s') }}</td>
+                                            <td>{{ $log->created_at->timezone('Asia/Jayapura')->format('Y-m-d H:i:s') }}
+                                            </td>
+
                                         </tr>
                                     @endforeach
                                 </tbody>
