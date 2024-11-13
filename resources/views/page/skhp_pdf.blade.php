@@ -324,7 +324,7 @@
                             <div class="row row2">
                                 <span class="label">Pada tanggal</span>
                                 <span class="colon">:</span>
-                                <span class="value">{{ date('F Y') }}</span>
+                                <span class="value">{{ date('d F Y') }}</span>
                             </div>
                         </div>
 
