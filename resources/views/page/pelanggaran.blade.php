@@ -1,13 +1,13 @@
-@extends('layouts.main')
+@extends('layouts.main', ['title' => 'Bentuk  Pelanggaran'])
 @section('main')
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Pelanggaran</h1>
+            <h1>Bentuk Pelanggaran</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Pelanggaran</li>
+                    <li class="breadcrumb-item active">Bentuk Pelanggaran</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->

@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main', ['title' => 'Edit Kasus'])
 @section('main')
     <main id="main" class="main">
 

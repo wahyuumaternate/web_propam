@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main', ['title' => 'Pangkat'])
 @section('main')
     <main id="main" class="main">
 

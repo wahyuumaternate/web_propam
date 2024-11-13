@@ -1,9 +1,9 @@
-@extends('layouts.main')
+@extends('layouts.main', ['title' => 'Tambah Kasus'])
 @section('main')
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Daftar Kasus</h1>
+            <h1>Tambah Kasus</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Dashboard</a></li>

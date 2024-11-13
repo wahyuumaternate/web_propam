@@ -23,7 +23,7 @@
             <a class="nav-link {{ request()->is('dashboard/kategori') ? '' : 'collapsed' }}"
                 href="{{ route('kategori') }}">
                 <i class="bi bi-file-earmark-ruled"></i>
-                <span>Kategori</span>
+                <span>Jenis Pelanggaran</span>
             </a>
         </li><!-- End Profile Page Nav -->
 

@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main', ['title' => 'Akrifitas User'])
 @section('main')
     <main id="main" class="main">
 

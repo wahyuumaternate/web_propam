@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main', ['title' => 'Hukuman'])
 @section('main')
     <main id="main" class="main">
 
