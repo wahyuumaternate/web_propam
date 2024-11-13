@@ -2,13 +2,14 @@
 
 use App\Http\Controllers\ArtisanRunnerController;
 use App\Http\Controllers\DaftarKasusController;
+use App\Http\Controllers\HukumanController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PangkatController;
+use App\Http\Controllers\PelanggaranController;
 use App\Http\Controllers\PengaturanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SatkerController;
 use App\Http\Controllers\StatusController;
-use App\Models\DaftarKasus;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -73,6 +74,18 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     // pengaturan
     Route::get('/activity-logs', [PengaturanController::class, 'activityLogs'])->name('activityLogs.index');
     Route::get('/activity-logs/export', [PengaturanController::class, 'exportActivityLogs'])->name('activityLogs.export');
+    // Hukuman
+    Route::get('/hukuman', [HukumanController::class, 'index'])->name('hukuman');
+    Route::post('/hukuman', [HukumanController::class, 'store'])->name('hukuman.store');
+    Route::put('/hukuman/{id}', [HukumanController::class, 'update'])->name('hukuman.update');
+    Route::delete('/hukuman/{id}', [HukumanController::class, 'destroy'])->name('hukuman.destroy');
+    // Pelanggaran
+    Route::get('/pelanggaran', [PelanggaranController::class, 'index'])->name('pelanggaran');
+    Route::post('/pelanggaran', [PelanggaranController::class, 'store'])->name('pelanggaran.store');
+    Route::put('/pelanggaran/{id}', [PelanggaranController::class, 'update'])->name('pelanggaran.update');
+    Route::delete('/pelanggaran/{id}', [PelanggaranController::class, 'destroy'])->name('pelanggaran.destroy');
+
+
 });
 
 require __DIR__.'/auth.php';

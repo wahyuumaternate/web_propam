@@ -140,6 +140,7 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
             'Laravel\\Sail\\' => 13,
             'Laravel\\Prompts\\' => 16,
             'Laravel\\Breeze\\' => 15,
+            'Ladumor\\LaravelPwa\\' => 19,
         ),
         'I' => 
         array (
@@ -471,6 +472,10 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         array (
             0 => __DIR__ . '/..' . '/laravel/breeze/src',
         ),
+        'Ladumor\\LaravelPwa\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ladumor/laravel-pwa/src',
+        ),
         'Illuminate\\Support\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Macroable',
@@ -585,8 +590,11 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\CleanUpActivityLog' => __DIR__ . '/../..' . '/app/Console/Commands/CleanUpActivityLog.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Exports\\ActivityLogExport' => __DIR__ . '/../..' . '/app/Exports/ActivityLogExport.php',
+        'App\\Exports\\KasusExport' => __DIR__ . '/../..' . '/app/Exports/KasusExport.php',
         'App\\Http\\Controllers\\ArtisanRunnerController' => __DIR__ . '/../..' . '/app/Http/Controllers/ArtisanRunnerController.php',
         'App\\Http\\Controllers\\Auth\\AuthenticatedSessionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AuthenticatedSessionController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmablePasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmablePasswordController.php',
@@ -599,9 +607,13 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'App\\Http\\Controllers\\Auth\\VerifyEmailController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerifyEmailController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DaftarKasusController' => __DIR__ . '/../..' . '/app/Http/Controllers/DaftarKasusController.php',
+        'App\\Http\\Controllers\\HukumanController' => __DIR__ . '/../..' . '/app/Http/Controllers/HukumanController.php',
         'App\\Http\\Controllers\\KategoriController' => __DIR__ . '/../..' . '/app/Http/Controllers/KategoriController.php',
         'App\\Http\\Controllers\\PangkatController' => __DIR__ . '/../..' . '/app/Http/Controllers/PangkatController.php',
+        'App\\Http\\Controllers\\PelanggaranController' => __DIR__ . '/../..' . '/app/Http/Controllers/PelanggaranController.php',
+        'App\\Http\\Controllers\\PengaturanController' => __DIR__ . '/../..' . '/app/Http/Controllers/PengaturanController.php',
         'App\\Http\\Controllers\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProfileController.php',
+        'App\\Http\\Controllers\\SKHPController' => __DIR__ . '/../..' . '/app/Http/Controllers/SKHPController.php',
         'App\\Http\\Controllers\\SatkerController' => __DIR__ . '/../..' . '/app/Http/Controllers/SatkerController.php',
         'App\\Http\\Controllers\\StatusController' => __DIR__ . '/../..' . '/app/Http/Controllers/StatusController.php',
         'App\\Http\\Controllers\\WilayahKasusController' => __DIR__ . '/../..' . '/app/Http/Controllers/WilayahKasusController.php',
@@ -619,8 +631,11 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'App\\Http\\Requests\\ProfileUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ProfileUpdateRequest.php',
         'App\\Models\\ActivityLog' => __DIR__ . '/../..' . '/app/Models/ActivityLog.php',
         'App\\Models\\DaftarKasus' => __DIR__ . '/../..' . '/app/Models/DaftarKasus.php',
+        'App\\Models\\Hukuman' => __DIR__ . '/../..' . '/app/Models/Hukuman.php',
         'App\\Models\\Kategori' => __DIR__ . '/../..' . '/app/Models/Kategori.php',
         'App\\Models\\Pangkat' => __DIR__ . '/../..' . '/app/Models/Pangkat.php',
+        'App\\Models\\Pelanggaran' => __DIR__ . '/../..' . '/app/Models/Pelanggaran.php',
+        'App\\Models\\SKHP' => __DIR__ . '/../..' . '/app/Models/SKHP.php',
         'App\\Models\\Satker' => __DIR__ . '/../..' . '/app/Models/Satker.php',
         'App\\Models\\Status' => __DIR__ . '/../..' . '/app/Models/Status.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
@@ -763,6 +778,9 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
         'Database\\Seeders\\DaftarKasusSeeder' => __DIR__ . '/../..' . '/database/seeders/DaftarKasusSeeder.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
+        'Database\\Seeders\\HukumanSeeder' => __DIR__ . '/../..' . '/database/seeders/HukumanSeeder.php',
+        'Database\\Seeders\\PelanggaranSeeder' => __DIR__ . '/../..' . '/database/seeders/PelanggaranSeeder.php',
+        'Database\\Seeders\\SKHPSeeder' => __DIR__ . '/../..' . '/database/seeders/SKHPSeeder.php',
         'DateError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateError.php',
         'DateException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateException.php',
         'DateInvalidOperationException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateInvalidOperationException.php',
@@ -3104,6 +3122,9 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'Illuminate\\View\\ViewFinderInterface' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewFinderInterface.php',
         'Illuminate\\View\\ViewName' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewName.php',
         'Illuminate\\View\\ViewServiceProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
+        'Ladumor\\LaravelPwa\\LaravelPwa' => __DIR__ . '/..' . '/ladumor/laravel-pwa/src/LaravelPwa.php',
+        'Ladumor\\LaravelPwa\\PWAServiceProvider' => __DIR__ . '/..' . '/ladumor/laravel-pwa/src/PWAServiceProvider.php',
+        'Ladumor\\LaravelPwa\\commands\\PublishPWA' => __DIR__ . '/..' . '/ladumor/laravel-pwa/src/commands/PublishPWA.php',
         'Laravel\\Breeze\\BreezeServiceProvider' => __DIR__ . '/..' . '/laravel/breeze/src/BreezeServiceProvider.php',
         'Laravel\\Breeze\\Console\\InstallCommand' => __DIR__ . '/..' . '/laravel/breeze/src/Console/InstallCommand.php',
         'Laravel\\Breeze\\Console\\InstallsApiStack' => __DIR__ . '/..' . '/laravel/breeze/src/Console/InstallsApiStack.php',

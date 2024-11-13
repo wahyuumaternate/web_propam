@@ -55,10 +55,17 @@
         </li><!-- End Login Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link {{ request()->is('dashboard/satker-satwil') ? '' : 'collapsed' }}"
-                href="{{ route('satker') }}">
+            <a class="nav-link {{ request()->is('dashboard/pelanggaran') ? '' : 'collapsed' }}"
+                href="{{ route('pelanggaran') }}">
                 <i class="bi bi-pin-map"></i>
                 <span>Bentuk Pelanggaran</span>
+            </a>
+        </li><!-- End Contact Page Nav -->
+        <li class="nav-item">
+            <a class="nav-link {{ request()->is('dashboard/hukuman') ? '' : 'collapsed' }}"
+                href="{{ route('hukuman') }}">
+                <i class="bi bi-pin-map"></i>
+                <span>Hukuman</span>
             </a>
         </li><!-- End Contact Page Nav -->
 
