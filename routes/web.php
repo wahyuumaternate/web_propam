@@ -45,7 +45,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/link', [ArtisanRunnerController::class, 'link']);
     Route::get('/cache', [ArtisanRunnerController::class, 'cache']);
     // dashboard
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     // 
     Route::get('/daftar-kasus', [DaftarKasusController::class, 'index'])->name('daftarKasus');
     Route::get('/daftar-kasus/tambah-kasus', [DaftarKasusController::class, 'create'])->name('daftarKasus.create');
