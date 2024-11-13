@@ -22,14 +22,14 @@
                         <div class="dropdown">
                             <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="yearDropdown"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ $selectedYear }}
+                                Grafik Tahun {{ $selectedYear }}
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="yearDropdown">
                                 @foreach ($availableYears as $year)
                                     <li>
                                         <a href="#" class="dropdown-item"
                                             onclick="document.getElementById('year-input').value = '{{ $year }}'; this.closest('form').submit();">
-                                            {{ $year }}
+                                            Lihat Grafik Kasus Pada Tahun {{ $year }}
                                         </a>
                                     </li>
                                 @endforeach
