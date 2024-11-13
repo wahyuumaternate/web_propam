@@ -26,12 +26,12 @@
                                 <h5 class="card-title">Laporan Pelanggaran</h5>
 
                                 <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Kategori <span
+                                    <label class="col-sm-2 col-form-label">Jenis Pelanggaran <span
                                             class="text-danger">*</span></label>
                                     <div class="col-sm-10">
                                         <select class="form-select @error('kategori_id') is-invalid @enderror"
                                             aria-label="Default select example" name="kategori_id">
-                                            <option value="">Pilih Kategori</option>
+                                            <option value="">Pilih Jenis Pelanggaran</option>
                                             @foreach ($kategori as $k)
                                                 <option value="{{ $k->id }}"
                                                     {{ old('kategori_id', $kasus->kategori_id) == $k->id ? 'selected' : '' }}>
@@ -106,10 +106,10 @@
                                         <select class="form-select @error('pangkat_id') is-invalid @enderror"
                                             name="pangkat_id">
                                             <option value="">Pilih Pangkat</option>
-                                            @foreach ($pangkat as $p)
-                                                <option value="{{ $p->id }}"
-                                                    {{ old('pangkat_id', $kasus->pangkat_id) == $p->id ? 'selected' : '' }}>
-                                                    {{ $p->nama_pangkat }}</option>
+                                            @foreach ($pangkat as $psa)
+                                                <option value="{{ $psa->id }}"
+                                                    {{ old('pangkat_id', $kasus->pangkat_id) == $psa->id ? 'selected' : '' }}>
+                                                    {{ $psa->nama_pangkat }}</option>
                                             @endforeach
                                         </select>
                                         @error('pangkat_id')
@@ -251,14 +251,21 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="bentuk_pelanggaran" class="col-sm-2 col-form-label">Bentuk
-                                        Pelanggaran</label>
+                                    <!-- Dropdown untuk Pelanggaran -->
+                                    <label class="col-sm-2 col-form-label">Bentuk Pelanggaran <span
+                                            class="text-danger">*</span></label>
                                     <div class="col-sm-10">
-                                        <input type="text"
-                                            class="form-control @error('bentuk_pelanggaran') is-invalid @enderror"
-                                            name="bentuk_pelanggaran"
-                                            value="{{ old('bentuk_pelanggaran', $kasus->bentuk_pelanggaran) }}">
-                                        @error('bentuk_pelanggaran')
+                                        <select class="form-select @error('pelanggaran_id') is-invalid @enderror"
+                                            name="pelanggaran_id" aria-label="Pilih Pelanggaran">
+                                            <option selected="">Pilih Bentuk Pelanggaran</option>
+                                            @foreach ($pelanggaran as $p)
+                                                <option value="{{ $p->id }}"
+                                                    {{ (old('pelanggaran_id') ?? $kasus->pelanggaran_id) == $p->id ? 'selected' : '' }}>
+                                                    {{ $p->nama_pelanggaran }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('pelanggaran_id')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -281,12 +288,21 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="hukuman" class="col-sm-2 col-form-label">Hukuman <span
+                                    <!-- Dropdown untuk Hukuman -->
+                                    <label class="col-sm-2 col-form-label">Hukuman <span
                                             class="text-danger">*</span></label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control @error('hukuman') is-invalid @enderror"
-                                            name="hukuman" value="{{ old('hukuman', $kasus->hukuman) }}">
-                                        @error('hukuman')
+                                        <select class="form-select @error('hukuman_id') is-invalid @enderror"
+                                            name="hukuman_id" aria-label="Pilih Hukuman">
+                                            <option selected="">Pilih Hukuman</option>
+                                            @foreach ($hukuman as $h)
+                                                <option value="{{ $h->id }}"
+                                                    {{ (old('hukuman_id') ?? $kasus->hukuman_id) == $h->id ? 'selected' : '' }}>
+                                                    {{ $h->nama_hukuman }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('hukuman_id')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -389,6 +405,7 @@
                         </div>
 
                         {{-- RPS --}}
+                        {{-- RPS --}}
                         <div class="card">
                             <div class="card-body p-5">
                                 <h5 class="card-title">RPS</h5>
@@ -443,6 +460,7 @@
                                     </div>
                                 </div>
 
+                                {{-- File Putusan Sidang --}}
                                 <div class="row mb-3">
                                     <label for="file_putusan_sidang" class="col-sm-2 col-form-label">Putusan
                                         Sidang</label>
@@ -455,12 +473,16 @@
                                             </div>
                                         @enderror
                                         @if ($kasus->file_putusan_sidang)
-                                            <small class="form-text text-muted">Current file:
-                                                {{ $kasus->file_putusan_sidang }}</small>
+                                            <small class="form-text text-muted">
+
+                                                <a href="{{ asset('storage/' . $kasus->file_putusan_sidang) }}"
+                                                    download>Download</a>
+                                            </small>
                                         @endif
                                     </div>
                                 </div>
 
+                                {{-- File Banding --}}
                                 <div class="row mb-3">
                                     <label for="file_banding" class="col-sm-2 col-form-label">Banding/Keberatan</label>
                                     <div class="col-sm-10">
@@ -472,12 +494,16 @@
                                             </div>
                                         @enderror
                                         @if ($kasus->file_banding)
-                                            <small class="form-text text-muted">Current file:
-                                                {{ $kasus->file_banding }}</small>
+                                            <small class="form-text text-muted">
+
+                                                <a href="{{ asset('storage/' . $kasus->file_banding) }}"
+                                                    download>Download</a>
+                                            </small>
                                         @endif
                                     </div>
                                 </div>
 
+                                {{-- File RPS --}}
                                 <div class="row mb-3">
                                     <label for="file_rps" class="col-sm-2 col-form-label">Upload File RPS</label>
                                     <div class="col-sm-10">
@@ -489,14 +515,17 @@
                                             </div>
                                         @enderror
                                         @if ($kasus->file_rps)
-                                            <small class="form-text text-muted">Current file:
-                                                {{ $kasus->file_rps }}</small>
+                                            <small class="form-text text-muted">
+
+                                                <a href="{{ asset('storage/' . $kasus->file_rps) }}" download>Download</a>
+                                            </small>
                                         @endif
                                     </div>
                                 </div>
 
                             </div>
                         </div>
+
 
                         {{-- The rest of the form fields can be updated similarly --}}
                         <button class="btn btn-primary">Update</button>

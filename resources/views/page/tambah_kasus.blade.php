@@ -25,12 +25,12 @@
                                 <h5 class="card-title">Laporan Pelanggaran</h5>
 
                                 <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Kategori <span
+                                    <label class="col-sm-2 col-form-label">Jenis Pelanggaran <span
                                             class="text-danger">*</span></label>
                                     <div class="col-sm-10">
                                         <select class="form-select @error('kategori_id') is-invalid @enderror"
                                             aria-label="Default select example" name="kategori_id">
-                                            <option selected value="">Pilih Kategori</option>
+                                            <option selected value="">Pilih Jenis Pelanggaran</option>
                                             @foreach ($kategori as $k)
                                                 <option value="{{ $k->id }}"
                                                     {{ old('kategori_id') == $k->id ? 'selected' : '' }}>
@@ -206,17 +206,18 @@
                                     <label class="col-sm-2 col-form-label">Satker/Satwil<span
                                             class="text-danger">*</span></label>
                                     <div class="col-sm-10">
-                                        <select class="form-select @error('wilayah_kasus_id') is-invalid @enderror"
-                                            aria-label="Default select example" name="wilayah_kasus_id">
+                                        <select
+                                            class="form-select @error('satker_saat_terkena_kasus') is-invalid @enderror"
+                                            aria-label="Default select example" name="satker_saat_terkena_kasus">
                                             <option selected="">Pilih Wilayah</option>
-                                            @foreach ($wilayah as $w)
-                                                <option value="{{ $w->id }}"
-                                                    {{ old('wilayah_kasus_id') == $w->id ? 'selected' : '' }}>
-                                                    {{ $w->nama_wilayah }}</option>
+                                            @foreach ($satker_satwil as $w)
+                                                <option value="{{ $w->nama_satker_satwil }}"
+                                                    {{ old('satker_saat_terkena_kasus') == $w->nama_satker_satwil ? 'selected' : '' }}>
+                                                    {{ $w->nama_satker_satwil }}</option>
                                             @endforeach
                                         </select>
                                         <small class="text-muted">Satker/Satwil Saat Buat Pelanggaran</small>
-                                        @error('wilayah_kasus_id')
+                                        @error('satker_saat_terkena_kasus')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -224,19 +225,21 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Wilayah Kasus <span
+                                    <!-- Dropdown untuk Hukuman -->
+                                    <label class="col-sm-2 col-form-label">Hukuman <span
                                             class="text-danger">*</span></label>
                                     <div class="col-sm-10">
-                                        <select class="form-select @error('wilayah_kasus_id') is-invalid @enderror"
-                                            aria-label="Default select example" name="wilayah_kasus_id">
-                                            <option selected="">Pilih Wilayah</option>
-                                            @foreach ($wilayah as $w)
-                                                <option value="{{ $w->id }}"
-                                                    {{ old('wilayah_kasus_id') == $w->id ? 'selected' : '' }}>
-                                                    {{ $w->nama_wilayah }}</option>
+                                        <select class="form-select @error('hukuman_id') is-invalid @enderror"
+                                            name="hukuman_id" aria-label="Pilih Hukuman">
+                                            <option selected="">Pilih Hukuman</option>
+                                            @foreach ($hukuman as $h)
+                                                <option value="{{ $h->id }}"
+                                                    {{ old('hukuman_id') == $h->id ? 'selected' : '' }}>
+                                                    {{ $h->nama_hukuman }}
+                                                </option>
                                             @endforeach
                                         </select>
-                                        @error('wilayah_kasus_id')
+                                        @error('hukuman_id')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -269,13 +272,21 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="bentuk_pelanggaran" class="col-sm-2 col-form-label">Bentuk Pelanggaran
-                                    </label>
+                                    <!-- Dropdown untuk Pelanggaran -->
+                                    <label class="col-sm-2 col-form-label">Bentuk Pelanggaran <span
+                                            class="text-danger">*</span></label>
                                     <div class="col-sm-10">
-                                        <input type="text"
-                                            class="form-control @error('bentuk_pelanggaran') is-invalid @enderror"
-                                            name="bentuk_pelanggaran" value="{{ old('bentuk_pelanggaran') }}">
-                                        @error('bentuk_pelanggaran')
+                                        <select class="form-select @error('pelanggaran_id') is-invalid @enderror"
+                                            name="pelanggaran_id" aria-label="Pilih Pelanggaran">
+                                            <option selected="">Pilih Bentuk Pelanggaran</option>
+                                            @foreach ($pelanggaran as $p)
+                                                <option value="{{ $p->id }}"
+                                                    {{ old('pelanggaran_id') == $p->id ? 'selected' : '' }}>
+                                                    {{ $p->nama_pelanggaran }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('pelanggaran_id')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -296,8 +307,28 @@
                                         @enderror
                                     </div>
                                 </div>
-
                                 <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label">Wilayah Kasus <span
+                                            class="text-danger">*</span></label>
+                                    <div class="col-sm-10">
+                                        <select class="form-select @error('wilayah_kasus_id') is-invalid @enderror"
+                                            aria-label="Default select example" name="wilayah_kasus_id">
+                                            <option value="">Pilih Wilayah</option>
+                                            @foreach ($wilayah as $w)
+                                                <option value="{{ $w->id }}"
+                                                    {{ old('wilayah_kasus_id') == $w->id ? 'selected' : '' }}>
+                                                    {{ $w->nama_wilayah }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('wilayah_kasus_id')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                {{-- <div class="row mb-3">
                                     <label for="hukuman" class="col-sm-2 col-form-label">Hukuman <span
                                             class="text-danger">*</span></label>
                                     <div class="col-sm-10">
@@ -309,7 +340,7 @@
                                             </div>
                                         @enderror
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
 

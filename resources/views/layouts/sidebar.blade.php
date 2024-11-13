@@ -71,18 +71,19 @@
 
 
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#skhp" data-bs-toggle="collapse" href="#">
+            <a class="nav-link {{ request()->is('dashboard/skhp*') ? '' : 'collapsed' }}" data-bs-target="#skhp"
+                data-bs-toggle="collapse" href="#">
                 <i class="bi bi-gear"></i><span>SKHP</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="skhp" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="">
-                        <i class="bi bi-circle"></i><span>Pengguna</span>
+                    <a href="{{ route('skhp.index') }}">
+                        <i class="bi bi-circle"></i><span>Semua SKHP</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('activityLogs.index') }}">
-                        <i class="bi bi-circle"></i><span>Aktivitas Pengguna</span>
+                        <i class="bi bi-circle"></i><span>Edit Tamplate SKHP</span>
                     </a>
                 </li>
             </ul>

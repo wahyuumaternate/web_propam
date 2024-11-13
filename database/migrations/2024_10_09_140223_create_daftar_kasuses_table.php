@@ -19,10 +19,9 @@ return new class extends Migration
             $table->string('jabatan');
             $table->string('pangkat_saat_terkena_kasus');
             $table->string('jabatan_saat_terkena_kasus');
+            $table->string('satker_saat_terkena_kasus');
             $table->string('referensi')->nullable();
-            // $table->string('bentuk_pelanggaran');
             $table->string('pasal')->nullable();
-            // $table->string('hukuman')->nullable();
             $table->date('tanggal_putusan')->nullable();
             $table->string('nomor_putusan')->nullable();
             $table->date('tanggal_putusan_keberatan')->nullable();

@@ -9,6 +9,7 @@ use App\Http\Controllers\PelanggaranController;
 use App\Http\Controllers\PengaturanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SatkerController;
+use App\Http\Controllers\SKHPController;
 use App\Http\Controllers\StatusController;
 use Illuminate\Support\Facades\Route;
 
@@ -84,7 +85,13 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::post('/pelanggaran', [PelanggaranController::class, 'store'])->name('pelanggaran.store');
     Route::put('/pelanggaran/{id}', [PelanggaranController::class, 'update'])->name('pelanggaran.update');
     Route::delete('/pelanggaran/{id}', [PelanggaranController::class, 'destroy'])->name('pelanggaran.destroy');
-
+    // Route untuk menampilkan daftar SKHP
+    Route::get('/skhp', [SKHPController::class, 'index'])->name('skhp.index');
+    Route::get('/skhp/create', [SKHPController::class, 'create'])->name('skhp.create');
+    Route::post('/skhp', [SKHPController::class, 'store'])->name('skhp.store');
+    Route::get('/skhp/{id}/edit', [SKHPController::class, 'edit'])->name('skhp.edit');
+    Route::put('/skhp/{id}', [SKHPController::class, 'update'])->name('skhp.update');
+    Route::delete('/skhp/{id}', [SKHPController::class, 'destroy'])->name('skhp.destroy');
 
 });
 

@@ -13,6 +13,6 @@ class DaftarKasusSeeder extends Seeder
      */
     public function run(): void
     {
-        DaftarKasus::factory()->count(10)->create();
+        
     }
 }
