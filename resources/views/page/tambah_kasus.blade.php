@@ -203,6 +203,27 @@
                                 </div>
 
                                 <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label">Satker/Satwil<span
+                                            class="text-danger">*</span></label>
+                                    <div class="col-sm-10">
+                                        <select class="form-select @error('wilayah_kasus_id') is-invalid @enderror"
+                                            aria-label="Default select example" name="wilayah_kasus_id">
+                                            <option selected="">Pilih Wilayah</option>
+                                            @foreach ($wilayah as $w)
+                                                <option value="{{ $w->id }}"
+                                                    {{ old('wilayah_kasus_id') == $w->id ? 'selected' : '' }}>
+                                                    {{ $w->nama_wilayah }}</option>
+                                            @endforeach
+                                        </select>
+                                        <small class="text-muted">Satker/Satwil Saat Buat Pelanggaran</small>
+                                        @error('wilayah_kasus_id')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Wilayah Kasus <span
                                             class="text-danger">*</span></label>
                                     <div class="col-sm-10">

@@ -34,9 +34,10 @@
                                 <thead>
                                     <tr>
                                         <th>Nama</th>
+                                        <th>Pangkat</th>
                                         <th>NRP</th>
-                                        <th>Kategori</th>
-                                        <th data-type="date" data-format="YYYY/DD/MM">Tanggal Lapor</th>
+                                        <th>Satker</th>
+                                        <th>Pelanggaran</th>
                                         <th>Status</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -45,9 +46,10 @@
                                     @foreach ($daftarKasus as $kasus)
                                         <tr>
                                             <td>{{ $kasus->nama }}</td>
+                                            <td>{{ $kasus->pangkat->nama_pangkat }}</td>
                                             <td>{{ $kasus->nrp }}</td>
+                                            <td>{{ $kasus->satkerSatwil->nama_satker_satwil }}</td>
                                             <td>{{ $kasus->kategori->nama_kategori }}</td>
-                                            <td>{{ $kasus->tanggal_lapor }}</td>
                                             <td>
                                                 <select class="form-select" id="statusDropdown-{{ $kasus->id }}"
                                                     onchange="updateStatus({{ $kasus->id }})">

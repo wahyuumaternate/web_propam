@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
             
         ]);
 
-        DaftarKasus::factory()->count(10)->create();
+        
 
         
     }

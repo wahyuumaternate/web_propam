@@ -45,6 +45,7 @@
 
 
 
+
         <li class="nav-item">
             <a class="nav-link {{ request()->is('dashboard/status') ? '' : 'collapsed' }}"
                 href="{{ route('status') }}">
@@ -52,6 +53,33 @@
                 <span>Status</span>
             </a>
         </li><!-- End Login Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link {{ request()->is('dashboard/satker-satwil') ? '' : 'collapsed' }}"
+                href="{{ route('satker') }}">
+                <i class="bi bi-pin-map"></i>
+                <span>Bentuk Pelanggaran</span>
+            </a>
+        </li><!-- End Contact Page Nav -->
+
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#skhp" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-gear"></i><span>SKHP</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="skhp" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="">
+                        <i class="bi bi-circle"></i><span>Pengguna</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('activityLogs.index') }}">
+                        <i class="bi bi-circle"></i><span>Aktivitas Pengguna</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End Forms Nav -->
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">

@@ -2,17 +2,16 @@
 
 namespace Database\Seeders;
 
-use App\Models\DaftarKasus;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class DaftarKasusSeeder extends Seeder
+class SKHPSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DaftarKasus::factory()->count(10)->create();
+        //
     }
 }
