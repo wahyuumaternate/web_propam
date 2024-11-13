@@ -109,11 +109,11 @@
 
         .watermark {
             position: absolute;
-            top: 36%;
+            top: 46%;
             left: 50%;
             width: 85%;
             height: 85%;
-            background-image: url({{ asset('assets/img/LP.png') }});
+            background-image: url({{ public_path('assets/img/LP.png') }});
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
@@ -222,7 +222,7 @@
         </div>
 
         <div class="logo-container">
-            <img src="{{ asset('assets/img/logo-polri.png') }}" class="logo">
+            <img src="{{ public_path('assets/img/logo-polri.png') }}" class="logo">
         </div>
 
         <div class="confidential">RAHASIA</div>
