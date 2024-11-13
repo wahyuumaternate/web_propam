@@ -161,30 +161,35 @@
         .rank {
             margin: 2px 0;
             /* Reduced margins */
+            margin-left: 30%;
         }
 
         .official-title {
             font-weight: bold;
-            text-align: right;
+            text-align: center;
         }
 
         .name {
             font-weight: bold;
             text-decoration: underline;
-            text-align: right;
+            text-align: center;
         }
 
         .rank {
-            text-align: right;
+            text-align: center;
+            font-weight: bold;
         }
 
         .location-date {
             display: flex;
             flex-direction: column;
             margin-bottom: 10px;
+            margin-right: 70px;
+
         }
 
         .location-date .row {
+            align-items: center;
             display: flex;
             margin: 2px 0;
             /* Space between rows */
@@ -198,13 +203,17 @@
 
         .colon {
             width: 10px;
-            text-align: center;
+            text-align: left;
         }
 
         .value {
             text-align: left;
             flex: 1;
             /* Ensures value spans the remaining space */
+        }
+
+        .row2 {
+            text-decoration: underline;
         }
     </style>
 
@@ -312,10 +321,10 @@
                                 <span class="colon">:</span>
                                 <span class="value">Ternate</span>
                             </div>
-                            <div class="row">
+                            <div class="row row2">
                                 <span class="label">Pada tanggal</span>
                                 <span class="colon">:</span>
-                                <span class="value">Oktober 2024</span>
+                                <span class="value">{{ date('F Y') }}</span>
                             </div>
                         </div>
 

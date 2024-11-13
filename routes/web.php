@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArtisanRunnerController;
 use App\Http\Controllers\DaftarKasusController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HukumanController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PangkatController;
@@ -28,9 +29,9 @@ Route::get('/', function () {
     return redirect()->route('dashboard');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -43,6 +44,8 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/migrate', [ArtisanRunnerController::class, 'migrateFresh']);
     Route::get('/link', [ArtisanRunnerController::class, 'link']);
     Route::get('/cache', [ArtisanRunnerController::class, 'cache']);
+    // dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     // 
     Route::get('/daftar-kasus', [DaftarKasusController::class, 'index'])->name('daftarKasus');
     Route::get('/daftar-kasus/tambah-kasus', [DaftarKasusController::class, 'create'])->name('daftarKasus.create');
