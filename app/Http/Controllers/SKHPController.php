@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SKHP;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Notify; // Pastikan untuk menggunakan notify
 
@@ -104,5 +105,19 @@ class SKHPController extends Controller
         // Menggunakan Laravel Notify untuk notifikasi sukses
         notify()->success('SKHP deleted successfully.');
         return redirect()->route('skhp.index');
+    }
+
+        public function downloadPDF($id)
+    {
+        // Ambil data SKHP berdasarkan ID
+        $skhp = SKHP::findOrFail($id);
+
+        // Load view untuk format PDF
+        $pdf = Pdf::loadView('page.skhp_pdf', compact('skhp'));
+
+         // Stream the PDF in the browser (instead of downloading)
+         return $pdf->stream('SKHP_' . $skhp->nama . '.pdf');
+        // Download PDF dengan nama file yang sesuai
+        // return $pdf->download('SKHP_' . $skhp->nama . '.pdf');
     }
 }

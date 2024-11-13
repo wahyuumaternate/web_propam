@@ -92,6 +92,8 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/skhp/{id}/edit', [SKHPController::class, 'edit'])->name('skhp.edit');
     Route::put('/skhp/{id}', [SKHPController::class, 'update'])->name('skhp.update');
     Route::delete('/skhp/{id}', [SKHPController::class, 'destroy'])->name('skhp.destroy');
+    Route::get('/skhp/download/{id}', [SKHPController::class, 'downloadPDF'])->name('skhp.download');
+
 
 });
 

@@ -45,6 +45,11 @@
                                             <td>{{ $skhp->kesatuan_instansi }}</td>
                                             <td>{{ $skhp->jabatan }}</td>
                                             <td>
+                                                <!-- Tombol Download PDF -->
+                                                <a href="{{ route('skhp.download', $skhp->id) }}" target="blank"
+                                                    class="btn btn-primary">
+                                                    <i class="bi bi-file-earmark-pdf"></i> PDF
+                                                </a>
                                                 <a href="{{ route('skhp.edit', $skhp->id) }}" class="btn btn-warning"><i
                                                         class="bi bi-pencil"></i></a>
                                                 <form id="delete-form-{{ $skhp->id }}"
