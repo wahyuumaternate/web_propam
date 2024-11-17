@@ -1,13 +1,13 @@
-@extends('layouts.main', ['title' => 'Bentuk  Pelanggaran'])
+@extends('layouts.main', ['title' => 'Jenis  Pelanggaran'])
 @section('main')
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Bentuk Pelanggaran</h1>
+            <h1>Jenis Pelanggaran</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Bentuk Pelanggaran</li>
+                    <li class="breadcrumb-item active">Jenis Pelanggaran</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -19,7 +19,7 @@
                     <div class="card">
                         <div class="card-body table-responsive">
                             <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="card-title">List Pelanggaran</h5>
+                                <h5 class="card-title">List Jenis Pelanggaran</h5>
                                 <div>
                                     <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
                                         data-bs-target="#basicModal">

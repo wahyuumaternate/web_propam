@@ -23,7 +23,7 @@
             <a class="nav-link {{ request()->is('dashboard/kategori') ? '' : 'collapsed' }}"
                 href="{{ route('kategori') }}">
                 <i class="bi bi-file-earmark-ruled"></i>
-                <span>Jenis Pelanggaran</span>
+                <span>Pelanggaran</span>
             </a>
         </li><!-- End Profile Page Nav -->
 
@@ -58,7 +58,7 @@
             <a class="nav-link {{ request()->is('dashboard/pelanggaran') ? '' : 'collapsed' }}"
                 href="{{ route('pelanggaran') }}">
                 <i class="bi bi-pin-map"></i>
-                <span>Bentuk Pelanggaran</span>
+                <span>Jenis Pelanggaran</span>
             </a>
         </li><!-- End Contact Page Nav -->
         <li class="nav-item">

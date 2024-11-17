@@ -4,12 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Domine:wght@400..700&display=swap" rel="stylesheet">
     <title>Surat Keterangan Hasil Penelitian Personel (SKHP)</title>
     <style>
         /* General Styles */
         body {
-            font-family: Arial, sans-serif;
-            font-size: 12px;
+            font-family: "Domine", serif;
+            font-size: 14px;
             line-height: 1.4;
             /* Reduced line height */
             margin: 0;
@@ -23,9 +26,24 @@
             margin: 0 auto;
         }
 
-        .header,
-        .footer {
+        .header {
+            width: 50%;
+            /* Lebar elemen tetap 50% dari halaman */
             text-align: center;
+            /* Teks di dalam elemen rata tengah */
+            font-weight: bold;
+            margin-left: -25px;
+            /* Geser elemen lebih ke kiri */
+            margin-right: 0;
+            /* Tidak ada margin kanan */
+            padding-left: 0;
+            /* Pastikan tidak ada padding */
+            box-sizing: border-box;
+            /* Tambahkan agar padding tidak memengaruhi layout */
+        }
+
+        .footer {
+            text-align: left;
             font-weight: bold;
             margin: 5px 0;
             /* Reduced margin */
@@ -46,8 +64,9 @@
         .confidential {
             text-align: center;
             font-weight: bold;
-            color: red;
-            margin: 5px 0;
+            color: #000000;
+            margin: 10px 0;
+            text-decoration: underline;
             /* Reduced margin */
         }
 
@@ -63,7 +82,7 @@
         .content {
             margin: 5px 5px;
             /* Reduced margin */
-            font-size: 12px;
+            font-size: 14px;
             /* Adjusted font size */
             text-align: justify;
         }
@@ -76,7 +95,7 @@
         }
 
         .info-table td {
-            padding: 1px 3px;
+            padding: 7px 3px;
             /* Reduced padding */
             vertical-align: top;
         }
@@ -184,7 +203,7 @@
             display: flex;
             flex-direction: column;
             margin-bottom: 10px;
-            margin-right: 70px;
+            margin-left: 180px;
 
         }
 
@@ -215,92 +234,115 @@
         .row2 {
             text-decoration: underline;
         }
+
+        ol {
+            margin: 0;
+            /* Hapus margin */
+            padding-left: 0;
+            /* Hapus padding kiri */
+            text-align: left;
+            /* Pastikan teks rata kiri */
+        }
+
+        li {
+            margin-top: 20px;
+        }
     </style>
 
 </head>
 
-<body>
+<body style="font-family: 'Trebuchet MS', sans-serif;">
     <!-- Background watermark -->
     <div class="watermark"></div>
 
+    <div class="confidential">RAHASIA</div>
     <div class="content-wrapper">
         <div class="header">
             KEPOLISIAN NEGARA REPUBLIK INDONESIA<br>
-            DAERAH MALUKU UTARA<br>
-            BIDANG PROFESI DAN PENGAMANAN
+            <span>DAERAH MALUKU UTARA</span> <br>
+            <span style="text-decoration: underline;">BIDANG PROFESI DAN PENGAMANAN</span>
         </div>
 
         <div class="logo-container">
             <img src="{{ public_path('assets/img/logo-polri.png') }}" class="logo">
         </div>
 
-        <div class="confidential">RAHASIA</div>
 
-        <div class="title">SURAT KETERANGAN HASIL PENELITIAN PERSONEL (SKHP)</div>
+        <div class="title"><span style="text-decoration: underline;">SURAT KETERANGAN HASIL PENELITIAN PERSONEL</span>
+            <br>( S K H P )
+        </div>
 
         <p style="text-align: center; margin: 10px 0; font-weight: bold">
-            Nomor: SKHP - {{ $skhp->id }} / {{ date('m') }} / {{ date('Y') }} / LITPERS
+            Nomor: SKHP - {{ $skhp->id }} / {{ $romanMonth }}
+            / {{ date('Y') }} / LITPERS
         </p>
 
         <div class="content">
-            <p>1. Berdasarkan Peraturan Kepala Kepolisian Negara Republik Indonesia Nomor 13 Tahun 2016 tentang
-                pengamanan internal di lingkungan Polri.</p>
-            <p>2. Peraturan Kepala Divisi Profesi dan Pengamanan Kepolisian Negara Republik Indonesia Nomor 1 Tahun 2016
-                tentang Standar Operasional Prosedur Catatan Personel Bagi Pegawai Negeri Pada Kepolisian Negara
-                Republik Indonesia.</p>
-            <p>Dengan ini menerangkan bahwa hasil Penelitian terhadap:</p>
+            <ol>
+                <li>Berdasarkan Peraturan Kepala Kepolisian Negara Republik Indonesia Nomor 13 Tahun 2016 tentang
+                    pengamanan internal di lingkungan Polri.</li>
+                <li>Peraturan Kepala Divisi Profesi dan Pengamanan Kepolisian Negara Republik Indonesia Nomor 1 Tahun
+                    2016
+                    tentang Standar Operasional Prosedur Catatan Personel Bagi Pegawai Negeri Pada Kepolisian Negara
+                    Republik Indonesia.</li>
 
-            <!-- Updated HTML Structure for .info-table -->
-            <table class="info-table">
-                <tr>
-                    <td class="info-label">Nama</td>
-                    <td class="info-colon">:</td>
-                    <td class="info-value">{{ $skhp->nama }}</td>
-                </tr>
-                <tr>
-                    <td class="info-label">Tempat dan tgl. lahir</td>
-                    <td class="info-colon">:</td>
-                    <td class="info-value">{{ $skhp->tanggal_lahir }}</td>
-                </tr>
-                <tr>
-                    <td class="info-label">Jenis Kelamin</td>
-                    <td class="info-colon">:</td>
-                    <td class="info-value">{{ $skhp->jenis_kelamin }}</td>
-                </tr>
-                <tr>
-                    <td class="info-label">Agama</td>
-                    <td class="info-colon">:</td>
-                    <td class="info-value">{{ $skhp->agama }}</td>
-                </tr>
-                <tr>
-                    <td class="info-label">Pangkat / Nrp / Nip</td>
-                    <td class="info-colon">:</td>
-                    <td class="info-value">{{ $skhp->pangkat_nrp_nip }}</td>
-                </tr>
-                <tr>
-                    <td class="info-label">Jabatan</td>
-                    <td class="info-colon">:</td>
-                    <td class="info-value">{{ $skhp->jabatan }}</td>
-                </tr>
-                <tr>
-                    <td class="info-label">Kesatuan / Instansi</td>
-                    <td class="info-colon">:</td>
-                    <td class="info-value">{{ $skhp->kesatuan_instansi }}</td>
-                </tr>
-                <tr>
-                    <td class="info-label">Alamat Kantor</td>
-                    <td class="info-colon">:</td>
-                    <td class="info-value">{{ $skhp->alamat_kantor }}</td>
-                </tr>
-            </table>
+                <p style="margin-bottom:-10px; padding-bottom:-10px;">Dengan ini menerangkan bahwa hasil Penelitian
+                    terhadap:
+                </p>
 
-            <p style="text-align: center; font-weight: bold">
-                MEMENUHI SYARAT untuk MENGIKUTI PENGUSULAN KENAIKAN PANGKAT<br>
-                TMT PERIODE 01 JANUARI 2025
-            </p>
+                <!-- Updated HTML Structure for .info-table -->
+                <table class="info-table" style="margin-top:0; padding-top:0;">
+                    <tr>
+                        <td class="info-label">Nama</td>
+                        <td class="info-colon">:</td>
+                        <td class="info-value">{{ $skhp->nama }}</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Tempat dan tgl. lahir</td>
+                        <td class="info-colon">:</td>
+                        <td class="info-value">{{ $skhp->tanggal_lahir }}</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Jenis Kelamin</td>
+                        <td class="info-colon">:</td>
+                        <td class="info-value">{{ $skhp->jenis_kelamin }}</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Agama</td>
+                        <td class="info-colon">:</td>
+                        <td class="info-value">{{ $skhp->agama }}</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Pangkat / Nrp / Nip</td>
+                        <td class="info-colon">:</td>
+                        <td class="info-value">{{ $skhp->pangkat_nrp_nip }}</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Jabatan</td>
+                        <td class="info-colon">:</td>
+                        <td class="info-value">{{ $skhp->jabatan }}</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Kesatuan / Instansi</td>
+                        <td class="info-colon">:</td>
+                        <td class="info-value">{{ $skhp->kesatuan_instansi }}</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Alamat Kantor</td>
+                        <td class="info-colon">:</td>
+                        <td class="info-value">{{ $skhp->alamat_kantor }}</td>
+                    </tr>
+                </table>
 
-            <p>3. Hasil penelitian ini berlaku selama 6 (enam) bulan sejak dikeluarkan. Apabila di kemudian hari
-                terdapat kekeliruan, surat keterangan hasil penelitian ini akan dicabut.</p>
+                <p style="text-align: center; font-weight: bold">
+                    MEMENUHI SYARAT untuk MENGIKUTI PENGUSULAN KENAIKAN PANGKAT<br>
+                    TMT PERIODE 01 JANUARI 2025
+                </p>
+
+
+                <li>Hasil penelitian ini berlaku selama 6 (enam) bulan sejak dikeluarkan. Apabila di kemudian hari
+                    terdapat kekeliruan, surat keterangan hasil penelitian ini akan dicabut.</li>
+            </ol>
 
             <br><br>
             <table class="signature-table">
@@ -315,7 +357,7 @@
 
                     <!-- Signature Details on the Right -->
                     <td class="signature-details">
-                        <div class="location-date">
+                        <div class="location-date" style="text-align: left;">
                             <div class="row">
                                 <span class="label">Di Keluarkan di</span>
                                 <span class="colon">:</span>

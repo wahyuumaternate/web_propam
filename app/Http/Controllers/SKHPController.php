@@ -112,8 +112,18 @@ class SKHPController extends Controller
         // Ambil data SKHP berdasarkan ID
         $skhp = SKHP::findOrFail($id);
 
+        $romanMonths = [
+            1 => 'I',  2 => 'II', 3 => 'III', 4 => 'IV', 5 => 'V', 
+            6 => 'VI', 7 => 'VII', 8 => 'VIII', 9 => 'IX', 10 => 'X',
+            11 => 'XI', 12 => 'XII'
+        ];
+    
+        $currentMonth = (int) date('m');
+        $romanMonth = $romanMonths[$currentMonth];
+
         // Load view untuk format PDF
-        $pdf = Pdf::loadView('page.skhp_pdf', compact('skhp'));
+        $pdf = Pdf::loadView('page.skhp_pdf', compact('skhp','romanMonth'))
+        ->setPaper([0, 0, 612, 1008], 'portrait'); // Ukuran Legal dalam poin
 
          // Stream the PDF in the browser (instead of downloading)
          return $pdf->stream('SKHP_' . $skhp->nama . '.pdf');
