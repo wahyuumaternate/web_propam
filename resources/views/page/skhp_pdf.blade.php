@@ -6,12 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Domine:wght@400..700&display=swap" rel="stylesheet">
     <title>Surat Keterangan Hasil Penelitian Personel (SKHP)</title>
+    {{-- \public\font\Roboto --}}
     <style>
-        /* General Styles */
+        @font-face {
+            font-family: 'PT Serif';
+            src: url({{ public_path('fonts/pt-serif/PTSerif-Regular.ttf') }}) format('truetype');
+        }
+
+
         body {
-            font-family: "Domine", serif;
+            font-family: 'PT Serif', serif;
             font-size: 14px;
             line-height: 1.4;
             /* Reduced line height */
@@ -113,6 +118,7 @@
 
         .info-value {
             font-weight: normal;
+
         }
 
         .footer-info {
@@ -231,9 +237,7 @@
             /* Ensures value spans the remaining space */
         }
 
-        .row2 {
-            text-decoration: underline;
-        }
+
 
         ol {
             margin: 0;
@@ -300,7 +304,9 @@
                     <tr>
                         <td class="info-label">Tempat dan tgl. lahir</td>
                         <td class="info-colon">:</td>
-                        <td class="info-value">{{ $skhp->tanggal_lahir }}</td>
+                        <td class="info-value">{{ $skhp->tempat_lahir }},
+                            {{ \Carbon\Carbon::parse($skhp->tanggal_lahir)->locale('id')->format('d F Y') }}
+                        </td>
                     </tr>
                     <tr>
                         <td class="info-label">Jenis Kelamin</td>
@@ -315,7 +321,14 @@
                     <tr>
                         <td class="info-label">Pangkat / Nrp / Nip</td>
                         <td class="info-colon">:</td>
-                        <td class="info-value">{{ $skhp->pangkat_nrp_nip }}</td>
+                        <td class="info-value">
+                            @foreach ($pangkat as $p)
+                                @if ($skhp->id_pangkat == $p->id)
+                                    {{ $p->nama_pangkat }} /
+                                @endif
+                            @endforeach
+                            {{ $skhp->nrp_nip }}
+                        </td>
                     </tr>
                     <tr>
                         <td class="info-label">Jabatan</td>
@@ -334,9 +347,8 @@
                     </tr>
                 </table>
 
-                <p style="text-align: center; font-weight: bold">
-                    MEMENUHI SYARAT untuk MENGIKUTI PENGUSULAN KENAIKAN PANGKAT<br>
-                    TMT PERIODE 01 JANUARI 2025
+                <p style="text-align: center; font-weight: bold; width: 85%; margin: 20px auto;">
+                    {{ $status }} untuk {{ $skhp->peruntukan }}
                 </p>
 
 
@@ -358,25 +370,39 @@
                     <!-- Signature Details on the Right -->
                     <td class="signature-details">
                         <div class="location-date" style="text-align: left;">
-                            <div class="row">
-                                <span class="label">Di Keluarkan di</span>
-                                <span class="colon">:</span>
-                                <span class="value">Ternate</span>
+                            <div class="row" style="display: flex; justify-content: space-between; width: 100%;">
+                                <span class="label" style="flex-grow: 1;">Di Keluarkan di</span>
+                                <span class="colon" style="margin-left: 5px;">:</span>
+                                <span class="value">{{ $tamplate->di_keluar_di }}</span>
                             </div>
-                            <div class="row row2">
+                            <div class="row row2"
+                                style="display: inline-flex; width: auto; border-bottom: 1px solid black;">
                                 <span class="label">Pada tanggal</span>
-                                <span class="colon">:</span>
+                                <span class="colon" style="margin-left: 16px;">:</span>
                                 <span class="value">{{ \Carbon\Carbon::now('Asia/Makassar')->format('d F Y') }}</span>
                             </div>
+
                         </div>
 
+
                         <div class="official-title">
-                            a.n KABID PROPAM POLDA MALUKU UTARA<br>
-                            Ps. KASUBBID PAMINAL
+                            @if ($ttd)
+                                KABID PROPAM POLDA MALUKU UTARA
+                            @else
+                                a.n KABID PROPAM POLDA MALUKU UTARA<br>
+                                Ps. KASUBBID PAMINAL
+                            @endif
                         </div>
                         <br><br><br><br>
-                        <div class="name">ROY BERMAN S.H., S.I.K.</div>
-                        <div class="rank">KOMPOL NRP 87121320</div>
+                        @if ($ttd)
+                            <div class="name">{{ $tamplate->kabid_nama }}</div>
+                            <div class="rank">{{ $tamplate->kabid_pangkat }} NRP {{ $tamplate->kabid_nrp }}
+                            </div>
+                        @else
+                            <div class="name">{{ $tamplate->kasubid_nama }}</div>
+                            <div class="rank">{{ $tamplate->kasubid_pangkat }} NRP {{ $tamplate->kasubid_nrp }}
+                            </div>
+                        @endif
                     </td>
                 </tr>
             </table>

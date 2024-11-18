@@ -11,6 +11,7 @@ use App\Models\Pangkat;
 use App\Models\Pelanggaran;
 use App\Models\Satker;
 use App\Models\Status;
+use App\Models\TamplateSKHP;
 use App\Models\WilayahKasus;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -129,31 +130,53 @@ class DatabaseSeeder extends Seeder
                 'tanggal_lahir' => Carbon::create('1990', '01', '01')->format('Y-m-d'), // Tanggal Lahir
                 'jenis_kelamin' => 'Laki-laki', // Jenis Kelamin
                 'agama' => 'Islam', // Agama
-                'pangkat_nrp_nip' => '123456789', // Pangkat / NRP / NIP
+                'nrp_nip' => '123456789', // Pangkat / NRP / NIP
                 'jabatan' => 'Anggota', // Jabatan
                 'kesatuan_instansi' => 'POLRES GRESIK', // Kesatuan / Instansi
                 'alamat_kantor' => 'Jl. Raya Gresik No. 1', // Alamat Kantor
+                'id_pangkat' => 1, // Alamat Kantor
+                'peruntukan' => 'MENGIKUTI PENGUSULAN KENAIKAN PANGKAT
+                    TMT PERIODE 01 JANUARI 2025', // Alamat Kantor
+                'tempat_lahir' => 'Ternate', // Alamat Kantor
             ],
             [
                 'nama' => 'Jane Smith',
                 'tanggal_lahir' => Carbon::create('1985', '05', '15')->format('Y-m-d'),
                 'jenis_kelamin' => 'Perempuan',
                 'agama' => 'Kristen',
-                'pangkat_nrp_nip' => '987654321',
+                'nrp_nip' => '987654321',
                 'jabatan' => 'Kepala',
                 'kesatuan_instansi' => 'POLSEK GRESIK',
                 'alamat_kantor' => 'Jl. Raya Gresik No. 2',
+                'id_pangkat' => 1,
+                'peruntukan' => 'MENGIKUTI PENGUSULAN KENAIKAN PANGKAT
+                    TMT PERIODE 01 JANUARI 2025',
+                'tempat_lahir' => 'Ternate',
             ],
             [
                 'nama' => 'Michael Johnson',
                 'tanggal_lahir' => Carbon::create('1980', '11', '25')->format('Y-m-d'),
                 'jenis_kelamin' => 'Laki-laki',
                 'agama' => 'Protestan',
-                'pangkat_nrp_nip' => 'AKP 1122334455',
+                'nrp_nip' => 'AKP 1122334455',
                 'jabatan' => 'Perwira',
                 'kesatuan_instansi' => 'POLRES GRESIK',
                 'alamat_kantor' => 'Jl. Raya Gresik No. 3',
+                'id_pangkat' => 1,
+                'peruntukan' => 'MENGIKUTI PENGUSULAN KENAIKAN PANGKAT
+                    TMT PERIODE 01 JANUARI 2025',
+                'tempat_lahir' => 'Ternate',
             ]
+        ]);
+
+        TamplateSKHP::create([
+            'di_keluar_di' => 'Surabaya',
+            'kabid_nama' => 'Michael Brown',
+            'kabid_pangkat' => 'Brigadier General',
+            'kabid_nrp' => '9988776655',
+            'kasubid_nama' => 'Sarah Lee',
+            'kasubid_pangkat' => 'Major',
+            'kasubid_nrp' => '5544332211',
         ]);
         
     }

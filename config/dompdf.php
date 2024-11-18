@@ -45,17 +45,17 @@ return [
          * Times-Roman, Times-Bold, Times-BoldItalic, Times-Italic,
          * Symbol, ZapfDingbats.
          */
-        'font_dir' => storage_path('fonts'), // advised by dompdf (https://github.com/dompdf/dompdf/pull/782)
+        'font_dir' => storage_path('fonts'),  // Folder tempat menyimpan font
+        'font_cache' => storage_path('fonts'), // Cache font
 
-        /**
-         * The location of the DOMPDF font cache directory
-         *
-         * This directory contains the cached font metrics for the fonts used by DOMPDF.
-         * This directory can be the same as DOMPDF_FONT_DIR
-         *
-         * Note: This directory must exist and be writable by the webserver process.
-         */
-        'font_cache' => storage_path('fonts'),
+        'fonts' => [
+            'PT Serif' => [
+                'normal' => public_path('fonts/pt-serif/PTSerif-Regular.ttf'),
+                'bold' => public_path('fonts/pt-serif/PTSerif-Bold.ttf'),
+                'italic' => public_path('fonts/pt-serif/PTSerif-Italic.ttf'),
+                'bold_italic' => public_path('fonts/pt-serif/PTSerif-BoldItalic.ttf'),
+            ],
+        ],
 
         /**
          * The location of a temporary directory.
@@ -160,7 +160,7 @@ return [
          *
          * @see CPDF_Adapter::PAPER_SIZES for valid sizes ('letter', 'legal', 'A4', etc.)
          */
-        'default_paper_size' => 'a4',
+        'default_paper_size' => 'legal',
 
         /**
          * The default paper orientation.
@@ -178,7 +178,7 @@ return [
          *
          * @var string
          */
-        'default_font' => 'Domine',
+        'default_font' => 'PT Serif',  // Menetapkan PT Serif sebagai font default
 
         /**
          * Image DPI setting

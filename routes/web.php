@@ -12,6 +12,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SatkerController;
 use App\Http\Controllers\SKHPController;
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\TamplateSKHPController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -96,7 +97,9 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::put('/skhp/{id}', [SKHPController::class, 'update'])->name('skhp.update');
     Route::delete('/skhp/{id}', [SKHPController::class, 'destroy'])->name('skhp.destroy');
     Route::get('/skhp/download/{id}', [SKHPController::class, 'downloadPDF'])->name('skhp.download');
-
+    Route::get('/skhp-tamplate', [TamplateSKHPController::class, 'index'])->name('skhp.tamplate');
+    // Route for updating the record
+    Route::put('/skhp/tamplate/{id}/update', [TamplateSkhpController::class, 'update'])->name('skhp.tamplate.update');
 
 });
 

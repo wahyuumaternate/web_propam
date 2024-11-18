@@ -41,7 +41,7 @@
                                     @foreach ($skhpList as $skhp)
                                         <tr>
                                             <td>{{ $skhp->nama }}</td>
-                                            <td>{{ $skhp->pangkat_nrp_nip }}</td>
+                                            <td>{{ $skhp->pangkat->nama_pangkat }} / {{ $skhp->nrp_nip }}</td>
                                             <td>{{ $skhp->kesatuan_instansi }}</td>
                                             <td>{{ $skhp->jabatan }}</td>
                                             <td>

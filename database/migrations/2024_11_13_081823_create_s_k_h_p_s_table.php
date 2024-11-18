@@ -14,13 +14,15 @@ return new class extends Migration
         Schema::create('skhp', function (Blueprint $table) {
             $table->id();
             $table->string('nama'); // Nama
+            $table->string('tempat_lahir'); // Nama
             $table->date('tanggal_lahir'); // Tempat dan Tanggal Lahir (date saja)
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']); // Jenis Kelamin
             $table->string('agama'); // Agama
-            $table->string('pangkat_nrp_nip'); // Pangkat / NRP / NIP
+            $table->string('nrp_nip'); // Pangkat / NRP / NIP
             $table->string('jabatan'); // Jabatan
             $table->string('kesatuan_instansi'); // Kesatuan / Instansi
             $table->string('alamat_kantor'); // Alamat Kantor
+            $table->string('peruntukan'); // Alamat Kantor
             $table->timestamps();
         });
     }

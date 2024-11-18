@@ -82,7 +82,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('activityLogs.index') }}">
+                    <a href="{{ route('skhp.tamplate') }}">
                         <i class="bi bi-circle"></i><span>Edit Tamplate SKHP</span>
                     </a>
                 </li>

@@ -56,14 +56,32 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="pangkat_nrp_nip" class="col-sm-2 col-form-label">Pangkat / NRP / NIP</label>
+                                    <label for="nrp_nip" class="col-sm-2 col-form-label">NRP / NIP</label>
                                     <div class="col-sm-10">
-                                        <input type="text"
-                                            class="form-control @error('pangkat_nrp_nip') is-invalid @enderror"
-                                            name="pangkat_nrp_nip" id="pangkat_nrp_nip" value="{{ old('pangkat_nrp_nip') }}"
-                                            required>
-                                        @error('pangkat_nrp_nip')
+                                        <input type="number" class="form-control @error('nrp_nip') is-invalid @enderror"
+                                            name="nrp_nip" id="nrp_nip" value="{{ old('nrp_nip') }}" required>
+                                        @error('nrp_nip')
                                             <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label">Pangkat</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-select @error('id_pangkat') is-invalid @enderror"
+                                            aria-label="Default select example" name="id_pangkat">
+                                            <option selected="" value="">Pilih Pangkat</option>
+                                            @foreach ($pangkat as $p)
+                                                <option value="{{ $p->id }}"
+                                                    {{ old('id_pangkat') == $p->id ? 'selected' : '' }}>
+                                                    {{ $p->nama_pangkat }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('id_pangkat')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
                                         @enderror
                                     </div>
                                 </div>
@@ -78,9 +96,21 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="row mb-3">
+                                    <label for="tempat_lahir" class="col-sm-2 col-form-label">Tempat Lahir</label>
+                                    <div class="col-sm-10">
+                                        <input type="text"
+                                            class="form-control @error('tempat_lahir') is-invalid @enderror"
+                                            name="tempat_lahir" id="tempat_lahir" value="{{ old('tempat_lahir') }}"
+                                            required>
+                                        @error('tempat_lahir')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
 
                                 <div class="row mb-3">
-                                    <label for="tanggal_lahir" class="col-sm-2 col-form-label">Tempat Tanggal Lahir</label>
+                                    <label for="tanggal_lahir" class="col-sm-2 col-form-label">Tanggal Lahir</label>
                                     <div class="col-sm-10">
                                         <input type="date"
                                             class="form-control @error('tanggal_lahir') is-invalid @enderror"
@@ -141,6 +171,18 @@
                                             name="kesatuan_instansi" id="kesatuan_instansi"
                                             value="{{ old('kesatuan_instansi') }}" required>
                                         @error('kesatuan_instansi')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                {{-- Alamat Kantor --}}
+                                <div class="row mb-3">
+                                    <label for="peruntukan" class="col-sm-2 col-form-label">Peruntukan</label>
+                                    <div class="col-sm-10">
+                                        <input type="text"
+                                            class="form-control @error('peruntukan') is-invalid @enderror"
+                                            name="peruntukan" id="peruntukan" value="{{ old('peruntukan') }}" required>
+                                        @error('peruntukan')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
