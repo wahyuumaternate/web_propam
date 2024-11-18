@@ -188,7 +188,11 @@ class SKHPController extends Controller
         ->setPaper([0, 0, 612, 1008], 'portrait'); // Ukuran Legal dalam poin
 
          // Stream the PDF in the browser (instead of downloading)
-         return $pdf->stream('SKHP_' . $skhp->nama . '.pdf');
+        //  return $pdf->stream('SKHP_' . $skhp->nama . '.pdf');
+        $currentDate = date('d-m-Y_H-i-s'); // Format: day-month-year_hour-minute-second
+
+        // Stream the PDF with the modified filename including NRP and timestamp
+        return $pdf->stream('SKHP_' . $skhp->nama . '_' . $skhp->nrp_nip . '_' . $currentDate . '.pdf');
         // Download PDF dengan nama file yang sesuai
         // return $pdf->download('SKHP_' . $skhp->nama . '.pdf');
     }
