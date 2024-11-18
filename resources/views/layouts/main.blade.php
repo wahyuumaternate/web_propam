@@ -6,9 +6,8 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <title>{{ ($title ?? 'Dashboard') . ' - Litpers' }}</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
-
+    
+    <meta name="robots" content="noindex, nofollow">
     <!-- Favicons -->
     <link href="{{ asset('logo.png') }}" rel="icon">
     <link href="{{ asset('logo.png') }}" rel="apple-touch-icon">
