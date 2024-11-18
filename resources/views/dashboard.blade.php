@@ -14,30 +14,68 @@
 
         <section class="section dashboard">
             <div class="row">
+                <div class="col-xxl-4 col-md-6">
+                    <div class="card info-card sales-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Kasus</h5>
 
-                <!-- Year Selector -->
-                <div class="col-12">
-                    <form method="GET" action="{{ route('dashboard') }}">
-                        {{-- <label for="year">Lihat Berdasarkan Tahun :</label> --}}
-                        <div class="dropdown">
-                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="yearDropdown"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Grafik Tahun {{ $selectedYear }}
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="yearDropdown">
-                                @foreach ($availableYears as $year)
-                                    <li>
-                                        <a href="#" class="dropdown-item"
-                                            onclick="document.getElementById('year-input').value = '{{ $year }}'; this.closest('form').submit();">
-                                            Lihat Grafik Kasus Pada Tahun {{ $year }}
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-card-list"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h6>145</h6>
+
+                                </div>
+                            </div>
                         </div>
-                        <input type="hidden" name="year" id="year-input" value="{{ $selectedYear }}">
-                    </form>
+
+                    </div>
                 </div>
+                <div class="col-xxl-4 col-md-6">
+                    <div class="card info-card sales-card">
+
+                        <div class="card-body">
+                            <h5 class="card-title">Lihat Grafik Pertahun</h5>
+
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-bar-chart"></i>
+                                </div>
+                                <div class="ps-3">
+
+                                    <div class="col-12">
+                                        <form method="GET" action="{{ route('dashboard') }}">
+                                            {{-- <label for="year">Lihat Berdasarkan Tahun :</label> --}}
+                                            <div class="dropdown">
+                                                <button class="btn btn-outline-primary dropdown-toggle" type="button"
+                                                    id="yearDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    Grafik Tahun {{ $selectedYear }}
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="yearDropdown">
+                                                    @foreach ($availableYears as $year)
+                                                        <li>
+                                                            <a href="#" class="dropdown-item"
+                                                                onclick="document.getElementById('year-input').value = '{{ $year }}'; this.closest('form').submit();">
+                                                                Lihat Grafik Kasus Pada Tahun {{ $year }}
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                            <input type="hidden" name="year" id="year-input"
+                                                value="{{ $selectedYear }}">
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Year Selector -->
+
 
                 <!-- Left side columns -->
                 <div class="col-lg-12">
@@ -164,6 +202,65 @@
                             </div>
                         </div><!-- End Bar Chart -->
 
+                        <div class="col-10">
+                            <!-- Top Selling -->
+                            <div class="col-12">
+                                <div class="card top-selling overflow-auto">
+
+                                    <div class="filter">
+                                        <a class="icon" href="#" data-bs-toggle="dropdown"><i
+                                                class="bi bi-three-dots"></i></a>
+                                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                            <li class="dropdown-header text-start">
+                                                <h6>Filter</h6>
+                                            </li>
+
+                                            <li><a class="dropdown-item" href="#">Today</a></li>
+                                            <li><a class="dropdown-item" href="#">This Month</a></li>
+                                            <li><a class="dropdown-item" href="#">This Year</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="card-body pb-0">
+                                        <h5 class="card-title">Top Kasusg <span>| Today</span></h5>
+
+                                        <table class="table table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Kasus</th>
+                                                    <th scope="col">Kasus</th>
+                                                    <th scope="col">Kasus</th>
+                                                    <th scope="col">Kasus</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>ss</td>
+                                                    <td>$64</td>
+                                                    <td class="fw-bold">124</td>
+                                                    <td>$5,828</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>ss</td>
+                                                    <td>$64</td>
+                                                    <td class="fw-bold">124</td>
+                                                    <td>$5,828</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>ss</td>
+                                                    <td>$64</td>
+                                                    <td class="fw-bold">124</td>
+                                                    <td>$5,828</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+                                </div>
+                            </div><!-- End Top Selling -->
+                        </div>
                     </div>
                 </div><!-- End Left side columns -->
 

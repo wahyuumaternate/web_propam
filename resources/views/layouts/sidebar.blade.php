@@ -75,14 +75,16 @@
                 data-bs-toggle="collapse" href="#">
                 <i class="bi bi-gear"></i><span>SKHP</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="skhp" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <ul id="skhp" class="nav-content collapse {{ request()->is('dashboard/skhp*') ? 'show' : '' }}"
+                data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="{{ route('skhp.index') }}">
+                    <a href="{{ route('skhp.index') }}" class="{{ request()->is('dashboard/skhp') ? 'active' : '' }}">
                         <i class="bi bi-circle"></i><span>Semua SKHP</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('skhp.tamplate') }}">
+                    <a href="{{ route('skhp.tamplate') }}"
+                        class="{{ request()->is('dashboard/skhp-tamplate') ? 'active' : '' }}">
                         <i class="bi bi-circle"></i><span>Edit Tamplate SKHP</span>
                     </a>
                 </li>
