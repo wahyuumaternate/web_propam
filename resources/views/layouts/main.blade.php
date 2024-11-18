@@ -6,7 +6,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <title>{{ ($title ?? 'Dashboard') . ' - Litpers' }}</title>
-    
+
     <meta name="robots" content="noindex, nofollow">
     <!-- Favicons -->
     <link href="{{ asset('logo.png') }}" rel="icon">
@@ -38,9 +38,9 @@
 
     {{-- pwa --}}
     <!-- PWA  -->
-    <meta name="theme-color" content="#6777ef" />
+    <meta name="theme-color" content="#ffffff" />
     <link rel="apple-touch-icon" href="{{ asset('logo.png') }}">
-    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
 
 </head>
 
