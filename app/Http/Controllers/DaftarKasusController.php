@@ -12,12 +12,21 @@ use App\Models\Satker;
 use App\Models\Status;
 use App\Models\WilayahKasus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class DaftarKasusController extends Controller
 {
     function index() {
         
+        // if (Auth::check() && !Auth::user()->can('lihat_kasus')) {
+        //     // Menampilkan notifikasi error menggunakan Notify
+        //     notify()->error('You do not have permission to access this page.');
+    
+        //     // Redirect kembali ke halaman sebelumnya
+        //     return redirect()->back();
+        // }
+    
         return view('page.daftar_kasus_index',[
             'daftarKasus'=>DaftarKasus::latest()->get(),
             'statuses'=>Status::all(),
