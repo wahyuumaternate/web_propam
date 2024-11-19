@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\DaftarKasus;
 use App\Models\Pelanggaran;
 use App\Models\Status;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -64,12 +66,31 @@ class DashboardController extends Controller
             ->orderBy('year', 'desc')
             ->pluck('year');
     
+            $query = DaftarKasus::select('kategori.nama_kategori as kategori_nama', 'kasus.kategori_id', DB::raw('COUNT(*) as total'))
+                ->join('kategori', 'kasus.kategori_id', '=', 'kategori.id')
+                ->groupBy('kasus.kategori_id', 'kategori.nama_kategori')
+                ->orderBy('total', 'desc');
+
+            // Filter berdasarkan waktu
+            if ($request->filter == 'month') {
+                $query->whereMonth('kasus.created_at', Carbon::now()->month)
+                    ->whereYear('kasus.created_at', Carbon::now()->year);
+            } elseif ($request->filter == 'year') {
+                $query->whereYear('kasus.created_at', Carbon::now()->year);
+            }
+
+            $topKasusCategories = $query->take(10)->get(); // Mengambil 10 data teratas
+        
+            
+
         return view('dashboard', [
             'chartData' => $chartData,
             'statusChartData' => $statusChartData,
             'months' => $months,
             'selectedYear' => $selectedYear,
-            'availableYears' => $availableYears
+            'availableYears' => $availableYears,
+            'topKasusCategories'=>$topKasusCategories,
+            'totalKasus'=> DaftarKasus::all()->count(),
         ]);
     }
     public function index2(Request $request)

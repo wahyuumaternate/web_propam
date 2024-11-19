@@ -14,7 +14,7 @@ class RolePermissionSeeder extends Seeder
 {
     // Daftar Hak Akses (Permissions)
     $permissions = [
-        'lihat_dashboard',    // Dashboard view permission
+            'lihat_dashboard',    // Dashboard view permission
             
             'lihat_kasus',        // View case permission
             'tambah_kasus',       // Add case permission

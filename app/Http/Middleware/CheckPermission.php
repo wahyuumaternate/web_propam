@@ -19,7 +19,7 @@ class CheckPermission
         // Mengecek apakah pengguna sudah memiliki permission yang diperlukan
         if (Auth::check() && !Auth::user()->can($permission)) {
             // Menampilkan notifikasi error menggunakan Notify
-            notify()->error('You do not have permission to access this page.');
+            notify()->error('Anda tidak memiliki izin untuk mengakses halaman ini.');
 
             // Redirect kembali ke halaman sebelumnya
             return redirect()->back();

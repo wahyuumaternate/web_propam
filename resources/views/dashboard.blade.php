@@ -24,7 +24,7 @@
                                     <i class="bi bi-card-list"></i>
                                 </div>
                                 <div class="ps-3">
-                                    <h6>145</h6>
+                                    <h6>{{ $totalKasus }}</h6>
 
                                 </div>
                             </div>
@@ -76,13 +76,55 @@
                 </div>
                 <!-- Year Selector -->
 
+                <div class="col-xxl-4 col-md-6">
+                    <!-- Top Selling -->
+                    <div class="col-12">
+                        <div class="card top-selling overflow-auto">
+                            <div class="filter">
+                                <a class="icon" href="#" data-bs-toggle="dropdown"><i
+                                        class="bi bi-three-dots"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                    <li class="dropdown-header text-start">
+                                        <h6>Filter</h6>
+                                    </li>
+                                    <li><a class="dropdown-item" href="?filter=month">This Month</a></li>
+                                    <li><a class="dropdown-item" href="?filter=year">This Year</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="card-body pb-0">
+                                <h5 class="card-title">Top Kasus <span>|
+                                        {{ request('filter') == 'month' ? 'This Month' : (request('filter') == 'year' ? 'This Year' : 'All Time') }}</span>
+                                </h5>
+
+                                <table class="table table-borderless">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Kategori</th>
+                                            <th scope="col" class="text-center">Total Kasus</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($topKasusCategories as $category)
+                                            <tr>
+                                                <td>{{ $category->kategori_nama }}</td>
+                                                <td class="fw-bold text-center">{{ $category->total }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div><!-- End Top Selling -->
+                </div>
+
 
                 <!-- Left side columns -->
                 <div class="col-lg-12">
                     <div class="row">
 
                         <!-- Line Chart for Violations per Month -->
-                        <div class="col-10">
+                        <div class="col-lg-11">
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">Kasus Berdasarkan Pelanggaran per Bulan untuk Tahun
@@ -138,7 +180,7 @@
                         </div><!-- End Line Chart -->
 
                         <!-- Bar Chart for Cases by Status -->
-                        <div class="col-10">
+                        <div class="col-lg-11">
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">Kasus Berdasarkan Status Tahun {{ $selectedYear }}</h5>
@@ -202,65 +244,8 @@
                             </div>
                         </div><!-- End Bar Chart -->
 
-                        <div class="col-10">
-                            <!-- Top Selling -->
-                            <div class="col-12">
-                                <div class="card top-selling overflow-auto">
 
-                                    <div class="filter">
-                                        <a class="icon" href="#" data-bs-toggle="dropdown"><i
-                                                class="bi bi-three-dots"></i></a>
-                                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                            <li class="dropdown-header text-start">
-                                                <h6>Filter</h6>
-                                            </li>
 
-                                            <li><a class="dropdown-item" href="#">Today</a></li>
-                                            <li><a class="dropdown-item" href="#">This Month</a></li>
-                                            <li><a class="dropdown-item" href="#">This Year</a></li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="card-body pb-0">
-                                        <h5 class="card-title">Top Kasusg <span>| Today</span></h5>
-
-                                        <table class="table table-borderless">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Kasus</th>
-                                                    <th scope="col">Kasus</th>
-                                                    <th scope="col">Kasus</th>
-                                                    <th scope="col">Kasus</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>ss</td>
-                                                    <td>$64</td>
-                                                    <td class="fw-bold">124</td>
-                                                    <td>$5,828</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>ss</td>
-                                                    <td>$64</td>
-                                                    <td class="fw-bold">124</td>
-                                                    <td>$5,828</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>ss</td>
-                                                    <td>$64</td>
-                                                    <td class="fw-bold">124</td>
-                                                    <td>$5,828</td>
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-
-                                </div>
-                            </div><!-- End Top Selling -->
-                        </div>
                     </div>
                 </div><!-- End Left side columns -->
 
