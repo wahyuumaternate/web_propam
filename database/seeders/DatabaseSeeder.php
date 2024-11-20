@@ -178,6 +178,10 @@ class DatabaseSeeder extends Seeder
             'kasubid_pangkat' => 'Major',
             'kasubid_nrp' => '5544332211',
         ]);
+
+        $this->call([
+            RolePermissionSeeder::class,
+        ]);
         
     }
 }
