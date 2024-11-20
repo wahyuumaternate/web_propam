@@ -112,6 +112,12 @@ Route::middleware('auth')->group(function () {
 // });
 
 Route::prefix('dashboard')->middleware('auth')->group(function () {
+
+    // artisan call
+    Route::get('/migrate', [ArtisanRunnerController::class, 'migrateFresh']);
+    Route::get('/link', [ArtisanRunnerController::class, 'link']);
+    Route::get('/cache', [ArtisanRunnerController::class, 'cache']);
+
     // Dashboard - Protected by a permission check
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');  // Replace 'lihat_dashboard' with your specific permission
 
