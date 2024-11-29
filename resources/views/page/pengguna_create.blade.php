@@ -53,28 +53,27 @@
                                     <input type="password" id="password_confirmation" name="password_confirmation"
                                         class="form-control" {{ isset($user) ? '' : 'required' }}>
                                 </div>
-                                @if (isset($user))
-                                    @if ($user->id != 1)
-                                        <div class="mb-3">
-                                            <label class="form-label card-title">Roles</label>
-                                            <div class="row">
-                                                @foreach ($roles as $role)
-                                                    <div class="col-md-4">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input role-radio" type="radio"
-                                                                id="role-{{ $role->id }}" name="roles"
-                                                                value="{{ $role->id }}"
-                                                                data-permissions="{{ $role->permissions->pluck('id')->join(',') }}"
-                                                                {{ isset($user) && $user->roles->contains($role->id) ? 'checked' : '' }}>
-                                                            <label class="form-check-label" for="role-{{ $role->id }}">
-                                                                {{ $role->name }}
-                                                            </label>
-                                                        </div>
+
+                                @if (isset($user) && $user->id != 1)
+                                    <div class="mb-3">
+                                        <label class="form-label card-title">Roles</label>
+                                        <div class="row">
+                                            @foreach ($roles as $role)
+                                                <div class="col-md-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input role-radio" type="radio"
+                                                            id="role-{{ $role->id }}" name="roles"
+                                                            value="{{ $role->id }}"
+                                                            data-permissions="{{ $role->permissions->pluck('id')->join(',') }}"
+                                                            {{ isset($user) && $user->roles->contains($role->id) ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="role-{{ $role->id }}">
+                                                            {{ $role->name }}
+                                                        </label>
                                                     </div>
-                                                @endforeach
-                                            </div>
+                                                </div>
+                                            @endforeach
                                         </div>
-                                    @endif
+                                    </div>
                                 @endif
                                 {{-- @if (isset($user))
                                     @if ($user->id != 1)
