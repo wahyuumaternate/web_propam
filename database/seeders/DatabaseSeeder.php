@@ -47,7 +47,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::create([
             'name' => 'kabid',
             'email' => 'kabid@gmail.com',
-            'password' => Hash::make('kabid'),
+            'password' => Hash::make('kabid123'),
         ]);
 
 
