@@ -57,10 +57,10 @@ class PenggunaController extends Controller
       
     }
 
-    public function show(User $user)
-    {
-        return view('users.show', compact('user'));
-    }
+    // public function show(User $user)
+    // {
+    //     return view('users.show', compact('user'));
+    // }
 
     public function edit(User $user)
     {
@@ -83,18 +83,21 @@ class PenggunaController extends Controller
             'password' => $request->password ? Hash::make($request->password) : $user->password,
         ]);
 
-        if ($request->has('roles')) {
-            $roles = Role::whereIn('id', (array) $request->roles)->get(); // Konversi ke array jika perlu
-            $user->syncRoles($roles);
-        } else {
-            $user->syncRoles([]);
-        }
-
-        if ($request->has('permissions')) {
-            $permissions = Permission::whereIn('id', $request->permissions)->get(); // Ambil koleksi permission berdasarkan ID
-            $user->syncPermissions($permissions); // Sinkronkan permissions ke user
-        } else {
-            $user->syncPermissions([]); // Hapus semua permissions jika tidak ada yang dipilih
+        if ($user->id != 1) {
+            # code...
+            if ($request->has('roles')) {
+                $roles = Role::whereIn('id', (array) $request->roles)->get(); // Konversi ke array jika perlu
+                $user->syncRoles($roles);
+            } else {
+                $user->syncRoles([]);
+            }
+    
+            if ($request->has('permissions')) {
+                $permissions = Permission::whereIn('id', $request->permissions)->get(); // Ambil koleksi permission berdasarkan ID
+                $user->syncPermissions($permissions); // Sinkronkan permissions ke user
+            } else {
+                $user->syncPermissions([]); // Hapus semua permissions jika tidak ada yang dipilih
+            }
         }
 
         notify()->success('User berhasil diperbarui.');

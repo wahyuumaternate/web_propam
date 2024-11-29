@@ -54,8 +54,28 @@
                                         class="form-control" {{ isset($user) ? '' : 'required' }}>
                                 </div>
 
-
-                                @if (isset($user))
+                                @if ($user->id != 1)
+                                    <div class="mb-3">
+                                        <label class="form-label card-title">Roles</label>
+                                        <div class="row">
+                                            @foreach ($roles as $role)
+                                                <div class="col-md-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input role-radio" type="radio"
+                                                            id="role-{{ $role->id }}" name="roles"
+                                                            value="{{ $role->id }}"
+                                                            data-permissions="{{ $role->permissions->pluck('id')->join(',') }}"
+                                                            {{ isset($user) && $user->roles->contains($role->id) ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="role-{{ $role->id }}">
+                                                            {{ $role->name }}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endif
+                                {{-- @if (isset($user))
                                     @if ($user->id != 1)
                                         <div class="mb-3">
                                             <label class="form-label card-title">Roles</label>
@@ -80,26 +100,6 @@
                                         <div class="mb-3">
 
 
-                                            {{-- <!-- Dashboard Permissions -->
-                                            <div class="my-3">
-                                                <h5 class="my-2 card-title">Dashboard</h5>
-                                                <div class="row">
-                                                    @foreach ($permissions->filter(fn($p) => str_contains($p->name, 'lihat_dashboard')) as $permission)
-                                                        <div class="col-md-4">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input permission-checkbox"
-                                                                    type="checkbox" id="permission-{{ $permission->id }}"
-                                                                    name="permissions[]" value="{{ $permission->id }}"
-                                                                    {{ isset($user) && $user->permissions->contains($permission->id) ? 'checked' : '' }}>
-                                                                <label class="form-check-label"
-                                                                    for="permission-{{ $permission->id }}">
-                                                                    {{ $permission->name }}
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                            </div> --}}
 
                                             <label class="form-label card-title">Permissions</label>
                                             <div class="form-check mb-2">
@@ -319,7 +319,7 @@
                                             </div>
                                         </div>
                                     @endif
-                                @endif
+                                @endif --}}
 
                                 <div class="mb-3">
                                     <button type="submit"
