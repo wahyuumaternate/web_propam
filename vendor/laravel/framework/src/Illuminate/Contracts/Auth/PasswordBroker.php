@@ -11,35 +11,35 @@ interface PasswordBroker
      *
      * @var string
      */
-    const RESET_LINK_SENT = 'passwords.sent';
+    const RESET_LINK_SENT = 'Kami sudah mengirim surel yang berisi tautan untuk mereset kata sandi Anda!';
 
     /**
      * Constant representing a successfully reset password.
      *
      * @var string
      */
-    const PASSWORD_RESET = 'passwords.reset';
+    const PASSWORD_RESET = 'Kata sandi Anda sudah direset!';
 
     /**
      * Constant representing the user not found response.
      *
      * @var string
      */
-    const INVALID_USER = 'passwords.user';
+    const INVALID_USER = 'Kami tidak dapat menemukan pengguna dengan alamat surel tersebut.';
 
     /**
      * Constant representing an invalid token.
      *
      * @var string
      */
-    const INVALID_TOKEN = 'passwords.token';
+    const INVALID_TOKEN = 'Token pengaturan ulang kata sandi tidak sah.';
 
     /**
      * Constant representing a throttled reset attempt.
      *
      * @var string
      */
-    const RESET_THROTTLED = 'passwords.throttled';
+    const RESET_THROTTLED = 'Kami tidak dapat menemukan pengguna dengan alamat surel tersebut.';
 
     /**
      * Send a password reset link to a user.
