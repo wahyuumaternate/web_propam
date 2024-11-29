@@ -32,10 +32,22 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => Hash::make('admin123'),
         ]);
+
         \App\Models\User::create([
             'name' => 'staff',
             'email' => 'staff@gmail.com',
             'password' => Hash::make('staff123'),
+        ]);
+
+        \App\Models\User::create([
+            'name' => 'staff2',
+            'email' => 'staff2@gmail.com',
+            'password' => Hash::make('staff123'),
+        ]);
+        \App\Models\User::create([
+            'name' => 'kabid',
+            'email' => 'kabid@gmail.com',
+            'password' => Hash::make('kabid'),
         ]);
 
 
