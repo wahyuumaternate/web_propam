@@ -26,9 +26,13 @@ class DaftarKasusController extends Controller
         //     // Redirect kembali ke halaman sebelumnya
         //     return redirect()->back();
         // }
-    
+    if (Auth::user()->can('lihat_semua_kasus')) {
+        $kasus = DaftarKasus::latest()->get();
+    }else{
+        $kasus = DaftarKasus::where('user_id',Auth::user()->id)->latest()->get();
+    }
         return view('page.daftar_kasus_index',[
-            'daftarKasus'=>DaftarKasus::latest()->get(),
+            'daftarKasus'=>$kasus,
             'statuses'=>Status::all(),
             
         ]);
@@ -95,6 +99,7 @@ class DaftarKasusController extends Controller
                 $filePath = $request->file('file_rps')->store('rps_files', 'public');
                 $validated['file_rps'] = $filePath; // Save the file path in the database
             }
+            $validated['user_id'] = Auth::user()->id;
             // Simpan data ke database
             DaftarKasus::create($request->all());
             
@@ -155,7 +160,6 @@ class DaftarKasusController extends Controller
 
         // Find the existing Kasus record
         $kasus = DaftarKasus::findOrFail($id);
-
         // Update the Kasus with the request data
         $kasus->update($request->all());
         notify()->success('Kasus Berhasil Diubah');
@@ -193,6 +197,10 @@ class DaftarKasusController extends Controller
 
     public function export()
     {
-        return Excel::download(new KasusExport, 'daftar_kasus.xlsx');
+       // Menggunakan 'now()' dengan zona waktu WIT (Asia/Jayapura)
+        $timestamp = now('Asia/Jayapura')->format('Y_m_d_H_i ');  // Format: Tahun_Bulan_Tanggal_Jam_Menit_Detik
+        
+        // Menambahkan timestamp ke nama file Excel
+        return Excel::download(new KasusExport, 'daftar_kasus_' . $timestamp . '.xlsx');
     }
 }

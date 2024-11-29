@@ -32,6 +32,13 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => Hash::make('admin123'),
         ]);
+        \App\Models\User::create([
+            'name' => 'staff',
+            'email' => 'staff@gmail.com',
+            'password' => Hash::make('staff123'),
+        ]);
+
+
        Kategori::create([
             'nama_kategori' => 'Kode Etik Profesi Polri
 ',
@@ -92,6 +99,7 @@ class DatabaseSeeder extends Seeder
                 'hukuman_id' => 1, // Pastikan ID ini ada di tabel hukuman atau nullable jika tidak diisi
                 'pelanggaran_id' => 1, // Pastikan ID ini ada di tabel pelanggaran
                 'uraian' => 'Uraian kasus John Doe yang dilaporkan dan sedang diproses.',
+                'user_id' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
@@ -119,6 +127,7 @@ class DatabaseSeeder extends Seeder
                 'hukuman_id' => 1, // Pastikan ID ini ada di tabel hukuman atau nullable jika tidak diisi
                 'pelanggaran_id' => 1, // Pastikan ID ini ada di tabel pelanggaran
                 'uraian' => 'Uraian kasus Jane Smith yang dilaporkan dan sedang diproses.',
+                'user_id' => 2,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
@@ -138,6 +147,7 @@ class DatabaseSeeder extends Seeder
                 'peruntukan' => 'MENGIKUTI PENGUSULAN KENAIKAN PANGKAT
                     TMT PERIODE 01 JANUARI 2025', // Alamat Kantor
                 'tempat_lahir' => 'Ternate', // Alamat Kantor
+                'user_id' => 1,
             ],
             [
                 'nama' => 'Jane Smith',
@@ -152,6 +162,7 @@ class DatabaseSeeder extends Seeder
                 'peruntukan' => 'MENGIKUTI PENGUSULAN KENAIKAN PANGKAT
                     TMT PERIODE 01 JANUARI 2025',
                 'tempat_lahir' => 'Ternate',
+                'user_id' => 1,
             ],
             [
                 'nama' => 'Michael Johnson',
@@ -166,6 +177,7 @@ class DatabaseSeeder extends Seeder
                 'peruntukan' => 'MENGIKUTI PENGUSULAN KENAIKAN PANGKAT
                     TMT PERIODE 01 JANUARI 2025',
                 'tempat_lahir' => 'Ternate',
+                'user_id' => 2,
             ]
         ]);
 

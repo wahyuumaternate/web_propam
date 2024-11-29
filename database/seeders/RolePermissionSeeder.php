@@ -14,9 +14,9 @@ class RolePermissionSeeder extends Seeder
 {
     // Daftar Hak Akses (Permissions)
     $permissions = [
-            'lihat_dashboard',    // Dashboard view permission
-            
+            // kasus
             'lihat_kasus',        // View case permission
+            'lihat_semua_kasus',        // View case permission
             'tambah_kasus',       // Add case permission
             'edit_kasus',         // Edit case permission
             'update_status_kasus',// Update case status permission
@@ -66,6 +66,7 @@ class RolePermissionSeeder extends Seeder
 
             // SKHP Permissions
             'lihat_skhp',       // View SKHP permission
+            'lihat_semua_skhp',
             'tambah_skhp',      // Create SKHP permission
             'edit_skhp',        // Edit SKHP permission
             'hapus_skhp',       // Delete SKHP permission
@@ -80,9 +81,8 @@ class RolePermissionSeeder extends Seeder
             'hapus_role',       // Delete role permission
             'lihat_pengaturan',
 
-            'lihat_grafik_kode_etik',
-            'lihat_grafik_disiplin',
-            'lihat_grafik_sendiri',
+            // 'lihat_grafik_kode_etik',
+            // 'lihat_grafik_disiplin',
     ];
 
     // Membuat Hak Akses (Permissions)
@@ -94,9 +94,9 @@ class RolePermissionSeeder extends Seeder
     $admin = Role::firstOrCreate(['name' => 'Admin', 'guard_name' => 'web']);
     $admin->syncPermissions(
         [
-            'lihat_dashboard',    // Dashboard view permission
-            
+            // kasus
             'lihat_kasus',        // View case permission
+            'lihat_semua_kasus',        // View case permission
             'tambah_kasus',       // Add case permission
             'edit_kasus',         // Edit case permission
             'update_status_kasus',// Update case status permission
@@ -146,6 +146,7 @@ class RolePermissionSeeder extends Seeder
 
             // SKHP Permissions
             'lihat_skhp',       // View SKHP permission
+            'lihat_semua_skhp',
             'tambah_skhp',      // Create SKHP permission
             'edit_skhp',        // Edit SKHP permission
             'hapus_skhp',       // Delete SKHP permission
@@ -160,38 +161,64 @@ class RolePermissionSeeder extends Seeder
             'hapus_role',       // Delete role permission
             'lihat_pengaturan',
 
-            'lihat_grafik_kode_etik',
-            'lihat_grafik_disiplin',
-            'lihat_grafik_sendiri',
+            // 'lihat_grafik_kode_etik',
+            // 'lihat_grafik_disiplin',
 
         ]
     );
 
     $kabidKasubid = Role::firstOrCreate(['name' => 'Kabid dan Kasubid', 'guard_name' => 'web']);
-    $kabidKasubid->syncPermissions(['lihat_dashboard', 'lihat_kasus']);
+    $kabidKasubid->syncPermissions(['lihat_kasus']);
 
-    $opWabprof = Role::firstOrCreate(['name' => 'Operator Wabprof', 'guard_name' => 'web']);
-    $opWabprof->syncPermissions([
-        'tambah_kasus',
-        'lihat_grafik_kode_etik',
-        'lihat_grafik_sendiri',
-    ]);
+    // $opWabprof = Role::firstOrCreate(['name' => 'Operator Wabprof', 'guard_name' => 'web']);
+    // $opWabprof->syncPermissions([
+    //    'lihat_kasus',        // View case permission
+            
+    //         'tambah_kasus',       // Add case permission
+    //         'edit_kasus',         // Edit case permission
+    //         'update_status_kasus',// Update case status permission
+    //         'hapus_kasus',        // Delete case permission
+    //         'export_kasus',       // Export case permission
+    //         'lihat_skhp',       // View SKHP permission
+    //         'edit_skhp',        // Edit SKHP permission
+    //         'hapus_skhp',       // Delete SKHP permission
+    //         'download_skhp',    // Download SKHP permission
+    // ]);
 
-    $opProvos = Role::firstOrCreate(['name' => 'Operator Provos', 'guard_name' => 'web']);
-    $opProvos->syncPermissions([
-        'tambah_kasus',
-        'lihat_grafik_disiplin',
-        'lihat_grafik_sendiri',
-    ]);
+    // $opProvos = Role::firstOrCreate(['name' => 'Operator Provos', 'guard_name' => 'web']);
+    // $opProvos->syncPermissions([
+    //     'lihat_kasus',        // View case permission
+    //     'tambah_kasus',       // Add case permission
+    //     'edit_kasus',         // Edit case permission
+    //     'update_status_kasus',// Update case status permission
+    //     'hapus_kasus',        // Delete case permission
+    //     'export_kasus',       // Export case permission
+
+    //     'lihat_skhp',       // View SKHP permission
+    //     'edit_skhp',        // Edit SKHP permission
+    //     'hapus_skhp',       // Delete SKHP permission
+    //     'download_skhp',    // Download SKHP permission
+    // ]);
 
     $opBidang = Role::firstOrCreate(['name' => 'Operator Bidang', 'guard_name' => 'web']);
     $opBidang->syncPermissions([
-        'tambah_kasus',
-        'lihat_grafik_sendiri',
+       'lihat_kasus',        // View case permission   
+        'tambah_kasus',       // Add case permission
+        'edit_kasus',         // Edit case permission
+        'update_status_kasus',// Update case status permission
+        'hapus_kasus',        // Delete case permission
+        'export_kasus',       // Export case permission
+
+        'lihat_skhp',       // View SKHP permission
+        'edit_skhp',        // Edit SKHP permission
+        'hapus_skhp',       // Delete SKHP permission
+        'download_skhp',    // Download SKHP permission
     ]);
 
     $user = User::find(1); // Find a user by ID
     $user->assignRole('Admin'); // Assign the 'Admin' role to the user
+    $user = User::find(2); // Find a user by ID
+    $user->assignRole('Operator Bidang'); // Assign the 'Admin' role to the user
 }
 
 }

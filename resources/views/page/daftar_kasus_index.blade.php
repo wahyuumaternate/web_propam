@@ -37,6 +37,7 @@
                             <table class="table datatable">
                                 <thead>
                                     <tr>
+                                        <th>No</th>
                                         <th>Nama</th>
                                         <th>Pangkat</th>
                                         <th>NRP</th>
@@ -49,6 +50,7 @@
                                 <tbody>
                                     @foreach ($daftarKasus as $kasus)
                                         <tr>
+                                            <td>{{ $loop->iteration }}</td>
                                             <td>{{ $kasus->nama }}</td>
                                             <td>{{ $kasus->pangkat->nama_pangkat }}</td>
                                             <td>{{ $kasus->nrp }}</td>
@@ -76,7 +78,7 @@
                                             <td>
                                                 @can('edit_kasus')
                                                     <a href="{{ route('daftarKasus.edit', $kasus->id) }}"
-                                                        class="btn btn-warning"><i class="bi bi-pencil"></i></a>
+                                                        class="btn btn-warning"><i class="bi bi-eye"></i></a>
                                                 @endcan
 
                                                 @can('hapus_kasus')

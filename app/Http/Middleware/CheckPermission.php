@@ -14,18 +14,37 @@ class CheckPermission
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $permission)
+    public function handle(Request $request, Closure $next, $permissions)
     {
-        // Mengecek apakah pengguna sudah memiliki permission yang diperlukan
-        if (Auth::check() && !Auth::user()->can($permission)) {
-            // Menampilkan notifikasi error menggunakan Notify
-            notify()->error('Anda tidak memiliki izin untuk mengakses halaman ini.');
+        // Memecah string izin menjadi array jika ada lebih dari satu izin
+        $permissions = explode(',', $permissions);
 
-            // Redirect kembali ke halaman sebelumnya
-            return redirect()->back();
+        // Mengecek apakah pengguna sudah login
+        if (Auth::check()) {
+            $user = Auth::user();
+
+            // Mengecek apakah pengguna memiliki salah satu dari izin yang diberikan
+            $hasPermission = false;
+            foreach ($permissions as $permission) {
+                if ($user->can($permission)) {
+                    $hasPermission = true;
+                    break;
+                }
+            }
+
+            // Jika pengguna tidak memiliki izin apapun, tampilkan notifikasi error
+            if (!$hasPermission) {
+                notify()->error('Anda tidak memiliki izin untuk mengakses halaman ini.');
+
+                // Redirect kembali ke halaman sebelumnya
+                return redirect()->back();
+            }
+        } else {
+            // Jika pengguna belum login, arahkan ke halaman login atau halaman lain yang sesuai
+            return redirect()->route('login');
         }
 
-        // Jika pengguna memiliki permission, lanjutkan ke request selanjutnya
+        // Jika pengguna memiliki salah satu izin, lanjutkan ke request selanjutnya
         return $next($request);
     }
 }

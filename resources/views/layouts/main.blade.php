@@ -34,6 +34,13 @@
         .notify {
             z-index: 999999;
         }
+
+        .form-control,
+        .form-check-input,
+        .search-input {
+            border: 1px solid rgba(116, 115, 115, 0.504) !important;
+            /* Example of a bold border */
+        }
     </style>
 
     {{-- pwa --}}

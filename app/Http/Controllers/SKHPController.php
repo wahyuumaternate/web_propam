@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DaftarKasus;
 use App\Models\Pangkat;
 use App\Models\SKHP;
 use App\Models\TamplateSKHP;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Notify; // Pastikan untuk menggunakan notify
 
@@ -15,7 +15,13 @@ class SKHPController extends Controller
 {
     public function index()
     {
-        $skhpList = SKHP::with('pangkat')->get(); // Ambil data status
+        if (Auth::user()->can('lihat_semua_skhp')) {
+
+            $skhpList = SKHP::with('pangkat')->get(); // Ambil data status
+        }else{
+            $skhpList = SKHP::where('user_id',Auth::user()->id)->with('pangkat')->get(); // Ambil data status
+        }
+        
         return view('page.skhp', compact('skhpList'));
     }
 
@@ -59,6 +65,7 @@ class SKHPController extends Controller
             $skhp->alamat_kantor = $request->alamat_kantor;
             $skhp->jenis_kelamin = $request->jenis_kelamin; // Menyimpan jenis kelamin
             $skhp->tanggal_lahir = $request->tanggal_lahir; // Menyimpan jenis kelamin
+            $skhp->user_id = Auth::user()->id; // Menyimpan jenis kelamin
             $skhp->save();
     
             // Menggunakan Laravel Notify untuk notifikasi sukses

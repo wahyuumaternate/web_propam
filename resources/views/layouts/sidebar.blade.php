@@ -94,12 +94,14 @@
                             <i class="bi bi-circle"></i><span>Semua SKHP</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ route('skhp.tamplate') }}"
-                            class="{{ request()->is('dashboard/skhp-tamplate') ? 'active' : '' }}">
-                            <i class="bi bi-circle"></i><span>Edit Tamplate SKHP</span>
-                        </a>
-                    </li>
+                    @can('lihat_skhp_tamplate')
+                        <li>
+                            <a href="{{ route('skhp.tamplate') }}"
+                                class="{{ request()->is('dashboard/skhp-tamplate') ? 'active' : '' }}">
+                                <i class="bi bi-circle"></i><span>Edit Tamplate SKHP</span>
+                            </a>
+                        </li>
+                    @endcan
                 </ul>
             </li><!-- End Forms Nav -->
         @endcan
@@ -112,18 +114,22 @@
                 </a>
                 <ul id="forms-nav" class="nav-content collapse {{ request()->is('dashboard/pengaturan*') ? 'show' : '' }}"
                     data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="{{ route('users.index') }}"
-                            class="{{ request()->is('dashboard/pengaturan/users') ? 'active' : '' }}">
-                            <i class="bi bi-circle"></i><span>Pengguna</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('roles.index') }}"
-                            class="{{ request()->is('dashboard/pengaturan/role') ? 'active' : '' }}">
-                            <i class="bi bi-circle"></i><span>Role</span>
-                        </a>
-                    </li>
+                    @can('lihat_role')
+                        <li>
+                            <a href="{{ route('users.index') }}"
+                                class="{{ request()->is('dashboard/pengaturan/users') ? 'active' : '' }}">
+                                <i class="bi bi-circle"></i><span>Pengguna</span>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('lihat_role')
+                        <li>
+                            <a href="{{ route('roles.index') }}"
+                                class="{{ request()->is('dashboard/pengaturan/role') ? 'active' : '' }}">
+                                <i class="bi bi-circle"></i><span>Role</span>
+                            </a>
+                        </li>
+                    @endcan
                     <li>
                         <a href="{{ route('activityLogs.index') }}"
                             class="{{ request()->is('dashboard/pengaturan/activity-logs') ? 'active' : '' }}">

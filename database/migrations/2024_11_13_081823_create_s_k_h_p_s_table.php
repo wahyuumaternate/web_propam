@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('kesatuan_instansi'); // Kesatuan / Instansi
             $table->string('alamat_kantor'); // Alamat Kantor
             $table->string('peruntukan'); // Alamat Kantor
+            $table->bigInteger('user_id'); // NRP Kasubid Propam
             $table->timestamps();
         });
     }

@@ -121,9 +121,9 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     // Dashboard - Protected by a permission check
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');  // Replace 'lihat_dashboard' with your specific permission
 
-    // Daftar Kasus - Protected by a permission check
-    Route::get('/daftar-kasus', [DaftarKasusController::class, 'index'])->name('daftarKasus')
-        ->middleware('check_permission:lihat_kasus');
+    // kasus
+    Route::get('/daftar-kasus', [DaftarKasusController::class, 'index'])
+    ->name('daftarKasus')->middleware('check_permission:lihat_kasus,lihat_semua_kasus');
     Route::get('/daftar-kasus/tambah-kasus', [DaftarKasusController::class, 'create'])->name('daftarKasus.create')
         ->middleware('check_permission:tambah_kasus');
     Route::post('/daftarKasus', [DaftarKasusController::class, 'store'])->name('daftarKasus.store')
@@ -208,7 +208,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     
     // SKHP Routes - Protected by permission middleware
     Route::get('/skhp', [SKHPController::class, 'index'])->name('skhp.index')
-        ->middleware('check_permission:lihat_skhp');  // Replace with permission for viewing SKHP
+        ->middleware('check_permission:lihat_skhp,lihat_semua_skhp');  // Replace with permission for viewing SKHP
     Route::get('/skhp/create', [SKHPController::class, 'create'])->name('skhp.create')
         ->middleware('check_permission:tambah_skhp');  // Replace with permission for creating SKHP
     Route::post('/skhp', [SKHPController::class, 'store'])->name('skhp.store')

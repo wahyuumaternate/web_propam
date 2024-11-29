@@ -31,6 +31,7 @@
                                 <thead>
                                     <tr>
                                         <th>Nama User</th>
+                                        <th>Role</th>
                                         {{-- Tambahkan kolom lain sesuai kebutuhan --}}
                                         <th>Aksi</th>
                                     </tr>
@@ -39,6 +40,11 @@
                                     @foreach ($users as $user)
                                         <tr>
                                             <td>{{ $user->name }}</td>
+                                            <td>
+                                                @foreach ($user->getRoleNames() as $role)
+                                                    {{ $role }}
+                                                @endforeach
+                                            </td>
                                             {{-- Tambahkan kolom lain sesuai kebutuhan --}}
                                             <td>
                                                 <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning">
