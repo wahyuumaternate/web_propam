@@ -35,6 +35,14 @@
     <meta name="theme-color" content="#ffffff" />
     <link rel="apple-touch-icon" href="{{ asset('logo.png') }}">
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
+
+    <style>
+        .form-control,
+        .input-group-text {
+            border: 1px solid rgba(116, 115, 115, 0.378) !important;
+            /* Example of a bold border */
+        }
+    </style>
 </head>
 
 <body>
