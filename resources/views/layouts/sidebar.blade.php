@@ -11,7 +11,7 @@
             </a>
         </li><!-- End Dashboard Nav -->
 
-        @can('lihat_kasus')
+        @if (auth()->user()->can('lihat_kasus') || auth()->user()->can('lihat_semua_kasus'))
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('dashboard/daftar-kasus*') ? '' : 'collapsed' }}"
                     href="{{ route('daftarKasus') }}">
@@ -19,7 +19,7 @@
                     <span>Daftar Kasus</span>
                 </a>
             </li><!-- End Kasus Page Nav -->
-        @endcan
+        @endif
 
         @can('lihat_pelanggaran')
             <li class="nav-item">
@@ -81,7 +81,7 @@
             </li><!-- End Contact Page Nav -->
         @endcan
 
-        @can('lihat_skhp')
+        @if (auth()->user()->can('lihat_skhp') || auth()->user()->can('lihat_semua_skhp'))
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('dashboard/skhp*') ? '' : 'collapsed' }}" data-bs-target="#skhp"
                     data-bs-toggle="collapse" href="#">
@@ -90,7 +90,8 @@
                 <ul id="skhp" class="nav-content collapse {{ request()->is('dashboard/skhp*') ? 'show' : '' }}"
                     data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="{{ route('skhp.index') }}" class="{{ request()->is('dashboard/skhp') ? 'active' : '' }}">
+                        <a href="{{ route('skhp.index') }}"
+                            class="{{ request()->is('dashboard/skhp') ? 'active' : '' }}">
                             <i class="bi bi-circle"></i><span>Semua SKHP</span>
                         </a>
                     </li>
@@ -104,7 +105,7 @@
                     @endcan
                 </ul>
             </li><!-- End Forms Nav -->
-        @endcan
+        @endif
 
         @can('lihat_pengaturan')
             <li class="nav-item">

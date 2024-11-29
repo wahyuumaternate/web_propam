@@ -20,11 +20,13 @@
                         <div class="card-body table-responsive">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 class="card-title">List Anggota yang Memiliki SKHP</h5>
-                                <div>
-                                    <a href="{{ route('skhp.create') }}" class="btn btn-primary">
-                                        <i class="bi bi-plus-lg"></i> Tambah SKHP
-                                    </a>
-                                </div>
+                                @can('tambah_skhp')
+                                    <div>
+                                        <a href="{{ route('skhp.create') }}" class="btn btn-primary">
+                                            <i class="bi bi-plus-lg"></i> Tambah SKHP
+                                        </a>
+                                    </div>
+                                @endcan
                             </div>
 
                             <table class="table datatable">
@@ -45,21 +47,28 @@
                                             <td>{{ $skhp->kesatuan_instansi }}</td>
                                             <td>{{ $skhp->jabatan }}</td>
                                             <td>
-                                                <!-- Tombol Download PDF -->
-                                                <a href="{{ route('skhp.download', $skhp->id) }}" target="blank"
-                                                    class="btn btn-primary">
-                                                    <i class="bi bi-file-earmark-pdf"></i> PDF
-                                                </a>
-                                                <a href="{{ route('skhp.edit', $skhp->id) }}" class="btn btn-warning"><i
-                                                        class="bi bi-pencil"></i></a>
-                                                <form id="delete-form-{{ $skhp->id }}"
-                                                    action="{{ route('skhp.destroy', $skhp->id) }}" method="POST"
-                                                    style="display: none;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                </form>
-                                                <button onclick="confirmDelete({{ $skhp->id }})"
-                                                    class="btn btn-danger"><i class="bi bi-trash"></i></button>
+
+                                                @can('download_skhp')
+                                                    <!-- Tombol Download PDF -->
+                                                    <a href="{{ route('skhp.download', $skhp->id) }}" target="blank"
+                                                        class="btn btn-primary">
+                                                        <i class="bi bi-file-earmark-pdf"></i> PDF
+                                                    </a>
+                                                @endcan
+                                                @can('edit_skhp_tamplate')
+                                                    <a href="{{ route('skhp.edit', $skhp->id) }}" class="btn btn-warning"><i
+                                                            class="bi bi-pencil"></i></a>
+                                                @endcan
+                                                @can('hapus_skhp')
+                                                    <form id="delete-form-{{ $skhp->id }}"
+                                                        action="{{ route('skhp.destroy', $skhp->id) }}" method="POST"
+                                                        style="display: none;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                    </form>
+                                                    <button onclick="confirmDelete({{ $skhp->id }})"
+                                                        class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                                                @endcan
                                             </td>
                                         </tr>
                                     @endforeach
