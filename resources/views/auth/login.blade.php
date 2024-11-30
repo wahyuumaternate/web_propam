@@ -34,7 +34,7 @@
     <!-- PWA  -->
     <meta name="theme-color" content="#ffffff" />
     <link rel="apple-touch-icon" href="{{ asset('logo.png') }}">
-    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
 
     <style>
         .form-control,
