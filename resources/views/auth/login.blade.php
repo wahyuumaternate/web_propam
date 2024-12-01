@@ -33,7 +33,7 @@
 
     <!-- PWA  -->
     <meta name="theme-color" content="#ffffff" />
-    <link rel="apple-touch-icon" href="{{ asset('logo.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('mstile-150x150.png') }}">
     <link rel="manifest" href="{{ asset('manifest.json') }}">
 
     <style>

@@ -1,14 +1,14 @@
 {
-    "name": "LITPERS PROPAM MALUT",
+   "name": "LITPERS PROPAM MALUT",
     "short_name": "LITPERS",
-    "start_url": "/index.php",
+    "start_url": "/",
     "background_color": "#ffffff",
     "description": "Aplikasi Pendataan Kasus Anggota Polda Maluku Utara",
     "display": "fullscreen",
     "theme_color": "#ffffff",
     "icons": [
         {
-            "src": "logo.png",
+            "src": "mstile-150x150.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "any maskable"

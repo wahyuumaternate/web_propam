@@ -43,10 +43,9 @@
         }
     </style>
 
-    {{-- pwa --}}
     <!-- PWA  -->
     <meta name="theme-color" content="#ffffff" />
-    <link rel="apple-touch-icon" href="{{ asset('logo.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('mstile-150x150.png') }}">
     <link rel="manifest" href="{{ asset('manifest.json') }}">
 
 </head>
@@ -101,7 +100,7 @@
     </script>
 
     {{-- pwa --}}
-    <script src="{{ asset('sw.js') }}"></script>
+    <script src="{{ asset('/sw.js') }}"></script>
     <script>
         if ("serviceWorker" in navigator) {
             // Register a service worker hosted at the root of the
