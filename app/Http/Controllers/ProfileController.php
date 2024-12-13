@@ -33,8 +33,8 @@ class ProfileController extends Controller
         }
 
         $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        notify()->success('Profil Berhasil Diperbaharui'); // Pesan berhasil
+        return Redirect::route('profile.edit');
     }
 
     /**

@@ -13,6 +13,7 @@ use App\Models\Status;
 use App\Models\WilayahKasus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
 class DaftarKasusController extends Controller
@@ -99,6 +100,7 @@ class DaftarKasusController extends Controller
                 $filePath = $request->file('file_rps')->store('rps_files', 'public');
                 $validated['file_rps'] = $filePath; // Save the file path in the database
             }
+
             $validated['user_id'] = Auth::user()->id;
             // Simpan data ke database
             DaftarKasus::create($request->all());
@@ -129,43 +131,125 @@ class DaftarKasusController extends Controller
     /**
      * Perbarui data kasus yang ada.
      */
+    // public function update(Request $request, $id)
+    // {
+    //     // Validate the request data
+    //     $request->validate([
+    //         'kategori_id' => 'required|exists:kategori,id',
+    //         'tanggal_lapor' => 'required|date',
+    //         'nrp' => 'required|string',
+    //         'uraian' => 'required|string',
+    //         'nama' => 'required|string|max:255',
+    //         'pangkat_id' => 'required|exists:pangkat,id',
+    //         'jabatan' => 'required|string|max:255',
+    //         'satker_satwil_id' => 'required|exists:satker_satwil,id',
+    //         'pangkat_saat_terkena_kasus' => 'required|string|max:255',
+    //         'jabatan_saat_terkena_kasus' => 'required|string|max:255',
+    //         'wilayah_kasus_id' => 'required|exists:wilayah_kasus,id',
+    //         'pasal' => 'nullable|string|max:255',
+    //         'tanggal_putusan' => 'nullable|date',
+    //         'nomor_putusan' => 'nullable|string',
+    //         'tanggal_putusan_keberatan' => 'nullable|date',
+    //         'nomor_putusan_keberatan' => 'nullable|string',
+    //         'tanggal_dimulai_hukuman' => 'nullable|date',
+    //         'tanggal_rps' => 'nullable|date',
+    //         'no_rps' => 'nullable|string',
+    //         'status_id' => 'required|exists:status,id',
+    //         'hukuman_id' => 'nullable|integer|exists:hukuman,id',
+    //         'pelanggaran_id' => 'required|integer|exists:pelanggaran,id',
+
+    //     ]);
+    //     if ($request->hasFile('file_putusan_sidang')) {
+    //         // Store the file and get the path
+    //         $filePath = $request->file('file_putusan_sidang')->store('rps_files', 'public');
+    //         $validated['file_putusan_sidang'] = $filePath; // Save the file path in the database
+    //     }
+
+    //     if ($request->hasFile('file_banding')) {
+    //         // Store the file and get the path
+    //         $filePath = $request->file('file_banding')->store('rps_files', 'public');
+    //         $validated['file_banding'] = $filePath; // Save the file path in the database
+    //     }
+
+    //     if ($request->hasFile('file_rps')) {
+    //         // Store the file and get the path
+    //         $filePath = $request->file('file_rps')->store('rps_files', 'public');
+    //         $validated['file_rps'] = $filePath; // Save the file path in the database
+    //     }
+    //     $validated['user_id'] = Auth::user()->id;
+    //     // Find the existing Kasus record
+    //     $kasus = DaftarKasus::findOrFail($id);
+        
+    //     // Update the Kasus with the request data
+    //     $kasus->update($request->all());
+    //     notify()->success('Kasus Berhasil Diubah');
+    //     return redirect()->route('daftarKasus');
+    // }
     public function update(Request $request, $id)
     {
-        // Validate the request data
-        $request->validate([
-            'kategori_id' => 'required|exists:kategori,id',
-            'tanggal_lapor' => 'required|date',
-            'nrp' => 'required|string',
-            'uraian' => 'required|string',
-            'nama' => 'required|string|max:255',
-            'pangkat_id' => 'required|exists:pangkat,id',
-            'jabatan' => 'required|string|max:255',
-            'satker_satwil_id' => 'required|exists:satker_satwil,id',
-            'pangkat_saat_terkena_kasus' => 'required|string|max:255',
-            'jabatan_saat_terkena_kasus' => 'required|string|max:255',
-            'wilayah_kasus_id' => 'required|exists:wilayah_kasus,id',
-            'pasal' => 'nullable|string|max:255',
-            'tanggal_putusan' => 'nullable|date',
-            'nomor_putusan' => 'nullable|string',
-            'tanggal_putusan_keberatan' => 'nullable|date',
-            'nomor_putusan_keberatan' => 'nullable|string',
-            'tanggal_dimulai_hukuman' => 'nullable|date',
-            'tanggal_rps' => 'nullable|date',
-            'no_rps' => 'nullable|string',
-            'status_id' => 'required|exists:status,id',
-            'hukuman_id' => 'nullable|integer|exists:hukuman,id',
-            'pelanggaran_id' => 'required|integer|exists:pelanggaran,id',
+    // Temukan record Kasus yang ada
+    $kasus = DaftarKasus::findOrFail($id);
+    // Validasi data request
+    $validated = $request->validate([
+        'kategori_id' => 'required|exists:kategori,id',
+        'tanggal_lapor' => 'required|date',
+        'nrp' => 'required|string',
+        'uraian' => 'required|string',
+        'nama' => 'required|string|max:255',
+        'pangkat_id' => 'required|exists:pangkat,id',
+        'jabatan' => 'required|string|max:255',
+        'satker_satwil_id' => 'required|exists:satker_satwil,id',
+        'pangkat_saat_terkena_kasus' => 'required|string|max:255',
+        'jabatan_saat_terkena_kasus' => 'required|string|max:255',
+        'wilayah_kasus_id' => 'required|exists:wilayah_kasus,id',
+        'pasal' => 'nullable|string|max:255',
+        'tanggal_putusan' => 'nullable|date',
+        'nomor_putusan' => 'nullable|string',
+        'tanggal_putusan_keberatan' => 'nullable|date',
+        'nomor_putusan_keberatan' => 'nullable|string',
+        'tanggal_dimulai_hukuman' => 'nullable|date',
+        'tanggal_rps' => 'nullable|date',
+        'no_rps' => 'nullable|string',
+        'status_id' => 'required|exists:status,id',
+        'hukuman_id' => 'nullable|integer|exists:hukuman,id',
+        'pelanggaran_id' => 'required|integer|exists:pelanggaran,id',
+    ]);
 
-        ]);
+    // Handle file uploads
+    $files = ['file_putusan_sidang', 'file_banding', 'file_rps'];
 
-        // Find the existing Kasus record
-        $kasus = DaftarKasus::findOrFail($id);
-        // Update the Kasus with the request data
-        $kasus->update($request->all());
-        notify()->success('Kasus Berhasil Diubah');
-        return redirect()->route('daftarKasus');
+    foreach ($files as $file) {
+        if ($request->hasFile($file)) {
+            // Cek apakah file lama ada, jika ada hapus file lama terlebih dahulu
+            if ($kasus->$file) {
+                Storage::disk('public')->delete($kasus->$file);
+            }
+
+            // Simpan file baru
+            $filePath = $request->file($file)->store('rps_files', 'public');
+            $validated[$file] = $filePath; // Update file path pada data yang divalidasi
+        } else {
+            // Jika tidak ada file baru, tetap pertahankan file lama
+            if ($kasus->$file) {
+                $validated[$file] = $kasus->$file; // Gunakan file lama
+            }
+        }
     }
 
+    // Tambahkan user_id
+    $validated['user_id'] = Auth::user()->id;
+
+    
+
+    // Perbarui Kasus dengan data yang sudah divalidasi
+    $kasus->update($validated);
+
+    // Notifikasi berhasil
+    notify()->success('Kasus Berhasil Diubah');
+    return redirect()->route('daftarKasus');
+}
+
+    
     public function destroy($id)
     {
         // Mencari data kasus berdasarkan ID

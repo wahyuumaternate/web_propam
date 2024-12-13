@@ -474,9 +474,10 @@
                                         @enderror
                                         @if ($kasus->file_putusan_sidang)
                                             <small class="form-text text-muted">
-
                                                 <a href="{{ asset('storage/' . $kasus->file_putusan_sidang) }}"
-                                                    download>Download</a>
+                                                    download="File_Putusan_Sidang_{{ $kasus->nama }}_{{ basename($kasus->file_putusan_sidang) }}">
+                                                    Download
+                                                </a>
                                             </small>
                                         @endif
                                     </div>
@@ -497,7 +498,7 @@
                                             <small class="form-text text-muted">
 
                                                 <a href="{{ asset('storage/' . $kasus->file_banding) }}"
-                                                    download>Download</a>
+                                                    download="File_Banding_{{ $kasus->nama }}_{{ basename($kasus->file_banding) }}">Download</a>
                                             </small>
                                         @endif
                                     </div>
@@ -517,7 +518,8 @@
                                         @if ($kasus->file_rps)
                                             <small class="form-text text-muted">
 
-                                                <a href="{{ asset('storage/' . $kasus->file_rps) }}" download>Download</a>
+                                                <a href="{{ asset('storage/' . $kasus->file_rps) }}"
+                                                    download="File_RPS_{{ $kasus->nama }}_{{ basename($kasus->file_rps) }}">Download</a>
                                             </small>
                                         @endif
                                     </div>

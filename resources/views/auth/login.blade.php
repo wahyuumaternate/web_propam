@@ -42,6 +42,41 @@
             border: 1px solid rgba(116, 115, 115, 0.378) !important;
             /* Example of a bold border */
         }
+
+        .card {
+            border: 1px solid #ddd;
+            /* Menambahkan border abu-abu */
+            border-radius: 0.25rem;
+            /* Sudut sedikit melengkung seperti Bootstrap */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* Menambahkan shadow yang lembut */
+            background-color: #fff;
+            /* Menetapkan latar belakang putih */
+            margin-bottom: 1.5rem;
+            /* Memberikan jarak antar card */
+            padding: 1rem;
+            /* Memberikan padding di dalam card */
+        }
+
+        .card-header {
+            font-weight: bold;
+            background-color: #f8f9fa;
+            /* Warna latar belakang header sedikit lebih terang */
+            border-bottom: 1px solid #ddd;
+            /* Membuat border bawah di header */
+            padding: 0.75rem 1rem;
+        }
+
+        .card-body {
+            padding: 1rem;
+            /* Padding lebih besar untuk isi card */
+        }
+
+        .card-footer {
+            padding: 0.75rem 1rem;
+            background-color: #f8f9fa;
+            border-top: 1px solid #ddd;
+        }
     </style>
 </head>
 
