@@ -52,10 +52,10 @@ class DaftarKasusController extends Controller
 
     public function store(Request $request)
     {
-        try {
+        // try {
             $request->validate([
                 'tanggal_lapor' => 'required|date',
-                'nrp' => 'required|string|max:255',
+                'nrp' => 'required|string|max:255|unique:kasus,nrp',
                 'nama' => 'required|string|max:255',
                 'jabatan' => 'required|string|max:255',
                 'pangkat_saat_terkena_kasus' => 'required|string|max:255',
@@ -63,9 +63,7 @@ class DaftarKasusController extends Controller
                 'satker_saat_terkena_kasus' => 'required|string|max:255',
                 'referensi' => 'required|string|max:255',
                 'uraian' => 'required|string',
-                // 'bentuk_pelanggaran' => 'required|string|max:255',
                 'pasal' => 'required|string|max:255',
-                // 'hukuman' => 'required|string|max:255',
                 'tanggal_putusan' => 'required|date',
                 'nomor_putusan' => 'required|string|max:255',
                 'tanggal_putusan_keberatan' => 'required|date',
@@ -82,36 +80,32 @@ class DaftarKasusController extends Controller
                 'file_banding' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
                 'file_rps' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
             ]);
-    
-            if ($request->hasFile('file_putusan_sidang')) {
-                // Store the file and get the path
-                $filePath = $request->file('file_putusan_sidang')->store('rps_files', 'public');
-                $validated['file_putusan_sidang'] = $filePath; // Save the file path in the database
-            }
-    
-            if ($request->hasFile('file_banding')) {
-                // Store the file and get the path
-                $filePath = $request->file('file_banding')->store('rps_files', 'public');
-                $validated['file_banding'] = $filePath; // Save the file path in the database
-            }
-    
-            if ($request->hasFile('file_rps')) {
-                // Store the file and get the path
-                $filePath = $request->file('file_rps')->store('rps_files', 'public');
-                $validated['file_rps'] = $filePath; // Save the file path in the database
-            }
-
+            
+            // Handle file uploads and store paths in the validated array
+            $validated = $request->all();
             $validated['user_id'] = Auth::user()->id;
-            // Simpan data ke database
-            DaftarKasus::create($request->all());
+            
+            // Define an array of file fields to handle
+            $fileFields = ['file_putusan_sidang', 'file_banding', 'file_rps'];
+            
+            foreach ($fileFields as $fileField) {
+                if ($request->hasFile($fileField)) {
+                    // Store the file and save the path in the validated array
+                    $validated[$fileField] = $request->file($fileField)->store('rps_files', 'public');
+                }
+            }
+            
+            // Save the data to the database
+            DaftarKasus::create($validated);
+            
             
             notify()->success('Kasus Baru Berhasil Ditambahkan');
             return redirect()->route('daftarKasus');
-        } catch (\Throwable $th) {
-            //throw $th;
-            notify()->error('ERROR : '.$th->getMessage());
-            return redirect()->back();
-        }
+        // } catch (\Throwable $th) {
+        //     //throw $th;
+        //     notify()->error('ERROR : '.$th->getMessage());
+        //     return redirect()->back();
+        // }
     }
 
     public function edit($id)

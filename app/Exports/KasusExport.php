@@ -48,7 +48,7 @@ class KasusExport implements FromCollection, WithHeadings
                         'kategori' => $kasus->kategori->nama_kategori ?? 'N/A',
                         'pangkat' => $kasus->pangkat->nama_pangkat ?? 'N/A',
                         'satker_satwil' => $kasus->satkerSatwil->nama_satker_satwil ?? 'N/A',
-                        'wilayah_kasus' => $kasus->wilayahKasus->nama_wilayah ?? 'N/A',
+                        // 'wilayah_kasus' => $kasus->wilayahKasus->nama_wilayah ?? 'N/A',
                         'status' => $kasus->status->nama_status ?? 'N/A',
                         'created_at' => $kasus->created_at,
                     ];
@@ -87,7 +87,7 @@ class KasusExport implements FromCollection, WithHeadings
                         'kategori' => $kasus->kategori->nama_kategori ?? 'N/A',
                         'pangkat' => $kasus->pangkat->nama_pangkat ?? 'N/A',
                         'satker_satwil' => $kasus->satkerSatwil->nama_satker_satwil ?? 'N/A',
-                        'wilayah_kasus' => $kasus->wilayahKasus->nama_wilayah ?? 'N/A',
+                        // 'wilayah_kasus' => $kasus->wilayahKasus->nama_wilayah ?? 'N/A',
                         'status' => $kasus->status->nama_status ?? 'N/A',
                         'created_at' => $kasus->created_at,
                     ];
@@ -128,7 +128,7 @@ class KasusExport implements FromCollection, WithHeadings
             'Kategori',
             'Pangkat',
             'Satker/Satwil',
-            'Wilayah Kasus',
+            // 'Wilayah Kasus',
             'Status',
             'Tanggal Dibuat',
         ];

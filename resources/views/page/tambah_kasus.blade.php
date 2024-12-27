@@ -1,6 +1,19 @@
 @extends('layouts.main', ['title' => 'Tambah Kasus'])
 @section('main')
     <main id="main" class="main">
+        <!-- Tampilkan pesan success dengan notify -->
+        @if (session('success'))
+            <script>
+                notify().success('{{ session('success') }}');
+            </script>
+        @endif
+
+        <!-- Tampilkan pesan error jika ada error validation -->
+        @if ($errors->any())
+            <script>
+                notify().error('{{ implode(' ', $errors->all()) }}');
+            </script>
+        @endif
 
         <div class="pagetitle">
             <h1>Tambah Kasus</h1>
@@ -25,8 +38,7 @@
                                 <h5 class="card-title">Laporan Pelanggaran</h5>
 
                                 <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Jenis Pelanggaran <span
-                                            class="text-danger">*</span></label>
+                                    <label class="col-sm-2 col-form-label">Jenis Pelanggaran </label>
                                     <div class="col-sm-10">
                                         <select class="form-select @error('kategori_id') is-invalid @enderror"
                                             aria-label="Default select example" name="kategori_id">
@@ -46,8 +58,7 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="tanggal_lapor" class="col-sm-2 col-form-label">Tanggal Lapor <span
-                                            class="text-danger">*</span></label>
+                                    <label for="tanggal_lapor" class="col-sm-2 col-form-label">Tanggal Lapor </label>
                                     <div class="col-sm-10">
                                         <input type="date" name="tanggal_lapor"
                                             class="form-control @error('tanggal_lapor') is-invalid @enderror"
@@ -69,8 +80,7 @@
                                 <h5 class="card-title">Profil</h5>
 
                                 <div class="row mb-3">
-                                    <label for="inputNumber" class="col-sm-2 col-form-label">NRP <span
-                                            class="text-danger">*</span></label>
+                                    <label for="inputNumber" class="col-sm-2 col-form-label">NRP </label>
                                     <div class="col-sm-10">
                                         <input type="number" class="form-control @error('nrp') is-invalid @enderror"
                                             name="nrp" value="{{ old('nrp') }}">
@@ -83,8 +93,7 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Nama <span
-                                            class="text-danger">*</span></label>
+                                    <label for="inputText" class="col-sm-2 col-form-label">Nama </label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control @error('nama') is-invalid @enderror"
                                             name="nama" value="{{ old('nama') }}">
@@ -97,8 +106,7 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Pangkat <span
-                                            class="text-danger">*</span></label>
+                                    <label class="col-sm-2 col-form-label">Pangkat </label>
                                     <div class="col-sm-10">
                                         <select class="form-select @error('pangkat_id') is-invalid @enderror"
                                             aria-label="Default select example" name="pangkat_id">
@@ -118,8 +126,7 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Jabatan <span
-                                            class="text-danger">*</span></label>
+                                    <label for="inputText" class="col-sm-2 col-form-label">Jabatan </label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control @error('jabatan') is-invalid @enderror"
                                             name="jabatan" value="{{ old('jabatan') }}">
@@ -132,11 +139,10 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Satker/Satwil <span
-                                            class="text-danger">*</span></label>
+                                    <label for="satker_satwil_id" class="col-sm-2 col-form-label">Satker/Satwil</label>
                                     <div class="col-sm-10">
                                         <select class="form-select @error('satker_satwil_id') is-invalid @enderror"
-                                            aria-label="Default select example" name="satker_satwil_id">
+                                            name="satker_satwil_id">
                                             <option selected="">Pilih Satker</option>
                                             @foreach ($satker_satwil as $satker)
                                                 <option value="{{ $satker->id }}"
@@ -154,6 +160,7 @@
                                 </div>
 
 
+
                             </div>
                         </div>
 
@@ -163,8 +170,7 @@
                                 <h5 class="card-title">Pelanggaran</h5>
 
                                 <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Pangkat <span
-                                            class="text-danger">*</span></label>
+                                    <label class="col-sm-2 col-form-label">Pangkat </label>
                                     <div class="col-sm-10">
                                         <select
                                             class="form-select @error('pangkat_saat_terkena_kasus') is-invalid @enderror"
@@ -186,8 +192,7 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Jabatan <span
-                                            class="text-danger">*</span></label>
+                                    <label for="inputText" class="col-sm-2 col-form-label">Jabatan </label>
                                     <div class="col-sm-10">
                                         <input type="text"
                                             class="form-control @error('jabatan_saat_terkena_kasus') is-invalid @enderror"
@@ -203,8 +208,7 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Satker/Satwil<span
-                                            class="text-danger">*</span></label>
+                                    <label class="col-sm-2 col-form-label">Satker/Satwil</label>
                                     <div class="col-sm-10">
                                         <select
                                             class="form-select @error('satker_saat_terkena_kasus') is-invalid @enderror"
@@ -224,28 +228,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="row mb-3">
-                                    <!-- Dropdown untuk Hukuman -->
-                                    <label class="col-sm-2 col-form-label">Hukuman <span
-                                            class="text-danger">*</span></label>
-                                    <div class="col-sm-10">
-                                        <select class="form-select @error('hukuman_id') is-invalid @enderror"
-                                            name="hukuman_id" aria-label="Pilih Hukuman">
-                                            <option selected="">Pilih Hukuman</option>
-                                            @foreach ($hukuman as $h)
-                                                <option value="{{ $h->id }}"
-                                                    {{ old('hukuman_id') == $h->id ? 'selected' : '' }}>
-                                                    {{ $h->nama_hukuman }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        @error('hukuman_id')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
+
 
                                 <div class="row mb-3">
                                     <label for="referensi" class="col-sm-2 col-form-label">Referensi</label>
@@ -273,8 +256,7 @@
 
                                 <div class="row mb-3">
                                     <!-- Dropdown untuk Pelanggaran -->
-                                    <label class="col-sm-2 col-form-label">Bentuk Pelanggaran <span
-                                            class="text-danger">*</span></label>
+                                    <label class="col-sm-2 col-form-label">Bentuk Pelanggaran </label>
                                     <div class="col-sm-10">
                                         <select class="form-select @error('pelanggaran_id') is-invalid @enderror"
                                             name="pelanggaran_id" aria-label="Pilih Pelanggaran">
@@ -295,8 +277,7 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="pasal" class="col-sm-2 col-form-label">Pasal <span
-                                            class="text-danger">*</span></label>
+                                    <label for="pasal" class="col-sm-2 col-form-label">Pasal </label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control @error('pasal') is-invalid @enderror"
                                             name="pasal" value="{{ old('pasal') }}">
@@ -307,9 +288,9 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Wilayah Kasus <span
-                                            class="text-danger">*</span></label>
+                                <input type="hidden" name="wilayah_kasus_id" value="1">
+                                {{-- <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label">Wilayah Kasus </label>
                                     <div class="col-sm-10">
                                         <select class="form-select @error('wilayah_kasus_id') is-invalid @enderror"
                                             aria-label="Default select example" name="wilayah_kasus_id">
@@ -327,10 +308,9 @@
                                             </div>
                                         @enderror
                                     </div>
-                                </div>
+                                </div> --}}
                                 {{-- <div class="row mb-3">
-                                    <label for="hukuman" class="col-sm-2 col-form-label">Hukuman <span
-                                            class="text-danger">*</span></label>
+                                    <label for="hukuman" class="col-sm-2 col-form-label">Hukuman </label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control @error('hukuman') is-invalid @enderror"
                                             name="hukuman" value="{{ old('hukuman') }}">
@@ -351,8 +331,7 @@
                                 <h5 class="card-title">Putusan</h5>
 
                                 <div class="row mb-3">
-                                    <label for="tanggal_putusan" class="col-sm-2 col-form-label">Tanggal Putusan <span
-                                            class="text-danger">*</span></label>
+                                    <label for="tanggal_putusan" class="col-sm-2 col-form-label">Tanggal Putusan </label>
                                     <div class="col-sm-10">
                                         <input type="date"
                                             class="form-control @error('tanggal_putusan') is-invalid @enderror"
@@ -366,8 +345,7 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="nomor_putusan" class="col-sm-2 col-form-label">No Putusan <span
-                                            class="text-danger">*</span></label>
+                                    <label for="nomor_putusan" class="col-sm-2 col-form-label">No Putusan </label>
                                     <div class="col-sm-10">
                                         <textarea class="form-control @error('nomor_putusan') is-invalid @enderror" style="height: 100px"
                                             name="nomor_putusan">{{ old('nomor_putusan') }}</textarea>
@@ -379,7 +357,27 @@
                                     </div>
                                 </div>
 
-
+                                <div class="row mb-3">
+                                    <!-- Dropdown untuk Hukuman -->
+                                    <label class="col-sm-2 col-form-label">Hukuman </label>
+                                    <div class="col-sm-10">
+                                        <select class="form-select @error('hukuman_id') is-invalid @enderror"
+                                            name="hukuman_id" aria-label="Pilih Hukuman">
+                                            <option selected="0">Pilih Hukuman</option>
+                                            @foreach ($hukuman as $h)
+                                                <option value="{{ $h->id }}"
+                                                    {{ old('hukuman_id') == $h->id ? 'selected' : '' }}>
+                                                    {{ $h->nama_hukuman }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('hukuman_id')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -391,7 +389,7 @@
 
                                 <div class="row mb-3">
                                     <label for="tanggal_putusan_keberatan" class="col-sm-2 col-form-label">Tanggal Putusan
-                                        Banding/Keberatan <span class="text-danger">*</span></label>
+                                        Banding/Keberatan </label>
                                     <div class="col-sm-10">
                                         <input type="date"
                                             class="form-control @error('tanggal_putusan_keberatan') is-invalid @enderror"
@@ -407,7 +405,7 @@
 
                                 <div class="row mb-3">
                                     <label for="nomor_putusan_keberatan" class="col-sm-2 col-form-label">No Putusan
-                                        Banding/Keberatan <span class="text-danger">*</span></label>
+                                        Banding/Keberatan </label>
                                     <div class="col-sm-10">
                                         <textarea class="form-control @error('nomor_putusan_keberatan') is-invalid @enderror" style="height: 100px"
                                             name="nomor_putusan_keberatan">{{ old('nomor_putusan_keberatan') }}</textarea>
@@ -421,7 +419,7 @@
 
                                 <div class="row mb-3">
                                     <label for="tanggal_dimulai_hukuman" class="col-sm-2 col-form-label">Tanggal Mulai
-                                        Hitung Hukuman <span class="text-danger">*</span></label>
+                                        Hitung Hukuman </label>
                                     <div class="col-sm-10">
                                         <input type="date"
                                             class="form-control @error('tanggal_dimulai_hukuman') is-invalid @enderror"
@@ -445,8 +443,7 @@
                                 <h5 class="card-title">RPS</h5>
 
                                 <div class="row mb-3">
-                                    <label for="tanggal_rps" class="col-sm-2 col-form-label">Tanggal RPS <span
-                                            class="text-danger">*</span></label>
+                                    <label for="tanggal_rps" class="col-sm-2 col-form-label">Tanggal RPS </label>
                                     <div class="col-sm-10">
                                         <input type="date"
                                             class="form-control @error('tanggal_rps') is-invalid @enderror"
@@ -460,8 +457,7 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="no_rps" class="col-sm-2 col-form-label">RPS <span
-                                            class="text-danger">*</span></label>
+                                    <label for="no_rps" class="col-sm-2 col-form-label">RPS </label>
                                     <div class="col-sm-10">
                                         <textarea class="form-control @error('no_rps') is-invalid @enderror" style="height: 100px" name="no_rps">{{ old('no_rps') }}</textarea>
                                         @error('no_rps')
@@ -473,8 +469,7 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="status_id" class="col-sm-2 col-form-label">Status <span
-                                            class="text-danger">*</span></label>
+                                    <label for="status_id" class="col-sm-2 col-form-label">Status </label>
                                     <div class="col-sm-10">
                                         <select class="form-select @error('status_id') is-invalid @enderror"
                                             name="status_id">
