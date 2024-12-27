@@ -78,7 +78,7 @@
                                             <td>
                                                 @can('edit_kasus')
                                                     <a href="{{ route('daftarKasus.edit', $kasus->id) }}"
-                                                        class="btn btn-warning"><i class="bi bi-eye"></i></a>
+                                                        class="btn btn-warning"><i class="bi bi-pen"></i></a>
                                                 @endcan
 
                                                 @can('hapus_kasus')
