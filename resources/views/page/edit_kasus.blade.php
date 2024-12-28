@@ -281,7 +281,7 @@
                                     <div class="col-sm-10">
                                         <select class="form-select @error('hukuman_id') is-invalid @enderror"
                                             name="hukuman_id" aria-label="Pilih Hukuman">
-                                            <option selected="">Pilih Hukuman</option>
+                                            <option selected="0">Pilih Hukuman</option>
                                             @foreach ($hukuman as $h)
                                                 <option value="{{ $h->id }}"
                                                     {{ (old('hukuman_id') ?? $kasus->hukuman_id) == $h->id ? 'selected' : '' }}>

@@ -15,81 +15,68 @@ class KasusExport implements FromCollection, WithHeadings
     public function collection()
     {
         if (Auth::user()->can('lihat_semua_kasus')) {
-            
-
             // Select all fields to be exported, including related data
-            return DaftarKasus::with(['kategori', 'pangkat', 'satkerSatwil', 'wilayahKasus', 'status'])
+            return DaftarKasus::with(['kategori', 'pangkat', 'satkerSatwil', 'wilayahKasus', 'status', 'hukuman', 'pelanggaran'])
                 ->get()
-                ->map(function ($kasus) {
+                ->map(function ($kasus, $index) {
                     return [
-                        'tanggal_lapor' => $kasus->tanggal_lapor,
-                        'nrp' => (string) "'".$kasus->nrp,
-                        'nama' => $kasus->nama,
-                        'jabatan' => $kasus->jabatan,
-                        'pangkat_saat_terkena_kasus' => $kasus->pangkat_saat_terkena_kasus,
-                        'jabatan_saat_terkena_kasus' => $kasus->jabatan_saat_terkena_kasus,
-                        'referensi' => $kasus->referensi,
-                        'bentuk_pelanggaran' => $kasus->bentuk_pelanggaran,
-                        'pasal' => $kasus->pasal,
-                        'hukuman' => $kasus->hukuman,
-                        'tanggal_putusan' => $kasus->tanggal_putusan,
-                        'nomor_putusan' => $kasus->nomor_putusan,
-                        'tanggal_putusan_keberatan' => $kasus->tanggal_putusan_keberatan,
-                        'nomor_putusan_keberatan' => $kasus->nomor_putusan_keberatan,
-                        'tanggal_dimulai_hukuman' => $kasus->tanggal_dimulai_hukuman,
-                        'tanggal_rps' => $kasus->tanggal_rps,
-                        'no_rps' => $kasus->no_rps,
-                        // 'file_putusan_sidang' => $kasus->file_putusan_sidang,
-                        // 'file_banding' => $kasus->file_banding,
-                        // 'file_rps' => $kasus->file_rps,
-                        'uraian' => $kasus->uraian,
-                        // 'updated_at' => $kasus->updated_at,
-                        // Include related data
-                        'kategori' => $kasus->kategori->nama_kategori ?? 'N/A',
-                        'pangkat' => $kasus->pangkat->nama_pangkat ?? 'N/A',
-                        'satker_satwil' => $kasus->satkerSatwil->nama_satker_satwil ?? 'N/A',
-                        // 'wilayah_kasus' => $kasus->wilayahKasus->nama_wilayah ?? 'N/A',
-                        'status' => $kasus->status->nama_status ?? 'N/A',
-                        'created_at' => $kasus->created_at,
+                        'no' => $index + 1, // Menambahkan nomor urut mulai dari 1
+                        'tanggal_lapor' => $kasus->tanggal_lapor ?? '-',
+                        'nrp' => (string) "'" . ($kasus->nrp ?? '-'),
+                        'nama' => $kasus->nama ?? '-',
+                        'jabatan' => $kasus->jabatan ?? '-',
+                        'pangkat_saat_terkena_kasus' => $kasus->pangkat_saat_terkena_kasus ?? '-',
+                        'jabatan_saat_terkena_kasus' => $kasus->jabatan_saat_terkena_kasus ?? '-',
+                        'referensi' => $kasus->referensi ?? '-',
+                        'bentuk_pelanggaran' => $kasus->pelanggaran->nama_pelanggaran ?? '-',
+                        'pasal' => $kasus->pasal ?? '-',
+                        'hukuman' => $kasus->hukuman->nama_hukuman ?? '-',
+                        'tanggal_putusan' => $kasus->tanggal_putusan ?? '-',
+                        'nomor_putusan' => $kasus->nomor_putusan ?? '-',
+                        'tanggal_putusan_keberatan' => $kasus->tanggal_putusan_keberatan ?? '-',
+                        'nomor_putusan_keberatan' => $kasus->nomor_putusan_keberatan ?? '-',
+                        'tanggal_dimulai_hukuman' => $kasus->tanggal_dimulai_hukuman ?? '-',
+                        'tanggal_rps' => $kasus->tanggal_rps ?? '-',
+                        'no_rps' => $kasus->no_rps ?? '-',
+                        'uraian' => $kasus->uraian ?? '-',
+                        'kategori' => $kasus->kategori->nama_kategori ?? '-',
+                        'pangkat' => $kasus->pangkat->nama_pangkat ?? '-',
+                        'satker_satwil' => $kasus->satkerSatwil->nama_satker_satwil ?? '-',
+                        'status' => $kasus->status->nama_status ?? '-',
+                        'created_at' => $kasus->created_at ?? '-',
                     ];
                 });
-        }else{
-            
+        } else {
             // Select all fields to be exported, including related data
-            return DaftarKasus::with(['kategori', 'pangkat', 'satkerSatwil', 'wilayahKasus', 'status'])
-                ->where('user_id',Auth::user()->id)
+            return DaftarKasus::with(['kategori', 'pangkat', 'satkerSatwil', 'wilayahKasus', 'status', 'hukuman', 'pelanggaran'])
+                ->where('user_id', Auth::user()->id)
                 ->get()
-                ->map(function ($kasus) {
+                ->map(function ($kasus, $index) {
                     return [
-                        'tanggal_lapor' => $kasus->tanggal_lapor,
-                        'nrp' => (string) "'".$kasus->nrp,
-                        'nama' => $kasus->nama,
-                        'jabatan' => $kasus->jabatan,
-                        'pangkat_saat_terkena_kasus' => $kasus->pangkat_saat_terkena_kasus,
-                        'jabatan_saat_terkena_kasus' => $kasus->jabatan_saat_terkena_kasus,
-                        'referensi' => $kasus->referensi,
-                        'bentuk_pelanggaran' => $kasus->bentuk_pelanggaran,
-                        'pasal' => $kasus->pasal,
-                        'hukuman' => $kasus->hukuman,
-                        'tanggal_putusan' => $kasus->tanggal_putusan,
-                        'nomor_putusan' => $kasus->nomor_putusan,
-                        'tanggal_putusan_keberatan' => $kasus->tanggal_putusan_keberatan,
-                        'nomor_putusan_keberatan' => $kasus->nomor_putusan_keberatan,
-                        'tanggal_dimulai_hukuman' => $kasus->tanggal_dimulai_hukuman,
-                        'tanggal_rps' => $kasus->tanggal_rps,
-                        'no_rps' => $kasus->no_rps,
-                        // 'file_putusan_sidang' => $kasus->file_putusan_sidang,
-                        // 'file_banding' => $kasus->file_banding,
-                        // 'file_rps' => $kasus->file_rps,
-                        'uraian' => $kasus->uraian,
-                        // 'updated_at' => $kasus->updated_at,
-                        // Include related data
-                        'kategori' => $kasus->kategori->nama_kategori ?? 'N/A',
-                        'pangkat' => $kasus->pangkat->nama_pangkat ?? 'N/A',
-                        'satker_satwil' => $kasus->satkerSatwil->nama_satker_satwil ?? 'N/A',
-                        // 'wilayah_kasus' => $kasus->wilayahKasus->nama_wilayah ?? 'N/A',
-                        'status' => $kasus->status->nama_status ?? 'N/A',
-                        'created_at' => $kasus->created_at,
+                        'no' => $index + 1, // Menambahkan nomor urut mulai dari 1
+                        'tanggal_lapor' => $kasus->tanggal_lapor ?? '-',
+                        'nrp' => (string) "'" . ($kasus->nrp ?? '-'),
+                        'nama' => $kasus->nama ?? '-',
+                        'jabatan' => $kasus->jabatan ?? '-',
+                        'pangkat_saat_terkena_kasus' => $kasus->pangkat_saat_terkena_kasus ?? '-',
+                        'jabatan_saat_terkena_kasus' => $kasus->jabatan_saat_terkena_kasus ?? '-',
+                        'referensi' => $kasus->referensi ?? '-',
+                        'bentuk_pelanggaran' => $kasus->pelanggaran->nama_pelanggaran ?? '-',
+                        'pasal' => $kasus->pasal ?? '-',
+                        'hukuman' => $kasus->hukuman->nama_hukuman ?? '-',
+                        'tanggal_putusan' => $kasus->tanggal_putusan ?? '-',
+                        'nomor_putusan' => $kasus->nomor_putusan ?? '-',
+                        'tanggal_putusan_keberatan' => $kasus->tanggal_putusan_keberatan ?? '-',
+                        'nomor_putusan_keberatan' => $kasus->nomor_putusan_keberatan ?? '-',
+                        'tanggal_dimulai_hukuman' => $kasus->tanggal_dimulai_hukuman ?? '-',
+                        'tanggal_rps' => $kasus->tanggal_rps ?? '-',
+                        'no_rps' => $kasus->no_rps ?? '-',
+                        'uraian' => $kasus->uraian ?? '-',
+                        'kategori' => $kasus->kategori->nama_kategori ?? '-',
+                        'pangkat' => $kasus->pangkat->nama_pangkat ?? '-',
+                        'satker_satwil' => $kasus->satkerSatwil->nama_satker_satwil ?? '-',
+                        'status' => $kasus->status->nama_status ?? '-',
+                        'created_at' => $kasus->created_at ?? '-',
                     ];
                 });
         }
@@ -103,6 +90,7 @@ class KasusExport implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
+            'No', // Menambahkan kolom No
             'Tanggal Lapor',
             'NRP',
             'Nama',
@@ -120,15 +108,10 @@ class KasusExport implements FromCollection, WithHeadings
             'Tanggal Dimulai Hukuman',
             'Tanggal RPS',
             'No RPS',
-            // 'File Putusan Sidang',
-            // 'File Banding',
-            // 'File RPS',
             'Uraian',
-            // 'Updated At',
             'Kategori',
             'Pangkat',
             'Satker/Satwil',
-            // 'Wilayah Kasus',
             'Status',
             'Tanggal Dibuat',
         ];

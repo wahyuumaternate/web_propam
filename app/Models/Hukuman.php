@@ -11,4 +11,9 @@ class Hukuman extends Model
 
     protected $table = 'hukuman';
     protected $guarded =['id'];
+
+    public function kasus()
+    {
+        return $this->hasMany(DaftarKasus::class);
+    }
 }

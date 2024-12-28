@@ -35,6 +35,14 @@ class DaftarKasus extends Model
     {
         return $this->belongsTo(WilayahKasus::class);
     }
+    public function hukuman()
+    {
+        return $this->belongsTo(Hukuman::class);
+    }
+    public function pelanggaran()
+    {
+        return $this->belongsTo(Pelanggaran::class);
+    }
 
     
 

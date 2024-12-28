@@ -10,4 +10,9 @@ class Pelanggaran extends Model
     use HasFactory;
     protected $table = 'pelanggaran';
     protected $guarded =['id'];
+
+    public function kasus()
+    {
+        return $this->hasMany(DaftarKasus::class);
+    }
 }
