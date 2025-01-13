@@ -30,14 +30,15 @@ class KasusObserver
 
     public function updated(DaftarKasus $kasus)
     {
-        $originalData = $kasus->getOriginal();
-        $changes = $kasus->getChanges();
+        // $originalData = $kasus->getOriginal();
+        // $changes = $kasus->getChanges();
 
-        $description = 'Ubah data Kasus dengan nama pelanggar ' . $kasus->nama . '. Perubahan: ';
-        foreach ($changes as $field => $newValue) {
-            $oldValue = $originalData[$field];
-            $description .= "$field dari '$oldValue' menjadi '$newValue'; ";
-        }
+        // $description = 'Ubah data Kasus dengan nama pelanggar ' . $kasus->nama . '. Perubahan: ';
+        $description = 'Ubah data Kasus dengan nama pelanggar ' . $kasus->nama;
+        // foreach ($changes as $field => $newValue) {
+        //     $oldValue = $originalData[$field];
+        //     $description .= "$field dari '$oldValue' menjadi '$newValue'; ";
+        // }
 
         ActivityLog::create([
             'user_id' => Auth::id(),
