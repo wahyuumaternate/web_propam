@@ -32,6 +32,7 @@ class KasusObserver
     {
         // $originalData = $kasus->getOriginal();
         // $changes = $kasus->getChanges();
+        
 
         // $description = 'Ubah data Kasus dengan nama pelanggar ' . $kasus->nama . '. Perubahan: ';
         $description = 'Ubah data Kasus dengan nama pelanggar ' . $kasus->nama;
