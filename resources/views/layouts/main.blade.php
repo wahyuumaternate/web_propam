@@ -8,6 +8,7 @@
     <title>{{ ($title ?? 'Dashboard') . ' - Litpers' }}</title>
 
     <meta name="robots" content="noindex, nofollow">
+    
     <!-- Favicons -->
     <link href="{{ asset('logo.png') }}" rel="icon">
     <link href="{{ asset('logo.png') }}" rel="apple-touch-icon">
