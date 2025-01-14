@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\KasusExport;
 use App\Models\DaftarKasus;
 use App\Models\Hukuman;
+use App\Models\KasusHukuman;
 use App\Models\Kategori;
 use App\Models\Pangkat;
 use App\Models\Pelanggaran;
@@ -13,6 +14,7 @@ use App\Models\Status;
 use App\Models\WilayahKasus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -76,7 +78,8 @@ class DaftarKasusController extends Controller
                 'satker_satwil_id' => 'required|integer|exists:satker_satwil,id',
                 'wilayah_kasus_id' => 'required|integer|exists:wilayah_kasus,id',
                 'status_id' => 'required|integer|exists:status,id',
-                'hukuman_id' => 'required|integer|exists:hukuman,id',
+                'hukuman_id' => 'nullable|array',
+                'hukuman_id.*' => 'exists:hukuman,id',
                 'pelanggaran_id' => 'required|integer|exists:pelanggaran,id',
                 'file_putusan_sidang' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
                 'file_banding' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
@@ -98,9 +101,17 @@ class DaftarKasusController extends Controller
             }
             
             // Save the data to the database
-            DaftarKasus::create($validated);
-            
-            
+            $daftarKasus =  DaftarKasus::create($validated);
+              // Create the DaftarKasus record
+        // $daftarKasus = DaftarKasus::create($validated);
+            if ($request->has('hukuman_id')) {
+                foreach ($request->hukuman_id as $hukuman_id) {
+                    KasusHukuman::create([
+                        'daftar_kasus_id' => $daftarKasus->id,
+                        'hukuman_id' => $hukuman_id,
+                    ]);
+                }
+            }
             notify()->success('Kasus Baru Berhasil Ditambahkan');
             return redirect()->route('daftarKasus');
         // } catch (\Throwable $th) {
@@ -120,71 +131,20 @@ class DaftarKasusController extends Controller
         $status = Status::all(); // Get all Status records
         $pelanggaran = Pelanggaran::all();
         $hukuman = Hukuman::all();
+        $kasusHukuman = DB::table('kasus_hukuman')
+        ->where('daftar_kasus_id', $id)
+        ->pluck('hukuman_id')
+        ->toArray();
 
         // Return the edit view with the existing Kasus and related data
-        return view('page.edit_kasus', compact('pelanggaran','hukuman','kasus', 'kategori', 'pangkat', 'satker_satwil', 'wilayah', 'status'));
+        return view('page.edit_kasus', compact('kasusHukuman','pelanggaran','hukuman','kasus', 'kategori', 'pangkat', 'satker_satwil', 'wilayah', 'status'));
     }
-    /**
-     * Perbarui data kasus yang ada.
-     */
-    // public function update(Request $request, $id)
-    // {
-    //     // Validate the request data
-    //     $request->validate([
-    //         'kategori_id' => 'required|exists:kategori,id',
-    //         'tanggal_lapor' => 'required|date',
-    //         'nrp' => 'required|string',
-    //         'uraian' => 'required|string',
-    //         'nama' => 'required|string|max:255',
-    //         'pangkat_id' => 'required|exists:pangkat,id',
-    //         'jabatan' => 'required|string|max:255',
-    //         'satker_satwil_id' => 'required|exists:satker_satwil,id',
-    //         'pangkat_saat_terkena_kasus' => 'required|string|max:255',
-    //         'jabatan_saat_terkena_kasus' => 'required|string|max:255',
-    //         'wilayah_kasus_id' => 'required|exists:wilayah_kasus,id',
-    //         'pasal' => 'nullable|string|max:255',
-    //         'tanggal_putusan' => 'nullable|date',
-    //         'nomor_putusan' => 'nullable|string',
-    //         'tanggal_putusan_keberatan' => 'nullable|date',
-    //         'nomor_putusan_keberatan' => 'nullable|string',
-    //         'tanggal_dimulai_hukuman' => 'nullable|date',
-    //         'tanggal_rps' => 'nullable|date',
-    //         'no_rps' => 'nullable|string',
-    //         'status_id' => 'required|exists:status,id',
-    //         'hukuman_id' => 'nullable|integer|exists:hukuman,id',
-    //         'pelanggaran_id' => 'required|integer|exists:pelanggaran,id',
-
-    //     ]);
-    //     if ($request->hasFile('file_putusan_sidang')) {
-    //         // Store the file and get the path
-    //         $filePath = $request->file('file_putusan_sidang')->store('rps_files', 'public');
-    //         $validated['file_putusan_sidang'] = $filePath; // Save the file path in the database
-    //     }
-
-    //     if ($request->hasFile('file_banding')) {
-    //         // Store the file and get the path
-    //         $filePath = $request->file('file_banding')->store('rps_files', 'public');
-    //         $validated['file_banding'] = $filePath; // Save the file path in the database
-    //     }
-
-    //     if ($request->hasFile('file_rps')) {
-    //         // Store the file and get the path
-    //         $filePath = $request->file('file_rps')->store('rps_files', 'public');
-    //         $validated['file_rps'] = $filePath; // Save the file path in the database
-    //     }
-    //     $validated['user_id'] = Auth::user()->id;
-    //     // Find the existing Kasus record
-    //     $kasus = DaftarKasus::findOrFail($id);
-        
-    //     // Update the Kasus with the request data
-    //     $kasus->update($request->all());
-    //     notify()->success('Kasus Berhasil Diubah');
-    //     return redirect()->route('daftarKasus');
-    // }
-    public function update(Request $request, $id)
-    {
+  
+public function update(Request $request, $id)
+{
     // Temukan record Kasus yang ada
     $kasus = DaftarKasus::findOrFail($id);
+
     // Validasi data request
     $validated = $request->validate([
         'kategori_id' => 'required|exists:kategori,id',
@@ -207,7 +167,8 @@ class DaftarKasusController extends Controller
         'tanggal_rps' => 'nullable|date',
         'no_rps' => 'nullable|string',
         'status_id' => 'required|exists:status,id',
-        'hukuman_id' => 'nullable|integer|exists:hukuman,id',
+        'hukuman_id' => 'nullable|array',
+        'hukuman_id.*' => 'exists:hukuman,id',
         'pelanggaran_id' => 'required|integer|exists:pelanggaran,id',
         'file_putusan_sidang' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
         'file_banding' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
@@ -216,39 +177,46 @@ class DaftarKasusController extends Controller
 
     // Handle file uploads
     $files = ['file_putusan_sidang', 'file_banding', 'file_rps'];
-
     foreach ($files as $file) {
         if ($request->hasFile($file)) {
-            // Cek apakah file lama ada, jika ada hapus file lama terlebih dahulu
             if ($kasus->$file) {
                 Storage::disk('public')->delete($kasus->$file);
             }
-
-            // Simpan file baru
             $filePath = $request->file($file)->store('rps_files', 'public');
-            $validated[$file] = $filePath; // Update file path pada data yang divalidasi
+            $validated[$file] = $filePath;
         } else {
-            // Jika tidak ada file baru, tetap pertahankan file lama
             if ($kasus->$file) {
-                $validated[$file] = $kasus->$file; // Gunakan file lama
+                $validated[$file] = $kasus->$file;
             }
         }
     }
 
+    // Pisahkan hukuman_id dari validated data
+    $hukuman_ids = $validated['hukuman_id'] ?? [];
+    unset($validated['hukuman_id']);
+
     // Tambahkan user_id
     $validated['user_id'] = Auth::user()->id;
 
-    
-
-    // Perbarui Kasus dengan data yang sudah divalidasi
+    // Update data kasus
     $kasus->update($validated);
 
-    // Notifikasi berhasil
+    // Hapus data lama di tabel kasus_hukuman
+    KasusHukuman::where('daftar_kasus_id', $kasus->id)->delete();
+
+    // Insert data baru ke tabel kasus_hukuman
+    foreach ($hukuman_ids as $hukuman_id) {
+        KasusHukuman::insert([
+            'daftar_kasus_id' => $kasus->id,
+            'hukuman_id' => $hukuman_id,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+    }
+
     notify()->success('Kasus Berhasil Diubah');
     return redirect()->route('daftarKasus');
 }
-
-    
     public function destroy($id)
     {
         // Mencari data kasus berdasarkan ID

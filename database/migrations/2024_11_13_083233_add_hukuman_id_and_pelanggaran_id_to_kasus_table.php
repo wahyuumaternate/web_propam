@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('kasus', function (Blueprint $table) {
-            $table->unsignedBigInteger('hukuman_id')->nullable()->after('status_id');  // Gantilah 'existing_column' dengan kolom yang sudah ada
-            $table->unsignedBigInteger('pelanggaran_id')->nullable()->after('hukuman_id');
+            // $table->unsignedBigInteger('hukuman_id')->nullable()->after('status_id');  // Gantilah 'existing_column' dengan kolom yang sudah ada
+            // $table->unsignedBigInteger('pelanggaran_id')->nullable()->after('hukuman_id');
+            $table->unsignedBigInteger('pelanggaran_id')->nullable();
 
             // Tambahkan foreign key constraints jika diperlukan
-            $table->foreign('hukuman_id')->references('id')->on('hukuman')->onDelete('cascade');
+            // $table->foreign('hukuman_id')->references('id')->on('hukuman')->onDelete('cascade');
             $table->foreign('pelanggaran_id')->references('id')->on('pelanggaran')->onDelete('cascade');
         });
     }
@@ -27,9 +28,10 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('kasus', function (Blueprint $table) {
-            $table->dropForeign(['hukuman_id']);
+            // $table->dropForeign(['hukuman_id']);
             $table->dropForeign(['pelanggaran_id']);
-            $table->dropColumn(['hukuman_id', 'pelanggaran_id']);
+            $table->dropColumn(['pelanggaran_id']);
+            // $table->dropColumn(['hukuman_id', 'pelanggaran_id']);
         });
     }
 };

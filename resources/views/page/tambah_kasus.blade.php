@@ -358,21 +358,30 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <!-- Dropdown untuk Hukuman -->
-                                    <label class="col-sm-2 col-form-label">Hukuman </label>
+                                    <label class="col-sm-2 col-form-label">Hukuman</label>
                                     <div class="col-sm-10">
-                                        <select class="form-select @error('hukuman_id') is-invalid @enderror"
-                                            name="hukuman_id" aria-label="Pilih Hukuman">
-                                            <option selected="0">Pilih Hukuman</option>
-                                            @foreach ($hukuman as $h)
-                                                <option value="{{ $h->id }}"
-                                                    {{ old('hukuman_id') == $h->id ? 'selected' : '' }}>
-                                                    {{ $h->nama_hukuman }}
-                                                </option>
+                                        <div class="row">
+                                            @foreach ($hukuman as $index => $h)
+                                                <div class="col-md-3 mb-2">
+                                                    <div class="form-check">
+                                                        <input
+                                                            class="form-check-input @error('hukuman_id') is-invalid @enderror"
+                                                            type="checkbox" name="hukuman_id[]"
+                                                            value="{{ $h->id }}" id="hukuman{{ $h->id }}"
+                                                            {{ in_array($h->id, old('hukuman_id', [])) ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="hukuman{{ $h->id }}">
+                                                            {{ $h->nama_hukuman }}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                @if (($index + 1) % 4 == 0 && !$loop->last)
+                                        </div>
+                                        <div class="row">
+                                            @endif
                                             @endforeach
-                                        </select>
+                                        </div>
                                         @error('hukuman_id')
-                                            <div class="invalid-feedback">
+                                            <div class="invalid-feedback d-block">
                                                 {{ $message }}
                                             </div>
                                         @enderror

@@ -35,16 +35,18 @@ class DaftarKasus extends Model
     {
         return $this->belongsTo(WilayahKasus::class);
     }
-    public function hukuman()
-    {
-        return $this->belongsTo(Hukuman::class);
-    }
+    // public function hukuman()
+    // {
+    //     return $this->belongsTo(Hukuman::class);
+    // }
     public function pelanggaran()
     {
         return $this->belongsTo(Pelanggaran::class);
     }
 
-    
-
+    public function kasusHukuman()
+    {
+        return $this->hasMany(KasusHukuman::class, 'daftar_kasus_id');
+    }
 
 }

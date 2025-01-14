@@ -7,13 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Hukuman extends Model
 {
+
     use HasFactory;
 
     protected $table = 'hukuman';
     protected $guarded =['id'];
 
-    public function kasus()
+   
+    public function kasusHukuman()
     {
-        return $this->hasMany(DaftarKasus::class);
+        return $this->belongsToMany(DaftarKasus::class, 'kasus_hukuman');
     }
 }

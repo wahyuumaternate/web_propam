@@ -80,6 +80,10 @@ class DatabaseSeeder extends Seeder
             'nama_hukuman' => 'HUKUMAN 1',
             
         ]);
+       Hukuman::create([
+            'nama_hukuman' => 'HUKUMAN 2',
+            
+        ]);
        Pelanggaran::create([
             'nama_pelanggaran' => 'Pelanggaran 1',
             
@@ -108,7 +112,7 @@ class DatabaseSeeder extends Seeder
                 'tanggal_rps' => Carbon::now()->format('Y-m-d'),
                 'no_rps' => 'RPS-123456',
                 'status_id' => 1, // Pastikan ID ini ada di tabel status
-                'hukuman_id' => 1, // Pastikan ID ini ada di tabel hukuman atau nullable jika tidak diisi
+                // 'hukuman_id' => 1, // Pastikan ID ini ada di tabel hukuman atau nullable jika tidak diisi
                 'pelanggaran_id' => 1, // Pastikan ID ini ada di tabel pelanggaran
                 'uraian' => 'Uraian kasus John Doe yang dilaporkan dan sedang diproses.',
                 'user_id' => 1,
@@ -136,7 +140,7 @@ class DatabaseSeeder extends Seeder
                 'tanggal_rps' => Carbon::now()->subDays(10)->format('Y-m-d'),
                 'no_rps' => 'RPS-654321',
                 'status_id' => 1, // Pastikan ID ini ada di tabel status
-                'hukuman_id' => 1, // Pastikan ID ini ada di tabel hukuman atau nullable jika tidak diisi
+                // 'hukuman_id' => 1, // Pastikan ID ini ada di tabel hukuman atau nullable jika tidak diisi
                 'pelanggaran_id' => 1, // Pastikan ID ini ada di tabel pelanggaran
                 'uraian' => 'Uraian kasus Jane Smith yang dilaporkan dan sedang diproses.',
                 'user_id' => 2,
