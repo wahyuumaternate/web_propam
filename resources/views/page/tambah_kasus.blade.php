@@ -387,6 +387,20 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="row mb-3">
+                                    <label for="tanggal_dimulai_hukuman" class="col-sm-2 col-form-label"><small>Selesai
+                                            Melaksanakan Hukuman</small></label>
+                                    <div class="col-sm-10">
+                                        <input type="date"
+                                            class="form-control @error('tanggal_dimulai_hukuman') is-invalid @enderror"
+                                            name="tanggal_dimulai_hukuman" value="{{ old('tanggal_dimulai_hukuman') }}">
+                                        @error('tanggal_dimulai_hukuman')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -426,20 +440,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
-                                    <label for="tanggal_dimulai_hukuman" class="col-sm-2 col-form-label">Tanggal Mulai
-                                        Hitung Hukuman </label>
-                                    <div class="col-sm-10">
-                                        <input type="date"
-                                            class="form-control @error('tanggal_dimulai_hukuman') is-invalid @enderror"
-                                            name="tanggal_dimulai_hukuman" value="{{ old('tanggal_dimulai_hukuman') }}">
-                                        @error('tanggal_dimulai_hukuman')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
+
 
 
                             </div>

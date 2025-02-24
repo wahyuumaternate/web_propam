@@ -186,7 +186,7 @@
         .rank {
             margin: 2px 0;
             /* Reduced margins */
-            margin-left: 30%;
+            margin-left: 25%;
         }
 
         .official-title {
@@ -196,7 +196,7 @@
 
         .name {
             font-weight: bold;
-            text-decoration: underline;
+            /* text-decoration: underline; */
             text-align: center;
         }
 
@@ -251,6 +251,45 @@
         li {
             margin-top: 20px;
         }
+
+        .info-table {
+            text-transform: uppercase;
+        }
+
+        .signature {
+            /* margin-top: 25px; */
+            text-align: center;
+            /* Memastikan semua elemen di dalamnya sejajar tengah */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .separator-container {
+            margin-left: 35.5%;
+            width: 100%;
+            /* Pastikan lebar container penuh agar garis bisa sejajar */
+            display: flex;
+            justify-content: center;
+        }
+
+        .separator {
+            width: 53%;
+            /* Sesuaikan panjang garis */
+            margin: 0 0;
+            /* Beri jarak antara nama dan pangkat */
+            border: 1px solid black;
+            /* Sesuaikan ketebalan dan warna */
+        }
+
+        .page-break {
+            page-break-before: always;
+            /* Memastikan elemen ini mulai di halaman baru */
+            display: block;
+            /* Pastikan tampil sebagai elemen blok */
+            margin-top: 20px;
+            /* Beri sedikit jarak agar rapi */
+        }
     </style>
 
 </head>
@@ -304,9 +343,11 @@
                     <tr>
                         <td class="info-label">Tempat dan tgl. lahir</td>
                         <td class="info-colon">:</td>
-                        <td class="info-value">{{ $skhp->tempat_lahir }},
-                            {{ \Carbon\Carbon::parse($skhp->tanggal_lahir)->locale('id')->format('d F Y') }}
+                        <td class="info-value">
+                            {{ $skhp->tempat_lahir }},
+                            {{ \Carbon\Carbon::parse($skhp->tanggal_lahir)->locale('id')->translatedFormat('d F Y') }}
                         </td>
+
                     </tr>
                     <tr>
                         <td class="info-label">Jenis Kelamin</td>
@@ -369,40 +410,245 @@
 
                     <!-- Signature Details on the Right -->
                     <td class="signature-details">
-                        <div class="location-date" style="text-align: left;">
-                            <div class="row" style="display: flex; justify-content: space-between; width: 100%;">
+                        <div class="location-date" style="text-align: left; margin-top: 0; margin-bottom: 0;">
+                            <div class="row"
+                                style="display: flex; justify-content: space-between; width: 100%; margin-top: 0; margin-bottom: 0;">
                                 <span class="label" style="flex-grow: 1;">Di Keluarkan di</span>
                                 <span class="colon" style="margin-left: 5px;">:</span>
                                 <span class="value">{{ $tamplate->di_keluar_di }}</span>
                             </div>
                             <div class="row row2"
-                                style="display: inline-flex; width: auto; border-bottom: 1px solid black;">
+                                style="display: inline-flex; width: auto; border-bottom: 1px solid black; margin-top: 0; margin-bottom: 1px;">
                                 <span class="label">Pada tanggal</span>
                                 <span class="colon" style="margin-left: 16px;">:</span>
-                                <span class="value">{{ \Carbon\Carbon::now('Asia/Makassar')->format('d F Y') }}</span>
+                                <span class="value">
+                                    {{ \Carbon\Carbon::now('Asia/Jayapura')->locale('id')->translatedFormat('d F Y') }}
+                                </span>
                             </div>
-
                         </div>
+
 
 
                         <div class="official-title">
                             @if ($ttd)
-                                KABID PROPAM POLDA MALUKU UTARA
+                                KEPALA BIDANG PROPAM POLDA MALUKU UTARA
                             @else
-                                a.n KABID PROPAM POLDA MALUKU UTARA<br>
+                                a.n KEPALA BIDANG PROPAM POLDA MALUKU UTARA
                                 Ps. KASUBBID PAMINAL
                             @endif
                         </div>
-                        <br><br><br><br>
+                        <br><br><br>
                         @if ($ttd)
-                            <div class="name">{{ $tamplate->kabid_nama }}</div>
-                            <div class="rank">{{ $tamplate->kabid_pangkat }} NRP {{ $tamplate->kabid_nrp }}
+                            <div class="signature">
+                                <div class="name">{{ $tamplate->kabid_nama }}</div>
+                                <div class="separator-container">
+                                    <hr class="separator">
+                                </div>
+                                <div class="rank">{{ $tamplate->kabid_pangkat }} NRP {{ $tamplate->kabid_nrp }}
+                                </div>
                             </div>
                         @else
-                            <div class="name">{{ $tamplate->kasubid_nama }}</div>
-                            <div class="rank">{{ $tamplate->kasubid_pangkat }} NRP {{ $tamplate->kasubid_nrp }}
+                            <div class="signature">
+                                <div class="name">{{ $tamplate->kasubid_nama }}</div>
+                                <div class="separator-container">
+                                    <hr class="separator">
+                                </div>
+                                <div class="rank">{{ $tamplate->kasubid_pangkat }} NRP {{ $tamplate->kasubid_nrp }}
+                                </div>
                             </div>
                         @endif
+
+
+                    </td>
+                </tr>
+            </table>
+
+            <div class="recipient">
+                Kepada:<br>
+                Yth. KARO SDM POLDA MALUKU UTARA
+            </div>
+
+            <div class="confidential">RAHASIA</div>
+        </div>
+    </div>
+    {{-- break --}}
+    <div class="page-break"></div>
+    <!-- Background watermark -->
+    <div class="watermark"></div>
+
+    <div class="confidential">RAHASIA</div>
+    <div class="content-wrapper">
+        <div class="header">
+            KEPOLISIAN NEGARA REPUBLIK INDONESIA<br>
+            <span>DAERAH MALUKU UTARA</span> <br>
+            <span style="text-decoration: underline;">BIDANG PROFESI DAN PENGAMANAN</span>
+        </div>
+
+        <div class="logo-container">
+            <img src="{{ public_path('assets/img/logo-polri.png') }}" class="logo">
+        </div>
+
+
+        <div class="title"><span style="text-decoration: underline;">SURAT KETERANGAN HASIL PENELITIAN PERSONEL</span>
+            <br>( S K H P )
+        </div>
+
+        <p style="text-align: center; margin: 10px 0; font-weight: bold">
+            Nomor: SKHP - {{ $skhp->id }} / {{ $romanMonth }}
+            / {{ date('Y') }} / LITPERS
+        </p>
+
+        <div class="content">
+            <ol>
+                <li>Berdasarkan Peraturan Kepala Kepolisian Negara Republik Indonesia Nomor 13 Tahun 2016 tentang
+                    pengamanan internal di lingkungan Polri.</li>
+                <li>Peraturan Kepala Divisi Profesi dan Pengamanan Kepolisian Negara Republik Indonesia Nomor 1 Tahun
+                    2016
+                    tentang Standar Operasional Prosedur Catatan Personel Bagi Pegawai Negeri Pada Kepolisian Negara
+                    Republik Indonesia.</li>
+
+                <p style="margin-bottom:-10px; padding-bottom:-10px;">Dengan ini menerangkan bahwa hasil Penelitian
+                    terhadap:
+                </p>
+
+                <!-- Updated HTML Structure for .info-table -->
+                <table class="info-table" style="margin-top:0; padding-top:0;">
+                    <tr>
+                        <td class="info-label">Nama</td>
+                        <td class="info-colon">:</td>
+                        <td class="info-value">{{ $skhp->nama }}</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Tempat dan tgl. lahir</td>
+                        <td class="info-colon">:</td>
+                        <td class="info-value">
+                            {{ $skhp->tempat_lahir }},
+                            {{ \Carbon\Carbon::parse($skhp->tanggal_lahir)->locale('id')->translatedFormat('d F Y') }}
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td class="info-label">Jenis Kelamin</td>
+                        <td class="info-colon">:</td>
+                        <td class="info-value">{{ $skhp->jenis_kelamin }}</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Agama</td>
+                        <td class="info-colon">:</td>
+                        <td class="info-value">{{ $skhp->agama }}</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Pangkat / Nrp / Nip</td>
+                        <td class="info-colon">:</td>
+                        <td class="info-value">
+                            @foreach ($pangkat as $p)
+                                @if ($skhp->id_pangkat == $p->id)
+                                    {{ $p->nama_pangkat }} /
+                                @endif
+                            @endforeach
+                            {{ $skhp->nrp_nip }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Jabatan</td>
+                        <td class="info-colon">:</td>
+                        <td class="info-value">{{ $skhp->jabatan }}</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Kesatuan / Instansi</td>
+                        <td class="info-colon">:</td>
+                        <td class="info-value">{{ $skhp->kesatuan_instansi }}</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Alamat Kantor</td>
+                        <td class="info-colon">:</td>
+                        <td class="info-value">{{ $skhp->alamat_kantor }}</td>
+                    </tr>
+                </table>
+
+                <p style="text-align: center; font-weight: bold; width: 85%; margin: 20px auto;">
+                    {{ $status }} untuk {{ $skhp->peruntukan }}
+                </p>
+
+
+                <li>Hasil penelitian ini berlaku selama 6 (enam) bulan sejak dikeluarkan. Apabila di kemudian hari
+                    terdapat kekeliruan, surat keterangan hasil penelitian ini akan dicabut.</li>
+            </ol>
+
+            <br><br>
+            <table class="signature-table">
+
+                <tr>
+                    <td style="width: 150px; vertical-align: top; text-align: left; padding-right: 10px;">
+                        <strong>Kabid Propam</strong>
+                        <br><br>
+                        <strong>Paraf :</strong>
+                        <br>1. Konseptor :
+                        <br>
+                        <br>2. Kaur Litpers :
+                        <br>
+                        <br>3. Ksb Paminal :
+                        <br>
+                    </td>
+                    <!-- Photo Placeholder on the Left -->
+                    <td style="width: 120px;">
+                        <div class="photo-placeholder">
+                            FOTO<br>BERWARNA<br>4 X 6
+                        </div>
+                    </td>
+
+                    <!-- Signature Details on the Right -->
+                    <td class="signature-details ">
+                        <div class="location-date" style="text-align: left; margin: 0 50px;">
+                            <div class="row"
+                                style="display: flex; justify-content: space-between; width: 100%; margin: 0;">
+                                <span class="label" style="flex-grow: 1;">Dikeluarkan di</span>
+                                <span class="colon">:</span>
+                                <span class="value">{{ $tamplate->di_keluar_di }}</span>
+                            </div>
+
+                            <div class="row row2"
+                                style="display: flex; width: 100%; border-bottom: 1px solid black; margin: 2px 0 0;">
+                                <span class="label">Pada tanggal</span>
+                                <span class="colon" style="margin-left: 10px;">:</span>
+                                <span class="value">
+                                    {{ \Carbon\Carbon::now('Asia/Jayapura')->locale('id')->translatedFormat('d F Y') }}
+                                </span>
+                            </div>
+                        </div>
+
+
+
+                        <div class="official-title">
+                            @if ($ttd)
+                                KEPALA BIDANG PROPAM POLDA MALUKU UTARA
+                            @else
+                                a.n KEPALA BIDANG PROPAM POLDA MALUKU UTARA
+                                Ps. KASUBBID PAMINAL
+                            @endif
+                        </div>
+                        <br><br><br>
+                        @if ($ttd)
+                            <div class="signature">
+                                <div class="name">{{ $tamplate->kabid_nama }}</div>
+                                <div class="separator-container">
+                                    <hr class="separator">
+                                </div>
+                                <div class="rank">{{ $tamplate->kabid_pangkat }} NRP {{ $tamplate->kabid_nrp }}
+                                </div>
+                            </div>
+                        @else
+                            <div class="signature">
+                                <div class="name">{{ $tamplate->kasubid_nama }}</div>
+                                <div class="separator-container">
+                                    <hr class="separator">
+                                </div>
+                                <div class="rank">{{ $tamplate->kasubid_pangkat }} NRP {{ $tamplate->kasubid_nrp }}
+                                </div>
+                            </div>
+                        @endif
+
+
                     </td>
                 </tr>
             </table>

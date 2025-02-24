@@ -52,6 +52,33 @@ class SKHPController extends Controller
                 'tempat_lahir' => 'required|string|max:50',
             ]);
         
+           // Ambil NRP/NIP dari request
+        $nrp_nip = (string) $request->nrp_nip;
+
+        // Periksa apakah NRP/NIP ada dalam tabel 'kasus'
+        $nrpExists = DB::table('kasus')
+            ->where('nrp', $nrp_nip)
+            ->exists(); // Lebih efisien daripada count()
+
+        if ($nrpExists) {
+            // Ambil status ID untuk 'Selesai' dan 'selesai'
+            $statusIds = DB::table('status')
+                ->whereIn('nama_status', ['Selesai', 'selesai'])
+                ->pluck('id');
+
+            // Hitung jumlah kasus dengan status 'Selesai' untuk NRP/NIP terkait
+            $kasus = DB::table('kasus')
+                ->where('nrp', $nrp_nip)
+                ->whereIn('status_id', $statusIds)
+                ->count();
+
+            // Jika tidak memenuhi syarat, kembalikan dengan pesan error
+            if ($kasus <= 0) {
+                notify()->error('Tidak memenuhi syarat untuk melanjutkan.');
+                return redirect()->back();
+            }
+        }
+
             // Menyimpan data SKHP
             $skhp = new SKHP();
             $skhp->nama = $request->nama;
@@ -98,7 +125,34 @@ class SKHPController extends Controller
                 'peruntukan' => 'required|string|max:200',
                 'tempat_lahir' => 'required|string|max:50',
             ]);
+
+            $skhp = SKHP::findOrFail($id);
+            $nrpExists = DB::table('kasus')
+            ->where('nrp', (string)$skhp->nrp_nip) // Check if nrp exists
+            ->count(); // Check if any record exists with this nrp
+            // dd($nrpExists);
+           if ($nrpExists > 0) {
+            // Retrieve status IDs for 'Selesai' and 'selesai' statuses
+            $statusIds = DB::table('status')
+            ->whereIn('nama_status', ['Selesai', 'selesai']) // Filter by status names
+            ->pluck('id'); // Use 'id' since that's the column that represents the status ID
     
+            // Query to count records in 'kasus' table matching the status IDs and nrp
+            $kasus = DB::table('kasus')
+            ->where('nrp', (string)$skhp->nrp_nip) // Filter by nrp
+            ->whereIn('status_id', $statusIds) // Use 'status_id' in the 'kasus' table (ensure it's correctly referencing the 'id' column from 'status')
+            ->count(); // Count the number of matching records
+    
+            // // Determine the status based on the count
+            // $status = ($kasus > 0) ? 'MEMENUHI SYARAT' : 'TIDAK MEMENUHI SYARAT';  // Reversed condition logic
+            if ($kasus > 0) {
+                $status = 'MEMENUHI SYARAT';
+            } else {
+                notify()->error('Tidak memenuhi syarat untuk melanjutkan.');
+                return back();
+            }
+            
+           }
             // Update data SKHP
             $skhp = SKHP::findOrFail($id);
             $skhp->nama = $request->nama;
@@ -162,8 +216,14 @@ class SKHPController extends Controller
         ->whereIn('status_id', $statusIds) // Use 'status_id' in the 'kasus' table (ensure it's correctly referencing the 'id' column from 'status')
         ->count(); // Count the number of matching records
 
-        // Determine the status based on the count
+        // // Determine the status based on the count
         $status = ($kasus > 0) ? 'MEMENUHI SYARAT' : 'TIDAK MEMENUHI SYARAT';  // Reversed condition logic
+        // if ($kasus > 0) {
+        //     $status = 'MEMENUHI SYARAT';
+        // } else {
+        //     return back()->with('error', 'Tidak memenuhi syarat untuk melanjutkan.');
+        // }
+        
        } else {
         $status = 'MEMENUHI SYARAT';
        }
