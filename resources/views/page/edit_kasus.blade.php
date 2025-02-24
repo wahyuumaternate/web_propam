@@ -397,10 +397,10 @@
                         {{-- RPS --}}
                         <div class="card">
                             <div class="card-body p-5">
-                                <h5 class="card-title">RPS</h5>
+                                <h5 class="card-title">RPS/RPPH</h5>
 
                                 <div class="row mb-3">
-                                    <label for="tanggal_rps" class="col-sm-2 col-form-label">Tanggal RPS </label>
+                                    <label for="tanggal_rps" class="col-sm-2 col-form-label">Tanggal RPS/RPPH </label>
                                     <div class="col-sm-10">
                                         <input type="date"
                                             class="form-control @error('tanggal_rps') is-invalid @enderror"
@@ -414,7 +414,7 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="no_rps" class="col-sm-2 col-form-label">RPS </label>
+                                    <label for="no_rps" class="col-sm-2 col-form-label">RPS/RPPH </label>
                                     <div class="col-sm-10">
                                         <textarea class="form-control @error('no_rps') is-invalid @enderror" style="height: 100px" name="no_rps">{{ old('no_rps', $kasus->no_rps) }}</textarea>
                                         @error('no_rps')
@@ -492,7 +492,7 @@
 
                                 {{-- File RPS --}}
                                 <div class="row mb-3">
-                                    <label for="file_rps" class="col-sm-2 col-form-label">Upload File RPS</label>
+                                    <label for="file_rps" class="col-sm-2 col-form-label">Upload File RPS/RPPH</label>
                                     <div class="col-sm-10">
                                         <input class="form-control @error('file_rps') is-invalid @enderror"
                                             type="file" name="file_rps">
