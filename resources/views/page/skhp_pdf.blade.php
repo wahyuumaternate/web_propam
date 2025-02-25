@@ -184,7 +184,7 @@
         .official-title,
         .name,
         .rank {
-            margin: 2px 0;
+            margin: 0 0;
             /* Reduced margins */
             margin-left: 25%;
         }
@@ -290,9 +290,38 @@
             margin-top: 20px;
             /* Beri sedikit jarak agar rapi */
         }
+
+        .rank {
+            display: inline-block;
+            /* Agar border hanya sepanjang teks */
+            border-top: 2px solid black;
+            /* Atur ketebalan sesuai keinginan */
+
+            /* Jarak antara teks dan garis */
+            font-weight: bold;
+        }
+
+        /*  */
     </style>
 
 </head>
+{{-- .rank {
+    display: inline-block;
+    /* Agar border hanya sepanjang teks */
+    border-top: 1px solid black;
+    /* Atur ketebalan sesuai keinginan */
+   
+    /* Jarak antara teks dan garis */
+    font-weight: bold;
+}
+
+.name {
+    display: inline-block;
+    /* Agar border hanya sepanjang teks */
+    font-weight: bold;
+    border-bottom: 1px solid black;
+    /* Garis di bawah teks */
+} --}}
 
 <body style="font-family: 'Trebuchet MS', sans-serif;">
     <!-- Background watermark -->
@@ -441,18 +470,18 @@
                         @if ($ttd)
                             <div class="signature">
                                 <div class="name">{{ $tamplate->kabid_nama }}</div>
-                                <div class="separator-container">
+                                {{-- <div class="separator-container">
                                     <hr class="separator">
-                                </div>
+                                </div> --}}
                                 <div class="rank">{{ $tamplate->kabid_pangkat }} NRP {{ $tamplate->kabid_nrp }}
                                 </div>
                             </div>
                         @else
                             <div class="signature">
                                 <div class="name">{{ $tamplate->kasubid_nama }}</div>
-                                <div class="separator-container">
+                                {{-- <div class="separator-container">
                                     <hr class="separator">
-                                </div>
+                                </div> --}}
                                 <div class="rank">{{ $tamplate->kasubid_pangkat }} NRP {{ $tamplate->kasubid_nrp }}
                                 </div>
                             </div>
@@ -579,19 +608,27 @@
             <table class="signature-table">
 
                 <tr>
-                    <td style="width: 150px; vertical-align: top; text-align: left; padding-right: 10px;">
+                    <td
+                        style="width: 110px; vertical-align: top; text-align: left; padding-right: 0; margin-right: 0;">
                         <strong>Kabid Propam</strong>
                         <br><br>
                         <strong>Paraf :</strong>
-                        <br>1. Konseptor :
-                        <br>
-                        <br>2. Kaur Litpers :
-                        <br>
-                        <br>3. Ksb Paminal :
-                        <br>
+                        @if ($ttd)
+                            <br>1. Konseptor :
+                            <br>
+                            <br>2. Kaur Litpers :
+                            <br>
+                            <br>3. Ksb Paminal :
+                            <br>
+                        @else
+                            <br>1. Konseptor :
+                            <br>
+                            <br>2. Kaur Litpers :
+                            <br>
+                        @endif
                     </td>
                     <!-- Photo Placeholder on the Left -->
-                    <td style="width: 120px;">
+                    <td style="width: 50px;">
                         <div class="photo-placeholder">
                             FOTO<br>BERWARNA<br>4 X 6
                         </div>
@@ -599,9 +636,8 @@
 
                     <!-- Signature Details on the Right -->
                     <td class="signature-details ">
-                        <div class="location-date" style="text-align: left; margin: 0 50px;">
-                            <div class="row"
-                                style="display: flex; justify-content: space-between; width: 100%; margin: 0;">
+                        <div class="location-date" style="text-align: left; margin: 0 0 0 150px;">
+                            <div class="row" style="display: flex; justify-content: space-between; width: 100%; ">
                                 <span class="label" style="flex-grow: 1;">Dikeluarkan di</span>
                                 <span class="colon">:</span>
                                 <span class="value">{{ $tamplate->di_keluar_di }}</span>
@@ -631,20 +667,22 @@
                         @if ($ttd)
                             <div class="signature">
                                 <div class="name">{{ $tamplate->kabid_nama }}</div>
-                                <div class="separator-container">
+                                {{-- <div class="separator-container">
                                     <hr class="separator">
-                                </div>
+                                </div> --}}
                                 <div class="rank">{{ $tamplate->kabid_pangkat }} NRP {{ $tamplate->kabid_nrp }}
                                 </div>
                             </div>
                         @else
                             <div class="signature">
                                 <div class="name">{{ $tamplate->kasubid_nama }}</div>
-                                <div class="separator-container">
+                                {{-- <div class="separator-container">
                                     <hr class="separator">
+                                </div> --}}
+                                <div class="rank">
+                                    {{ $tamplate->kasubid_pangkat }} NRP {{ $tamplate->kasubid_nrp }}
                                 </div>
-                                <div class="rank">{{ $tamplate->kasubid_pangkat }} NRP {{ $tamplate->kasubid_nrp }}
-                                </div>
+
                             </div>
                         @endif
 
