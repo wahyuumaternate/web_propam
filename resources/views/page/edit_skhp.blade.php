@@ -192,15 +192,14 @@
                                 <div class="row mb-3">
                                     <label for="peruntukan" class="col-sm-2 col-form-label">Peruntukan</label>
                                     <div class="col-sm-10">
-                                        <input type="text"
-                                            class="form-control @error('peruntukan') is-invalid @enderror"
-                                            name="peruntukan" id="peruntukan"
-                                            value="{{ old('peruntukan', $skhp->peruntukan) }}" required>
+                                        <textarea class="form-control @error('peruntukan') is-invalid @enderror" name="peruntukan" id="peruntukan"
+                                            rows="3" required>{{ old('peruntukan', $skhp->peruntukan) }}</textarea>
                                         @error('peruntukan')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
+
 
                             </div>
 

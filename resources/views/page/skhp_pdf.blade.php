@@ -418,7 +418,7 @@
                 </table>
 
                 <p style="text-align: center; font-weight: bold; width: 85%; margin: 20px auto;">
-                    {{ $status }} untuk {{ $skhp->peruntukan }}
+                    {{ $status }} untuk {!! nl2br(e($skhp->peruntukan)) !!}
                 </p>
 
 
@@ -596,7 +596,7 @@
                 </table>
 
                 <p style="text-align: center; font-weight: bold; width: 85%; margin: 20px auto;">
-                    {{ $status }} untuk {{ $skhp->peruntukan }}
+                    {{ $status }} untuk {!! nl2br(e($skhp->peruntukan)) !!}
                 </p>
 
 
