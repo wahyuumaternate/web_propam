@@ -94,7 +94,7 @@
 
                             <div class="card-body pb-0">
                                 <h5 class="card-title">Top Kasus <span>|
-                                        {{ request('filter') == 'month' ? 'This Month' : (request('filter') == 'year' ? 'This Year' : 'All Time') }}</span>
+                                        {{ $filter == 'month' ? 'This Month' : ($filter == 'year' ? 'This Year' : 'All Time') }}</span>
                                 </h5>
 
                                 <table class="table table-borderless">

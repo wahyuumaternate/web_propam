@@ -610,10 +610,11 @@
                 <tr>
                     <td
                         style="width: 110px; vertical-align: top; text-align: left; padding-right: 0; margin-right: 0;">
-                        <strong>Kabid Propam</strong>
-                        <br><br>
-                        <strong>Paraf :</strong>
+
                         @if ($ttd)
+                            <strong>Kabid Propam</strong>
+                            <br><br>
+                            <strong>Paraf :</strong>
                             <br>1. Konseptor :
                             <br>
                             <br>2. Kaur Litpers :
@@ -621,6 +622,9 @@
                             <br>3. Ksb Paminal :
                             <br>
                         @else
+                            <strong>Kasubid Paminal</strong>
+                            <br><br>
+                            <strong>Paraf :</strong>
                             <br>1. Konseptor :
                             <br>
                             <br>2. Kaur Litpers :
