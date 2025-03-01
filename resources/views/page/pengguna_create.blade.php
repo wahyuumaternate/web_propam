@@ -320,7 +320,25 @@
                                         </div>
                                     @endif
                                 @endif --}}
-
+                                <!-- Add this to your user create/edit form -->
+                                <div class="form-group mb-3">
+                                    <label for="satker_id">Satker</label>
+                                    <select class="form-control @error('satker_id') is-invalid @enderror" id="satker_id"
+                                        name="satker_id">
+                                        <option value="">-- Pilih Satker --</option>
+                                        @foreach ($satkers as $satker)
+                                            <option value="{{ $satker->id }}"
+                                                {{ old('satker_id', $user->satker_id ?? '') == $satker->id ? 'selected' : '' }}>
+                                                {{ $satker->nama_satker_satwil }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('satker_id')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
                                 <div class="mb-3">
                                     <button type="submit"
                                         class="btn btn-outline-primary">{{ isset($user) ? 'Update' : 'Tambah' }}</button>

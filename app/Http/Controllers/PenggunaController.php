@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Satker;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -20,7 +21,8 @@ class PenggunaController extends Controller
     {
         $roles = Role::all();
         $permissions = Permission::all();
-        return view('page.pengguna_create', compact('roles', 'permissions'));
+        $satkers = Satker::all();
+        return view('page.pengguna_create', compact('roles', 'permissions','satkers'));
     }
 
     public function store(Request $request)
@@ -29,12 +31,14 @@ class PenggunaController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'satker_id' => ['required', 'exists:satker_satwil,id'],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'satker_id' => $request->satker_id,
         ]);
 
         // Assign roles and permissions
@@ -66,7 +70,8 @@ class PenggunaController extends Controller
     {
         $roles = Role::all();
         $permissions = Permission::all();
-        return view('page.pengguna_create', compact('user', 'roles', 'permissions'));
+        $satkers = Satker::all();
+        return view('page.pengguna_create', compact('user', 'roles', 'permissions','satkers'));
     }
 
     public function update(Request $request, User $user)
@@ -75,12 +80,14 @@ class PenggunaController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'password' => 'nullable|string|min:6|confirmed',
+            'satker_id' => ['required', 'exists:satker_satwil,id'],
         ]);
 
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password ? Hash::make($request->password) : $user->password,
+            'satker_id' => $request->satker_id,
         ]);
 
         if ($user->id != 1) {

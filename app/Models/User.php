@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'satker_id',
     ];
 
     /**
@@ -44,5 +45,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    
+    public function satker()
+    {
+        return $this->belongsTo(Satker::class);
+    }
 }

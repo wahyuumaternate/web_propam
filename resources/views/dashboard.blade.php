@@ -32,6 +32,7 @@
 
                     </div>
                 </div>
+                
                 <div class="col-xxl-4 col-md-6">
                     <div class="card info-card sales-card">
 
