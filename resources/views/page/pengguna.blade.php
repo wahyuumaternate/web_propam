@@ -32,6 +32,7 @@
                                     <tr>
                                         <th>Nama User</th>
                                         <th>Role</th>
+                                        <th>Satker</th>
                                         {{-- Tambahkan kolom lain sesuai kebutuhan --}}
                                         <th>Aksi</th>
                                     </tr>
@@ -40,10 +41,13 @@
                                     @foreach ($users as $user)
                                         <tr>
                                             <td>{{ $user->name }}</td>
+
                                             <td>
                                                 @foreach ($user->getRoleNames() as $role)
                                                     {{ $role }}
                                                 @endforeach
+                                            </td>
+                                            <td>{{ $user->satker ? $user->satker->nama_satker_satwil : 'Tidak ada satker' }}
                                             </td>
                                             {{-- Tambahkan kolom lain sesuai kebutuhan --}}
                                             <td>
