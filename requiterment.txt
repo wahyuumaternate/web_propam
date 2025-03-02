@@ -27,3 +27,5 @@ fitur :
 	pangkat
 	satker
 	jabatan
+
+ALTER TABLE skhp AUTO_INCREMENT = 400;
