@@ -252,7 +252,7 @@
             margin-top: 20px;
         }
 
-        .info-table {
+        .info-value {
             text-transform: uppercase;
         }
 
@@ -351,12 +351,13 @@
 
         <div class="content">
             <ol>
-                <li>Berdasarkan Peraturan Kepala Kepolisian Negara Republik Indonesia Nomor 13 Tahun 2016 tentang
+                <li style="text-align: justify;">Berdasarkan Peraturan Kepala Kepolisian Negara Republik Indonesia Nomor
+                    13 Tahun 2016 tentang
                     pengamanan internal di lingkungan Polri.</li>
-                <li>Peraturan Kepala Divisi Profesi dan Pengamanan Kepolisian Negara Republik Indonesia Nomor 1 Tahun
-                    2016
-                    tentang Standar Operasional Prosedur Catatan Personel Bagi Pegawai Negeri Pada Kepolisian Negara
-                    Republik Indonesia.</li>
+                <li style="text-align: justify;">Peraturan Kepala Divisi Profesi dan Pengamanan Kepolisian Negara
+                    Republik Indonesia Nomor 1
+                    Tahun 2016 tentang Standar Operasional Prosedur Catatan Personel Bagi Pegawai Negeri Pada
+                    Kepolisian Negara Republik Indonesia.</li>
 
                 <p style="margin-bottom:-10px; padding-bottom:-10px;">Dengan ini menerangkan bahwa hasil Penelitian
                     terhadap:
@@ -422,7 +423,8 @@
                 </p>
 
 
-                <li>Hasil penelitian ini berlaku selama 6 (enam) bulan sejak dikeluarkan. Apabila di kemudian hari
+                <li style="text-align: justify;">Hasil penelitian ini berlaku selama 6 (enam) bulan sejak dikeluarkan.
+                    Apabila di kemudian hari
                     terdapat kekeliruan, surat keterangan hasil penelitian ini akan dicabut.</li>
             </ol>
 
@@ -439,19 +441,19 @@
 
                     <!-- Signature Details on the Right -->
                     <td class="signature-details">
-                        <div class="location-date" style="text-align: left; margin-top: 0; margin-bottom: 0;">
-                            <div class="row"
-                                style="display: flex; justify-content: space-between; width: 100%; margin-top: 0; margin-bottom: 0;">
-                                <span class="label" style="flex-grow: 1;">Di Keluarkan di</span>
-                                <span class="colon" style="margin-left: 5px;">:</span>
+                        <div class="location-date"
+                            style="text-align: left; margin: @if ($ttd) 0 0 0 132px @else 0 0 0 142px @endif;">
+                            <div class="row" style="display: flex; align-items: center;">
+                                <span class="label" style="width: 120px;">Dikeluarkan di</span>
+                                <span class="colon">:</span>
                                 <span class="value">{{ $tamplate->di_keluar_di }}</span>
                             </div>
-                            <div class="row row2"
-                                style="display: inline-flex; width: auto; border-bottom: 1px solid black; margin-top: 0; margin-bottom: 1px;">
+
+                            <div style="margin: 2px 0 0; display: inline-block; border-bottom: 1px solid black;">
                                 <span class="label">Pada tanggal</span>
-                                <span class="colon" style="margin-left: 16px;">:</span>
-                                <span class="value">
-                                    {{ \Carbon\Carbon::now('Asia/Jayapura')->locale('id')->translatedFormat('d F Y') }}
+                                <span class="colon" style="margin-left: 5px;">:</span>
+                                <span
+                                    class="value">{{ \Carbon\Carbon::now('Asia/Jayapura')->locale('id')->translatedFormat('d F Y') }}
                                 </span>
                             </div>
                         </div>
@@ -529,12 +531,13 @@
 
         <div class="content">
             <ol>
-                <li>Berdasarkan Peraturan Kepala Kepolisian Negara Republik Indonesia Nomor 13 Tahun 2016 tentang
+                <li style="text-align: justify;">Berdasarkan Peraturan Kepala Kepolisian Negara Republik Indonesia Nomor
+                    13 Tahun 2016 tentang
                     pengamanan internal di lingkungan Polri.</li>
-                <li>Peraturan Kepala Divisi Profesi dan Pengamanan Kepolisian Negara Republik Indonesia Nomor 1 Tahun
-                    2016
-                    tentang Standar Operasional Prosedur Catatan Personel Bagi Pegawai Negeri Pada Kepolisian Negara
-                    Republik Indonesia.</li>
+                <li style="text-align: justify;">Peraturan Kepala Divisi Profesi dan Pengamanan Kepolisian Negara
+                    Republik Indonesia Nomor 1
+                    Tahun 2016 tentang Standar Operasional Prosedur Catatan Personel Bagi Pegawai Negeri Pada
+                    Kepolisian Negara Republik Indonesia.</li>
 
                 <p style="margin-bottom:-10px; padding-bottom:-10px;">Dengan ini menerangkan bahwa hasil Penelitian
                     terhadap:
@@ -600,7 +603,8 @@
                 </p>
 
 
-                <li>Hasil penelitian ini berlaku selama 6 (enam) bulan sejak dikeluarkan. Apabila di kemudian hari
+                <li style="text-align: justify;">Hasil penelitian ini berlaku selama 6 (enam) bulan sejak dikeluarkan.
+                    Apabila di kemudian hari
                     terdapat kekeliruan, surat keterangan hasil penelitian ini akan dicabut.</li>
             </ol>
 
@@ -612,8 +616,8 @@
                         style="width: 110px; vertical-align: top; text-align: left; padding-right: 0; margin-right: 0;">
 
                         @if ($ttd)
-                            <strong>Kabid Propam</strong>
-                            <br><br>
+                            {{-- <strong>Kabid Propam</strong>
+                            <br><br> --}}
                             <strong>Paraf :</strong>
                             <br>1. Konseptor :
                             <br>
@@ -622,8 +626,8 @@
                             <br>3. Ksb Paminal :
                             <br>
                         @else
-                            <strong>Kasubid Paminal</strong>
-                            <br><br>
+                            {{-- <strong>Kasubid Paminal</strong>
+                            <br><br> --}}
                             <strong>Paraf :</strong>
                             <br>1. Konseptor :
                             <br>
@@ -640,19 +644,19 @@
 
                     <!-- Signature Details on the Right -->
                     <td class="signature-details ">
-                        <div class="location-date" style="text-align: left; margin: 0 0 0 150px;">
-                            <div class="row" style="display: flex; justify-content: space-between; width: 100%; ">
-                                <span class="label" style="flex-grow: 1;">Dikeluarkan di</span>
+                        <div class="location-date"
+                            style="text-align: left; margin: @if ($ttd) 0 0 0 110px @else 0 0 0 122px @endif;">
+                            <div class="row" style="display: flex; align-items: center;">
+                                <span class="label" style="width: 120px;">Dikeluarkan di</span>
                                 <span class="colon">:</span>
                                 <span class="value">{{ $tamplate->di_keluar_di }}</span>
                             </div>
 
-                            <div class="row row2"
-                                style="display: flex; width: 100%; border-bottom: 1px solid black; margin: 2px 0 0;">
+                            <div style="margin: 2px 0 0; display: inline-block; border-bottom: 1px solid black;">
                                 <span class="label">Pada tanggal</span>
-                                <span class="colon" style="margin-left: 10px;">:</span>
-                                <span class="value">
-                                    {{ \Carbon\Carbon::now('Asia/Jayapura')->locale('id')->translatedFormat('d F Y') }}
+                                <span class="colon" style="margin-left: 5px;">:</span>
+                                <span
+                                    class="value">{{ \Carbon\Carbon::now('Asia/Jayapura')->locale('id')->translatedFormat('d F Y') }}
                                 </span>
                             </div>
                         </div>
@@ -671,25 +675,20 @@
                         @if ($ttd)
                             <div class="signature">
                                 <div class="name">{{ $tamplate->kabid_nama }}</div>
-                                {{-- <div class="separator-container">
-                                    <hr class="separator">
-                                </div> --}}
+
                                 <div class="rank">{{ $tamplate->kabid_pangkat }} NRP {{ $tamplate->kabid_nrp }}
                                 </div>
                             </div>
                         @else
                             <div class="signature">
                                 <div class="name">{{ $tamplate->kasubid_nama }}</div>
-                                {{-- <div class="separator-container">
-                                    <hr class="separator">
-                                </div> --}}
+
                                 <div class="rank">
                                     {{ $tamplate->kasubid_pangkat }} NRP {{ $tamplate->kasubid_nrp }}
                                 </div>
 
                             </div>
                         @endif
-
 
                     </td>
                 </tr>
