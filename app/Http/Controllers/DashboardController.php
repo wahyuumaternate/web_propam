@@ -145,23 +145,33 @@ class DashboardController extends Controller
             ->get();
     
         } else {
-            $totalKasus = DaftarKasus::where('user_id', Auth::user()->id)->count();
+            $totalKasus = DaftarKasus::where(function($query) {
+                $query->where('user_id', Auth::user()->id)
+                      ->orWhere('satker_satwil_id', Auth::user()->satker_id);
+            })->count();
+            
             // Fetch data for categories per year (monthly data)
             $kategoriData = DaftarKasus::selectRaw('kategori_id, MONTH(created_at) as month, COUNT(*) as count')
-            ->where('user_id', Auth::user()->id)
+                ->where(function($query) {
+                    $query->where('user_id', Auth::user()->id)
+                          ->orWhere('satker_satwil_id', Auth::user()->satker_id);
+                })
                 ->whereNotNull('kategori_id')
                 ->whereYear('created_at', $selectedYear) // Filter by selected year
                 ->groupBy('kategori_id', 'month')
                 ->orderBy('month')
                 ->get()
                 ->groupBy('kategori_id');
-    
+            
             // Fetch and prepare data for cases by status
             $statusData = DaftarKasus::selectRaw('status_id, COUNT(*) as count')
-            ->where('user_id', Auth::user()->id)
-            ->groupBy('status_id')
-            ->whereYear('created_at', $selectedYear) // Filter by selected year
-            ->get();
+                ->where(function($query) {
+                    $query->where('user_id', Auth::user()->id)
+                          ->orWhere('satker_satwil_id', Auth::user()->satker_id);
+                })
+                ->groupBy('status_id')
+                ->whereYear('created_at', $selectedYear) // Filter by selected year
+                ->get();
         }
     
         // Load kategori names

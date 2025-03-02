@@ -32,7 +32,10 @@ class DaftarKasusController extends Controller
     if (Auth::user()->can('lihat_semua_kasus')) {
         $kasus = DaftarKasus::latest()->get();
     }else{
-        $kasus = DaftarKasus::where('user_id',Auth::user()->id)->latest()->get();
+        $kasus = DaftarKasus::where(function($query) {
+            $query->where('user_id', Auth::user()->id)
+                  ->orWhere('satker_satwil_id', Auth::user()->satker_id);
+        })->latest()->get();
     }
         return view('page.daftar_kasus_index',[
             'daftarKasus'=>$kasus,
@@ -196,7 +199,7 @@ public function update(Request $request, $id)
     unset($validated['hukuman_id']);
 
     // Tambahkan user_id
-    $validated['user_id'] = Auth::user()->id;
+    // $validated['user_id'] = Auth::user()->id;
 
     // Update data kasus
     $kasus->update($validated);
